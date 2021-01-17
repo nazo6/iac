@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "lib": [
+      "es6",
+      "DOM"
+    ],
+    "allowJs": true,
+    "jsx": "react",
+    "strict": true,
+    "noImplicitAny": true,
+  },
+  "exclude": [
+    "node_modules",
+    "**/webpack.*.js",
+    "dist/*"
+  ]
+}
