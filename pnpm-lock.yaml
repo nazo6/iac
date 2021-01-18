@@ -10,11 +10,14 @@ devDependencies:
   '@types/react-dom': 17.0.0
   '@typescript-eslint/eslint-plugin': 4.13.0_f3178e4628777c9e52e8278f98ca1f2d
   '@typescript-eslint/parser': 4.13.0_eslint@7.18.0+typescript@4.1.3
+  axios: 0.21.1
   babel-loader: 8.2.2_ffb1facb21ca645be67cace74e2396c6
   eslint: 7.18.0
   eslint-config-prettier: 7.1.0_eslint@7.18.0
   eslint-plugin-react-hooks: 4.2.0_eslint@7.18.0
+  fast-copy: 2.1.1
   framer-motion: 3.2.1_react-dom@17.0.1+react@17.0.1
+  history: 5.0.0
   html-loader: 1.3.2_webpack@5.15.0
   html-webpack-plugin: 4.5.1_webpack@5.15.0
   husky: 4.3.8
@@ -23,6 +26,8 @@ devDependencies:
   react: 17.0.1
   react-dom: 17.0.1_react@17.0.1
   react-refresh: 0.9.0
+  recoil: 0.1.2_react-dom@17.0.1+react@17.0.1
+  rocon: 1.2.1_history@5.0.0
   typescript: 4.1.3
   webpack: 5.15.0_webpack-cli@4.3.1
   webpack-cli: 4.3.1_a44705bbc847cd741333942cb5d9a3c6
@@ -1907,6 +1912,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
+  /axios/0.21.1:
+    dependencies:
+      follow-redirects: 1.13.1_debug@4.3.1
+    dev: true
+    resolution:
+      integrity: sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
   /babel-loader/8.2.2_ffb1facb21ca645be67cace74e2396c6:
     dependencies:
       '@babel/core': 7.12.10
@@ -2036,7 +2047,7 @@ packages:
       integrity: sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==
   /browserslist/4.16.1:
     dependencies:
-      caniuse-lite: 1.0.30001177
+      caniuse-lite: 1.0.30001178
       colorette: 1.2.1
       electron-to-chromium: 1.3.641
       escalade: 3.1.1
@@ -2109,10 +2120,10 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
-  /caniuse-lite/1.0.30001177:
+  /caniuse-lite/1.0.30001178:
     dev: true
     resolution:
-      integrity: sha512-6Ld7t3ifCL02jTj3MxPMM5wAYjbo4h/TAQGFTgv1inihP1tWnWp8mxxT4ut4JBEHLbpFXEXJJQ119JCJTBkYDw==
+      integrity: sha512-VtdZLC0vsXykKni8Uztx45xynytOi71Ufx9T8kHptSw9AL4dpqailUJJHavttuzUe1KYuBYtChiWv+BAb7mPmQ==
   /chalk/2.4.2:
     dependencies:
       ansi-styles: 3.2.1
@@ -2372,7 +2383,7 @@ packages:
     dependencies:
       '@types/parse-json': 4.0.0
       import-fresh: 3.3.0
-      parse-json: 5.1.0
+      parse-json: 5.2.0
       path-type: 4.0.0
       yaml: 1.10.0
     dev: true
@@ -2384,7 +2395,7 @@ packages:
     dependencies:
       '@types/parse-json': 4.0.0
       import-fresh: 3.3.0
-      parse-json: 5.1.0
+      parse-json: 5.2.0
       path-type: 4.0.0
       yaml: 1.10.0
     dev: true
@@ -2790,10 +2801,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-d51brTeqC+BHlwF0BhPtcYgF5nlzf9ZZ0ZIUQNZpc9ZB9qw5IJ2diTrBY9jlCJkTLITYPjmiX6OWCwH+fuyNgQ==
-  /es-abstract/1.18.0-next.1:
+  /es-abstract/1.18.0-next.2:
     dependencies:
+      call-bind: 1.0.2
       es-to-primitive: 1.2.1
       function-bind: 1.1.1
+      get-intrinsic: 1.0.2
       has: 1.0.3
       has-symbols: 1.0.1
       is-callable: 1.2.2
@@ -2808,7 +2821,7 @@ packages:
     engines:
       node: '>= 0.4'
     resolution:
-      integrity: sha512-I4UGspA0wpZXWENrdA0uHbnhte683t3qT/1VFH9aX2dA5PPSf6QW5HHXf5HImaqPmjXaVeVk4RGWnaylmV7uAA==
+      integrity: sha512-Ih4ZMFHEtZupnUh6497zEL4y2+w8+1ljnCyaTa+adcoafI1GOvMwFlDjBLfWR7y9VLfrjRJe9ocuHY1PSR9jjw==
   /es-module-lexer/0.3.26:
     dev: true
     resolution:
@@ -3142,11 +3155,15 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-Nmb6QXkELsuBr24CJSkilo6UHHgbekK5UiZgfE6UHD3Eb27YC6oD+bhcT+tJ6cl8dmsgdQxnWlcry8ksBIBLpw==
+  /fast-copy/2.1.1:
+    dev: true
+    resolution:
+      integrity: sha512-Qod3DdRgFZ8GUIM6ygeoZYpQ0QLW9cf/FS9KhhjlYggcSZXWAemAw8BOCO5LuYCrR3Uj3qXDVTUzOUwG8C7beQ==
   /fast-deep-equal/3.1.3:
     dev: true
     resolution:
       integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
-  /fast-glob/3.2.4:
+  /fast-glob/3.2.5:
     dependencies:
       '@nodelib/fs.stat': 2.0.4
       '@nodelib/fs.walk': 1.2.6
@@ -3158,7 +3175,7 @@ packages:
     engines:
       node: '>=8'
     resolution:
-      integrity: sha512-kr/Oo6PX51265qeuCYsyGypiO5uJFgBS0jksyG7FUeCyQzNwYnzrNIMR1NXfkZXsMYXYLRAHgISHBz8gQcxKHQ==
+      integrity: sha512-2DtFcgT68wiTTiwZ2hNdJfcHNke9XOfnwmBRWXhmeKM8rF0TGwmC/Qto3S7RoZKp5cilZbxzO5iTNTQsJ+EeDg==
   /fast-json-stable-stringify/2.1.0:
     dev: true
     resolution:
@@ -3496,7 +3513,7 @@ packages:
     dependencies:
       array-union: 2.1.0
       dir-glob: 3.0.1
-      fast-glob: 3.2.4
+      fast-glob: 3.2.5
       ignore: 5.1.8
       merge2: 1.4.1
       slash: 3.0.0
@@ -3595,6 +3612,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==
+  /history/5.0.0:
+    dependencies:
+      '@babel/runtime': 7.12.5
+    dev: true
+    resolution:
+      integrity: sha512-3NyRMKIiFSJmIPdq7FxkNMJkQ7ZEtVblOQ38VtKaA0zZMW1Eo6Q6W8oDKEflr1kNNTItSnk4JMCO1deeSgbLLg==
   /hoist-non-react-statics/3.3.2:
     dependencies:
       react-is: 16.13.1
@@ -4529,13 +4552,13 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
-  /mime/2.4.7:
+  /mime/2.5.0:
     dev: true
     engines:
       node: '>=4.0.0'
     hasBin: true
     resolution:
-      integrity: sha512-dhNd1uA2u397uQk3Nv5LM4lm93WYDUXFn3Fu291FJerns4jyTudqhIWe4W04YLy7Uk1tm1Ore04NpjRvQp/NPA==
+      integrity: sha512-ft3WayFSFUVBuJj7BMLKAQcSlItKtfjsKDDsii3rqFDAZ7t11zRe8ASw/GlmivGwVUYtwkQrxiGGpL6gFvB0ag==
   /mimic-fn/2.1.0:
     dev: true
     engines:
@@ -4758,7 +4781,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.3
-      es-abstract: 1.18.0-next.1
+      es-abstract: 1.18.0-next.2
     dev: true
     engines:
       node: '>= 0.8'
@@ -4925,7 +4948,7 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==
-  /parse-json/5.1.0:
+  /parse-json/5.2.0:
     dependencies:
       '@babel/code-frame': 7.12.11
       error-ex: 1.3.2
@@ -4935,7 +4958,7 @@ packages:
     engines:
       node: '>=8'
     resolution:
-      integrity: sha512-+mi/lmVVNKFNVyLXV31ERiy2CY5E1/F6QtJFEzoChPRwwngMNXRDQ9GJ5WdE2Z2P4AujsOi0/+2qHID68KwfIQ==
+      integrity: sha512-ayCKvm/phCGxOkYRSCM82iDwct8/EonSEgCSxWxD7ve6jHggsFl4fZVQBPRNgQoKiuV/odhFrGzQXZwbifC8Rg==
   /parseurl/1.3.3:
     dev: true
     engines:
@@ -5350,6 +5373,22 @@ packages:
       node: '>= 0.10'
     resolution:
       integrity: sha512-ADsDEH2bvbjltXEP+hTIAmeFekTFK0V2BTxMkok6qILyAJEXV0AFfoWcAq4yfll5VdIMd/RVXq0lR+wQi5ZU3Q==
+  /recoil/0.1.2_react-dom@17.0.1+react@17.0.1:
+    dependencies:
+      react: 17.0.1
+      react-dom: 17.0.1_react@17.0.1
+    dev: true
+    peerDependencies:
+      react: ^16.13.1
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    resolution:
+      integrity: sha512-hIRrHlkmW4yITlBFprVYjVPhzPKYrJKoaDrrJtAtbkMeXfXaa/XE5OlyR10n+rNfnKWNToCKb3Z4fo86IGjkzg==
   /regenerator-runtime/0.13.7:
     dev: true
     resolution:
@@ -5518,6 +5557,15 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==
+  /rocon/1.2.1_history@5.0.0:
+    dependencies:
+      '@babel/runtime': 7.12.5
+      history: 5.0.0
+    dev: true
+    peerDependencies:
+      history: ^5.0.0
+    resolution:
+      integrity: sha512-CF3+iB1dKmJLGDDdCfnvv9Boxq1UKp81YkY2Loi9WYlkpd/JhXW1hkcSLTg74jBxJXUJSJcbWxu30P9mEb+bXg==
   /run-parallel/1.1.10:
     dev: true
     resolution:
@@ -6434,7 +6482,7 @@ packages:
   /webpack-dev-middleware/3.7.3_webpack@5.15.0:
     dependencies:
       memory-fs: 0.4.1
-      mime: 2.4.7
+      mime: 2.5.0
       mkdirp: 0.5.5
       range-parser: 1.2.1
       webpack: 5.15.0_webpack-cli@4.3.1
@@ -6700,11 +6748,14 @@ specifiers:
   '@types/react-dom': ^17.0.0
   '@typescript-eslint/eslint-plugin': ^4.13.0
   '@typescript-eslint/parser': ^4.13.0
+  axios: ^0.21.1
   babel-loader: ^8.2.2
   eslint: ^7.18.0
   eslint-config-prettier: ^7.1.0
   eslint-plugin-react-hooks: ^4.2.0
+  fast-copy: ^2.1.1
   framer-motion: ^3.2.1
+  history: ^5.0.0
   html-loader: ^1.3.2
   html-webpack-plugin: ^4.5.1
   husky: ^4.3.8
@@ -6713,6 +6764,8 @@ specifiers:
   react: ^17.0.1
   react-dom: ^17.0.1
   react-refresh: ^0.9.0
+  recoil: ^0.1.2
+  rocon: ^1.2.1
   typescript: ^4.1.3
   webpack: ^5.15.0
   webpack-cli: ^4.3.1

@@ -15,7 +15,103 @@ export type LibraryResponseType = {
     app_version: string; //"6.5"
   };
   library: {
-    tags: {};
+    expires: number; //1642266846
+    tags: Record<string, unknown>;
+    tracks: {
+      [trackId: string]: {
+        track: number;
+        year: number;
+        title: string;
+        genre: string;
+        /** Song length (seconds) */
+        length: number;
+        album_id: number;
+        artwork_id: number;
+        artist_id: number;
+        enid: number; //0
+        uploaded_on: string; //2021-01-15
+        trashed: boolean;
+        size: number;
+        path: string;
+        uid: string;
+        rating: number;
+        plays: number;
+        /** Audio file path. */
+        file: string;
+        /** Mime type e.g. audio/mpeg3 */
+        type: string;
+        /** Replay gain (number as string) e.g. -4.7*/
+        replay_gain: string;
+        /** Uploaded time. e.g. 17:13:59 */
+        uploaded_time: string;
+      };
+    };
+    artists: {
+      [artistId: string]: {
+        name: string;
+        /** Array of trackId */
+        tracks: Array<string>;
+        trashed: boolean;
+        rating: number;
+      };
+    };
+    albums: {
+      [albumId: string]: {
+        name: string;
+        tracks: Array<number>;
+        artist_id: number;
+        trashed: boolean;
+        rating: number;
+        disc: number;
+        year: number;
+      };
+    };
+    playlists: Array<{
+      name: string;
+      tracks: Array<number>;
+      uid: number;
+      system_created: boolean;
+      public_id: null | number;
+      type: null | unknown;
+      description: null | string;
+      artwork_id: null | number;
+      sort: number;
+    }>;
+    trash: {
+      [trashId: string]: {
+        name: string;
+        tracks: Array<number>;
+      };
+    };
+  };
+  lastfm: {
+    sessionkey: string;
+    user: string;
+    linked: boolean;
+    message: string;
+  };
+  result: boolean;
+};
+
+/*参考
+type LibraryResponseRawType = {
+  settings: {
+    artwork_server: string; //"https://artwork.ibroadcast.com",
+    fast_polling: number; //30,
+    librarybytespersong: number; //150,
+    streaming_server: string; //"https://streaming.ibroadcast.com",
+    slow_polling: number; //300,
+    librarysongspersecond: number; //4000
+  };
+  status: {
+    lastmodified: string; //"2021-01-15 17:14:27",
+    app_available: boolean; //false,
+    expires: string; //"2021-01-29 17:14:05.000000",
+    timestamp: string; //"2021-01-15 17:14:05",
+    app_version: string; //"6.5"
+  };
+  library: {
+    tags: Record<string, unknown>;
     tracks: {
       '201535254': [
         1,
@@ -185,3 +281,4 @@ export type LibraryResponseType = {
   };
   result: true;
 };
+*/

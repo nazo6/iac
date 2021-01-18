@@ -2,7 +2,7 @@ import { Flex, Box, Spacer, Input, Switch, Text, useColorMode } from '@chakra-ui
 import * as React from 'react';
 
 const Header = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { toggleColorMode } = useColorMode();
   return (
     <Flex h="100%" alignItems="center" boxShadow="md" paddingX="1rem">
       <Box>
