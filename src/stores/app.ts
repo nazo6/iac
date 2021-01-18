@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { LibraryResponseType } from '../types/LibraryResponseType';
+import { LibraryResponseType } from '../api/types/LibraryResponseType';
 import { persistEffect } from './effects';
 
 export const authState = atom<{ token: string; userId: string } | null>({

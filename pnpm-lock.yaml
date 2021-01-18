@@ -16,6 +16,7 @@ devDependencies:
   eslint-config-prettier: 7.1.0_eslint@7.18.0
   eslint-plugin-react-hooks: 4.2.0_eslint@7.18.0
   fast-copy: 2.1.1
+  focus-visible: 5.2.0
   framer-motion: 3.2.1_react-dom@17.0.1+react@17.0.1
   history: 5.0.0
   html-loader: 1.3.2_webpack@5.15.0
@@ -3321,6 +3322,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-LI7v2mH02R55SekHYdv9pRHR9RajVNyIJ2N5IEkWbg7FT5ZmJ9Hw4mWxHeEUcd+dJo0QmzztHvDvWcc7prVFsw==
+  /focus-visible/5.2.0:
+    dev: true
+    resolution:
+      integrity: sha512-Rwix9pBtC1Nuy5wysTmKy+UjbDJpIfg8eHjw0rjZ1mX4GNLz1Bmd16uDpI3Gk1i70Fgcs8Csg2lPm8HULFg9DQ==
   /follow-redirects/1.13.1_debug@4.3.1:
     dependencies:
       debug: 4.3.1_supports-color@6.1.0
@@ -6754,6 +6759,7 @@ specifiers:
   eslint-config-prettier: ^7.1.0
   eslint-plugin-react-hooks: ^4.2.0
   fast-copy: ^2.1.1
+  focus-visible: ^5.2.0
   framer-motion: ^3.2.1
   history: ^5.0.0
   html-loader: ^1.3.2

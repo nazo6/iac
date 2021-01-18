@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import type { AuthRequestBodyType } from '../types/AuthRequestType';
-import type { AuthResponseType } from '../types/AuthResponseType';
+import type { AuthRequestBodyType } from './types/AuthRequestType';
+import type { AuthResponseType } from './types/AuthResponseType';
 
 const API_STATUS_ENDPOINT = 'https://api.ibroadcast.com/s/JSON/status';
 

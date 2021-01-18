@@ -18,7 +18,7 @@ const MainPage = () => {
   };
   React.useEffect(() => {
     if (authData) {
-      getLibrary(authData?.token, authData?.userId);
+      getLibrary(authData.token, authData.userId);
     }
   }, []);
   return (

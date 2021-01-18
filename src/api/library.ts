@@ -1,7 +1,6 @@
 import axios from 'axios';
-import copy from 'fast-copy';
-import type { LibraryRequestType } from '../types/LibraryRequestType';
-import type { LibraryResponseType } from '../types/LibraryResponseType';
+import type { LibraryRequestType } from './types/LibraryRequestType';
+import type { LibraryResponseType } from './types/LibraryResponseType';
 
 const API_STATUS_ENDPOINT = 'https://library.ibroadcast.com/';
 
