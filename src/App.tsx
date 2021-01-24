@@ -5,10 +5,23 @@ import { getStatus } from './api/auth';
 import LoginPage from './Pages/LoginPage';
 import MainPage from './Pages/MainPage';
 import { authState } from './stores/app';
+import Rocon, { useNavigate, useRoutes } from 'rocon/react';
+
+const toplevelRoutes = Rocon.Path()
+  .exact({
+    action: () => <p>Loading...</p>,
+  })
+  .route('app', (route) => route.action(() => <MainPage />))
+  .route('login', (route) => route.action(() => <LoginPage />));
+
+const Routes: React.FC = () => {
+  return useRoutes(toplevelRoutes);
+};
 
 const App = () => {
   const [authData, setAuthData] = useRecoilState(authState);
   const [isReady, setIsReady] = React.useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     if (authData) {
       getStatus(authData.token, authData.userId).then((res) => {
@@ -20,17 +33,16 @@ const App = () => {
       });
     }
   }, [authData]);
-  let page;
   if (authData) {
     if (isReady) {
-      page = <MainPage />;
+      navigate(toplevelRoutes._.app);
     } else {
-      page = <></>;
+      navigate(toplevelRoutes.exactRoute);
     }
   } else {
-    page = <LoginPage />;
+    navigate(toplevelRoutes._.login);
   }
-  return page;
+  return <Routes />;
 };
 
 export default App;

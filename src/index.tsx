@@ -8,6 +8,7 @@ import { RecoilRoot } from 'recoil';
 
 import 'focus-visible/dist/focus-visible';
 import { Global, css } from '@emotion/react';
+import { RoconRoot } from 'rocon/react';
 const GlobalStyles = css`
   .js-focus-visible :focus:not([data-focus-visible-added]) {
     outline: none;
@@ -18,8 +19,10 @@ const root = document.getElementById('root');
 ReactDOM.render(
   <RecoilRoot>
     <ChakraProvider>
-      <Global styles={GlobalStyles} />
-      <App />
+      <RoconRoot>
+        <Global styles={GlobalStyles} />
+        <App />
+      </RoconRoot>
     </ChakraProvider>
   </RecoilRoot>,
   root,

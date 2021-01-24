@@ -18,6 +18,9 @@ const dev = {
   devServer: {
     contentBase: path.resolve(appDirectory, 'dist/development/renderer'),
     port: 9000,
+    historyApiFallback: {
+      rewrites: [{ from: /^\/*/, to: '/index.html' }],
+    },
   },
   plugins: [new webpack.HotModuleReplacementPlugin(), new ReactRefreshWebpackPlugin()],
 };
