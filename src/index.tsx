@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import App from './App';
-import { RecoilRoot } from 'recoil';
+import { Provider } from 'jotai';
 
 import { BrowserRouter as Router } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ const root = document.getElementById('root');
 const colorMode = localStorage.getItem('app-colorMode') as null | undefined | 'light' | 'dark';
 
 ReactDOM.render(
-  <RecoilRoot>
+  <Provider>
     <ChakraProvider>
       <Router>
         <ColorModeScript initialColorMode={colorMode != null ? colorMode : 'light'} />
@@ -27,6 +27,6 @@ ReactDOM.render(
         <App />
       </Router>
     </ChakraProvider>
-  </RecoilRoot>,
+  </Provider>,
   root,
 );

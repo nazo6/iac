@@ -1,30 +1,14 @@
-import { atom, selector } from 'recoil';
+import { atom } from 'jotai';
 import { LibraryResponseType } from '~/api/types/LibraryResponseType';
-import { persistEffect } from './effects';
+import { atomWithSave } from './utils';
 
-export const libraryState = atom<LibraryResponseType | null>({
+export const libraryState = atomWithSave<LibraryResponseType | null>({
   key: 'libraryState',
-  default: null,
-  effects_UNSTABLE: [persistEffect('app-librarystate')],
+  defaultValue: null,
 });
 
-export const tracksState = selector({
-  key: 'tracksState',
-  get: ({ get }) => get(libraryState)!.library.tracks,
-});
-export const albumsState = selector({
-  key: 'albumsState',
-  get: ({ get }) => get(libraryState)!.library.albums,
-});
-export const artistsState = selector({
-  key: 'artistsState',
-  get: ({ get }) => get(libraryState)!.library.artists,
-});
-export const playlistsState = selector({
-  key: 'playlistsState',
-  get: ({ get }) => get(libraryState)!.library.playlists,
-});
-export const trashStaete = selector({
-  key: 'trashState',
-  get: ({ get }) => get(libraryState)!.library.trash,
-});
+export const tracksStateAtom = atom((get) => get(libraryState)!.library.tracks);
+export const albumsStateAtom = atom((get) => get(libraryState)!.library.albums);
+export const artistsStateAtom = atom((get) => get(libraryState)!.library.artists);
+export const playlistsStateAtom = atom((get) => get(libraryState)!.library.playlists);
+export const trashStateAtom = atom((get) => get(libraryState)!.library.albums);

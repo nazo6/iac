@@ -1,6 +1,6 @@
+import { useAtom } from 'jotai';
 import * as React from 'react';
 import { CSSProperties, memo, useMemo } from 'react';
-import { useRecoilState } from 'recoil';
 import { vlistScrollPositionStateFamily } from './scrollState';
 
 import useScrollAware from './useScrollAware';
@@ -17,7 +17,7 @@ type VlistProps = {
 };
 
 export const Vlist = React.memo((props: VlistProps) => {
-  const [scrollPos, saveScrollPos] = useRecoilState(vlistScrollPositionStateFamily(props.id));
+  const [scrollPos, saveScrollPos] = useAtom(vlistScrollPositionStateFamily(props.id));
   const [scrolledVerticalTopPosition, ref] = useScrollAware();
 
   React.useEffect(() => {

@@ -3,12 +3,12 @@ import * as React from 'react';
 import { Box, Flex, IconButton } from '@chakra-ui/react';
 import { createRef } from 'react';
 import { ArrowBackIcon, ArrowForwardIcon, CloseIcon } from '@chakra-ui/icons';
-import { useRecoilState } from 'recoil';
 import { playerState } from '~/stores/player';
+import { useAtom } from 'jotai';
 
 const Player = () => {
   const ref = createRef<HTMLAudioElement>();
-  const [playerData, setPlayerData] = useRecoilState(playerState);
+  const [playerData, setPlayerData] = useAtom(playerState);
 
   React.useEffect(() => {
     if (playerData.enabled) {

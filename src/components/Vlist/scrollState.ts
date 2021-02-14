@@ -1,6 +1,3 @@
-import { atomFamily } from 'recoil';
+import { atomFamily } from 'jotai/utils';
 
-export const vlistScrollPositionStateFamily = atomFamily<null | number, string>({
-  key: 'vlistScrollPosition',
-  default: null,
-});
+export const vlistScrollPositionStateFamily = atomFamily<string, null | number>((param) => null);

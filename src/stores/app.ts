@@ -1,19 +1,13 @@
-import { atom } from 'recoil';
-import { persistEffect } from './effects';
+import { atom } from 'jotai';
+import { atomWithSave } from './utils';
 
-export const loginState = atom<{ status: 'OK' | null } | { status: 'Error'; message: string }>({
-  key: 'loggedInState',
-  default: { status: null },
-});
-
-export const authState = atom<{ token: string; userId: string } | null>({
+export const loginStateAtom = atom<{ status: 'OK' | null } | { status: 'Error'; message: string }>({ status: null });
+export const authStateAtom = atomWithSave<{ token: string; userId: string } | null>({
   key: 'authState',
-  default: null,
-  effects_UNSTABLE: [persistEffect('app-auth')],
+  defaultValue: null,
 });
 
-export const lastfmTokenState = atom<string | null>({
+export const lastfmTokenStateAtom = atomWithSave<string | null>({
   key: 'lastfmTokenState',
-  default: null,
-  effects_UNSTABLE: [persistEffect('app-lastfmtoken')],
+  defaultValue: null,
 });

@@ -1,15 +1,15 @@
 import { Box } from '@chakra-ui/react';
+import { useAtomValue } from 'jotai/utils';
 import * as React from 'react';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { artistsState } from '~/stores/library';
+import { artistsStateAtom } from '~/stores/library';
 import Explorer from '../Explorer';
 import Artist from '../GroupViews/Artist';
 
 const Artists = () => {
   const history = useHistory();
   const { path } = useRouteMatch();
-  const artistsData = useRecoilValue(artistsState);
+  const artistsData = useAtomValue(artistsStateAtom);
   const sortData = (sortType: 'name', sortDirection: 'ascend' | 'descend') => {
     return artistsData.slice().sort((a, b) => {
       let sortPair = ['', ''];

@@ -1,15 +1,15 @@
 import { Box, Flex } from '@chakra-ui/react';
 import * as React from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { getLibraryData } from '../../api/library';
 import Header from './components/Header';
 import Main from './components/Main';
-import { authState } from '../../stores/app';
+import { authStateAtom } from '../../stores/app';
 import { libraryState } from '../../stores/library';
+import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 
 const MainPage = () => {
-  const authData = useRecoilValue(authState);
-  const setLibraryData = useSetRecoilState(libraryState);
+  const authData = useAtomValue(authStateAtom);
+  const setLibraryData = useUpdateAtom(libraryState);
 
   const getLibrary = async (token: string, userId: string) => {
     const data = await getLibraryData(token, userId);

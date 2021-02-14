@@ -1,20 +1,21 @@
 import { CircularProgress } from '@chakra-ui/react';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { getStatus } from './api/auth';
 import LoginPage from './Pages/LoginPage';
 import MainPage from './Pages/MainPage';
-import { authState, loginState } from './stores/app';
+import { authStateAtom, loginStateAtom } from './stores/app';
+import { useAtomValue, useUpdateAtom } from 'jotai/utils';
+import { useAtom } from 'jotai';
 
 const RedirectRoot = () => {
-  const login = useRecoilValue(loginState);
+  const login = useAtomValue(loginStateAtom);
   return login.status === 'OK' ? <Redirect to="/app" /> : <Redirect to="/login" />;
 };
 const RedirectLogin = () => {
-  const setAuthState = useSetRecoilState(authState);
-  const [login, setLogin] = useRecoilState(loginState);
+  const setAuthState = useUpdateAtom(authStateAtom);
+  const [login, setLogin] = useAtom(loginStateAtom);
   const goApp = (token: string, userId: string) => {
     setAuthState({ token, userId });
     setLogin({ status: 'OK' });
@@ -22,13 +23,13 @@ const RedirectLogin = () => {
   return login.status !== 'OK' ? <LoginPage goApp={goApp} /> : <Redirect to="/app" />;
 };
 const RedirectApp = () => {
-  const login = useRecoilValue(loginState);
+  const login = useAtomValue(loginStateAtom);
   return login.status === 'OK' ? <MainPage /> : <Redirect to="/login" />;
 };
 
 const App = () => {
-  const setLoggedIn = useSetRecoilState(loginState);
-  const [authData, setAuthData] = useRecoilState(authState);
+  const [, setLoggedIn] = useAtom(loginStateAtom);
+  const [authData, setAuthData] = useAtom(authStateAtom);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -40,7 +41,7 @@ const App = () => {
           setAuthData({ token: res.user.token, userId: res.user.user_id });
           setIsLoading(false);
         } else {
-          setLoggedIn({ status: 'Error', message: res });
+          setLoggedIn({ status: 'Error', message: '' });
           console.log(res);
           setIsLoading(false);
         }

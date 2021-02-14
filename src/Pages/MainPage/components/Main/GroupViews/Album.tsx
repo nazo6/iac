@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Flex, Text } from '@chakra-ui/react';
-import { useRecoilValue } from 'recoil';
-import { albumsState, tracksState } from '~/stores/library';
+import { albumsStateAtom, tracksStateAtom } from '~/stores/library';
 import Explorer from '../Explorer';
 import { TrackType } from '~/api/types/LibraryResponseType';
+import { useAtomValue } from 'jotai/utils';
 
 const Album = () => {
   const { albumId } = useParams<{ albumId: string }>();
-  const albumData = useRecoilValue(albumsState).find((value) => value.id === albumId);
-  const tracksData = useRecoilValue(tracksState);
+  const albumData = useAtomValue(albumsStateAtom).find((value) => value.id === albumId);
+  const tracksData = useAtomValue(tracksStateAtom);
   if (!albumData) {
     return <Text>Error!</Text>;
   }

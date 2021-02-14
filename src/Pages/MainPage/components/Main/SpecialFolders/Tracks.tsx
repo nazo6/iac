@@ -1,11 +1,11 @@
 import { Box } from '@chakra-ui/react';
+import { useAtomValue } from 'jotai/utils';
 import * as React from 'react';
-import { useRecoilValue } from 'recoil';
-import { tracksState } from '~/stores/library';
+import { tracksStateAtom } from '~/stores/library';
 import Explorer from '../Explorer';
 
 const Tracks = () => {
-  const tracksData = useRecoilValue(tracksState);
+  const tracksData = useAtomValue(tracksStateAtom);
   const sortData = (sortType: 'title' | 'uploaded_time', sortDirection: 'ascend' | 'descend') => {
     return tracksData.slice().sort((a, b) => {
       let sortPair = ['', ''];
