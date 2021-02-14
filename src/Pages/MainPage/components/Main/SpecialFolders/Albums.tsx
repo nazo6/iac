@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/react';
 import * as React from 'react';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { libraryState } from '~/stores/app';
+import { libraryState } from '~/stores/library';
 import Explorer from '../Explorer';
 import Album from '../GroupViews/Album';
 

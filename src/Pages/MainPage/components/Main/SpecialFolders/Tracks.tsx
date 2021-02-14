@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import * as React from 'react';
 import { useRecoilValue } from 'recoil';
-import { libraryState } from '~/stores/app';
+import { libraryState } from '~/stores/library';
 import Explorer from '../Explorer';
 
 const Tracks = () => {

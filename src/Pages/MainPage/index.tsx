@@ -4,7 +4,8 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { getLibraryData } from '../../api/library';
 import Header from './components/Header';
 import Main from './components/Main';
-import { authState, libraryState } from '../../stores/app';
+import { authState } from '../../stores/app';
+import { libraryState } from '../../stores/library';
 
 const MainPage = () => {
   const authData = useRecoilValue(authState);
