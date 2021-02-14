@@ -4,13 +4,13 @@ import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { libraryState } from '~/stores/app';
 import Explorer from '../Explorer';
-import AlbumViewer from '../GroupViews/AlbumViewer';
+import Album from '../GroupViews/Album';
 
 const Albums = () => {
   const history = useHistory();
   const { path } = useRouteMatch();
   const library = useRecoilValue(libraryState);
-  const sortAlbumsData = (sortType: 'name', sortDirection: 'ascend' | 'descend') => {
+  const sortData = (sortType: 'name', sortDirection: 'ascend' | 'descend') => {
     return library!.library.albums.slice().sort((a, b) => {
       let sortPair = ['', ''];
       switch (sortType) {
@@ -40,7 +40,7 @@ const Albums = () => {
         <Route exact path={`${path}`}>
           <Explorer
             id={`albums`}
-            data={sortAlbumsData('name', 'ascend').map((value) => {
+            data={sortData('name', 'ascend').map((value) => {
               return {
                 type: 'folder',
                 name: value.id,
@@ -53,7 +53,7 @@ const Albums = () => {
           />
         </Route>
         <Route path={`${path}/:albumId`}>
-          <AlbumViewer />
+          <Album />
         </Route>
       </Switch>
     </Box>

@@ -57,7 +57,7 @@ const Explorer: React.FC<ExplorerPropsType> = (props) => {
                     props.onTrackSelect(data.fileData.id);
                   }
                 }}>
-                {data.fileData.album_id}
+                {data.fileData.title}
               </div>
             );
           }
