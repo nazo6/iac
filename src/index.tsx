@@ -2,13 +2,13 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import App from './App';
-
-import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import { RecoilRoot } from 'recoil';
+
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import 'focus-visible/dist/focus-visible';
 import { Global, css } from '@emotion/react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 const GlobalStyles = css`
   .js-focus-visible :focus:not([data-focus-visible-added]) {
     outline: none;

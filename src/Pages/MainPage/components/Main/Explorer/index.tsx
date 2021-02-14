@@ -12,10 +12,12 @@ type ExplorerPropsType = {
       }
     | {
         type: 'folder';
-        title: string;
+        name: string;
+        displayName?: string;
       }
   >;
-  onTrackSelect?: (trackId: number) => void;
+  id: string;
+  onTrackSelect?: (trackId: string) => void;
   onAlbumSelect?: (albumId: number) => void;
   onArtistSelect?: (artistId: number) => void;
   onGenreSelect?: (genre: string) => void;
@@ -26,21 +28,23 @@ const Explorer: React.FC<ExplorerPropsType> = (props) => {
   return (
     <Box ref={ref} w="100%" h="100%">
       <Vlist
+        id={props.id}
         listWidth={width}
         listHeight={height}
         itemRenderer={(index, style) => {
           const data = props.data[index];
           if (data.type === 'folder') {
+            const displayName = data.displayName ?? data.name;
             return (
               <div
                 key={index}
                 style={style}
                 onClick={() => {
                   if (props.onFolderSelect) {
-                    props.onFolderSelect(data.title);
+                    props.onFolderSelect(data.name);
                   }
                 }}>
-                {data.title}
+                {displayName}
               </div>
             );
           } else {
@@ -50,7 +54,7 @@ const Explorer: React.FC<ExplorerPropsType> = (props) => {
                 style={style}
                 onClick={() => {
                   if (props.onTrackSelect) {
-                    props.onTrackSelect(data.fileData.track);
+                    props.onTrackSelect(data.fileData.id);
                   }
                 }}>
                 {data.fileData.album_id}

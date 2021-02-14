@@ -7,6 +7,7 @@ import Albums from './SpecialFolders/Albums';
 import Artists from './SpecialFolders/Artists';
 import Genre from './SpecialFolders/Genre';
 import Tracks from './SpecialFolders/Tracks';
+import Folder from '../Folder';
 
 const Main = () => {
   const history = useHistory();
@@ -14,44 +15,45 @@ const Main = () => {
   const Top = () => {
     return (
       <Explorer
+        id="top"
         data={[
           {
             type: 'folder',
-            title: 'Artists',
+            name: 'Artists',
           },
           {
             type: 'folder',
-            title: 'Tracks',
+            name: 'Tracks',
           },
           {
             type: 'folder',
-            title: 'Albums',
+            name: 'Albums',
           },
           {
             type: 'folder',
-            title: 'Genre',
+            name: 'Genre',
           },
           {
             type: 'folder',
-            title: 'Custom Folders',
+            name: 'Custom Folders',
           },
         ]}
         onFolderSelect={(folderName) => {
           switch (folderName) {
             case 'Artists':
-              history.push(`${path}/artists`);
+              history.push(`${path}/artist`);
               break;
             case 'Tracks':
-              history.push(`${path}/tracks`);
+              history.push(`${path}/track`);
               break;
             case 'Albums':
-              history.push(`${path}/albums`);
+              history.push(`${path}/album`);
               break;
             case 'Genre':
               history.push(`${path}/genre`);
               break;
             case 'Custom Folders':
-              history.push(`${path}/artists`);
+              history.push(`${path}/folder`);
               break;
             default:
               break;
@@ -64,17 +66,20 @@ const Main = () => {
   return (
     <Box h="100%">
       <Switch>
-        <Route path={`${path}/artists`}>
+        <Route path={`${path}/artist`}>
           <Artists />
         </Route>
-        <Route path={`${path}/albums`}>
+        <Route path={`${path}/album`}>
           <Albums />
         </Route>
         <Route path={`${path}/genre`}>
           <Genre />
         </Route>
-        <Route path={`${path}/tracks`}>
+        <Route path={`${path}/track`}>
           <Tracks />
+        </Route>
+        <Route path={`${path}/folder`}>
+          <Folder />
         </Route>
         <Route path={`${path}/`}>
           <Top />

@@ -1,13 +1,17 @@
 import { Box } from '@chakra-ui/react';
 import * as React from 'react';
+import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { libraryState } from '~/stores/app';
 import Explorer from '../Explorer';
+import AlbumViewer from '../GroupViews/AlbumViewer';
 
 const Albums = () => {
+  const history = useHistory();
+  const { path } = useRouteMatch();
   const library = useRecoilValue(libraryState);
-  const sortAlbumsData = (sortType: 'name', sortDirection: 'descend' | 'ascend') => {
-    return library?.library.albums.slice().sort((a, b) => {
+  const sortAlbumsData = (sortType: 'name', sortDirection: 'ascend' | 'descend') => {
+    return library!.library.albums.slice().sort((a, b) => {
       let sortPair = ['', ''];
       switch (sortType) {
         case 'name':
@@ -15,13 +19,13 @@ const Albums = () => {
           break;
       }
       switch (sortDirection) {
-        case 'descend':
+        case 'ascend':
           if (sortPair[0] > sortPair[1]) {
             return 1;
           } else {
             return -1;
           }
-        case 'ascend':
+        case 'descend':
           if (sortPair[0] < sortPair[1]) {
             return 1;
           } else {
@@ -32,14 +36,26 @@ const Albums = () => {
   };
   return (
     <Box h="100%">
-      <Explorer
-        data={sortAlbumsData('name', 'descend')!.map((value) => {
-          return {
-            type: 'folder',
-            title: value.name,
-          };
-        })}
-      />
+      <Switch>
+        <Route exact path={`${path}`}>
+          <Explorer
+            id={`albums`}
+            data={sortAlbumsData('name', 'ascend').map((value) => {
+              return {
+                type: 'folder',
+                name: value.id,
+                displayName: value.name,
+              };
+            })}
+            onFolderSelect={(folderName) => {
+              history.push(`${path}/${folderName}`);
+            }}
+          />
+        </Route>
+        <Route path={`${path}/:albumId`}>
+          <AlbumViewer />
+        </Route>
+      </Switch>
     </Box>
   );
 };

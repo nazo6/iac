@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { CSSProperties, memo, useMemo } from 'react';
+import { useRecoilState } from 'recoil';
+import { vlistScrollPositionStateFamily } from './scrollState';
 
 import useScrollAware from './useScrollAware';
 
@@ -10,13 +12,25 @@ type VlistProps = {
   listWidth: number;
   renderAhead?: number;
   calcItemHeight: (index: number) => number;
+  /** Auto restore scroll position by this property */
+  id: string;
 };
 
 export const Vlist = React.memo((props: VlistProps) => {
-  //console.log(props.listHeight);
-  const renderAhead = props.renderAhead ? props.renderAhead : 5;
-
+  const [scrollPos, saveScrollPos] = useRecoilState(vlistScrollPositionStateFamily(props.id));
   const [scrolledVerticalTopPosition, ref] = useScrollAware();
+
+  React.useEffect(() => {
+    console.log(`id:${props.id} scrollPos:${scrollPos}`);
+    if (scrollPos) {
+      ref.current?.scrollTo(0, scrollPos);
+    }
+  }, []);
+  React.useEffect(() => {
+    saveScrollPos(scrolledVerticalTopPosition);
+  }, [scrolledVerticalTopPosition]);
+
+  const renderAhead = props.renderAhead ? props.renderAhead : 5;
 
   const itemDimensions = useMemo(() => {
     const heights: number[] = [];
