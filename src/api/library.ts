@@ -53,13 +53,14 @@ const convert = (libraryObject: LibraryObjectType) => {
       return value.key;
     });
   delete libraryObject.map;
-  const result: { [prop: string]: { [prop: string]: string | number } } = {};
+  const result: Array<{ [prop: string]: number | string }> = [];
   Object.keys(libraryObject).forEach((key) => {
     const itemObject: { [prop: string]: number | string } = {};
     libraryObject[key].forEach((value, index) => {
       itemObject[map[index]] = value;
     });
-    result[key] = itemObject;
+    itemObject['id'] = key;
+    result.push(itemObject);
   });
   return result;
 };

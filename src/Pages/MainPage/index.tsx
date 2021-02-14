@@ -2,8 +2,8 @@ import { Box, Flex } from '@chakra-ui/react';
 import * as React from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { getLibraryData } from '../../api/library';
-import Header from '../../components/Header';
-import Main from '../../components/Main';
+import Header from './components/Header';
+import Main from './components/Main';
 import { authState, libraryState } from '../../stores/app';
 
 const MainPage = () => {

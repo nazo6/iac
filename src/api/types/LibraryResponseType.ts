@@ -17,72 +17,11 @@ export type LibraryResponseType = {
   library: {
     expires: number; //1642266846
     tags: Record<string, unknown>;
-    tracks: {
-      [trackId: string]: {
-        track: number;
-        year: number;
-        title: string;
-        genre: string;
-        /** Song length (seconds) */
-        length: number;
-        album_id: number;
-        artwork_id: number;
-        artist_id: number;
-        enid: number; //0
-        uploaded_on: string; //2021-01-15
-        trashed: boolean;
-        size: number;
-        path: string;
-        uid: string;
-        rating: number;
-        plays: number;
-        /** Audio file path. */
-        file: string;
-        /** Mime type e.g. audio/mpeg3 */
-        type: string;
-        /** Replay gain (number as string) e.g. -4.7*/
-        replay_gain: string;
-        /** Uploaded time. e.g. 17:13:59 */
-        uploaded_time: string;
-      };
-    };
-    artists: {
-      [artistId: string]: {
-        name: string;
-        /** Array of trackId */
-        tracks: Array<string>;
-        trashed: boolean;
-        rating: number;
-      };
-    };
-    albums: {
-      [albumId: string]: {
-        name: string;
-        tracks: Array<number>;
-        artist_id: number;
-        trashed: boolean;
-        rating: number;
-        disc: number;
-        year: number;
-      };
-    };
-    playlists: Array<{
-      name: string;
-      tracks: Array<number>;
-      uid: number;
-      system_created: boolean;
-      public_id: null | number;
-      type: null | unknown;
-      description: null | string;
-      artwork_id: null | number;
-      sort: number;
-    }>;
-    trash: {
-      [trashId: string]: {
-        name: string;
-        tracks: Array<number>;
-      };
-    };
+    tracks: Array<TrackType>;
+    artists: Array<ArtistType>;
+    albums: Array<AlbumType>;
+    playlists: Array<PlayListType>;
+    trash: Array<{ trashId: string; name: string; tracks?: Array<number> }>;
   };
   lastfm: {
     sessionkey: string;
@@ -93,6 +32,67 @@ export type LibraryResponseType = {
   result: boolean;
 };
 
+export type PlayListType = {
+  id: string;
+  name: string;
+  tracks: Array<number>;
+  uid: number;
+  system_created: boolean;
+  public_id: null | number;
+  type: null | unknown;
+  description: null | string;
+  artwork_id: null | number;
+  sort: number;
+};
+
+export type ArtistType = {
+  id: string;
+  name: string;
+  /** Array of trackId */
+  tracks: Array<number>;
+  trashed: boolean;
+  rating: number;
+};
+
+export type AlbumType = {
+  id: string;
+  name: string;
+  tracks: Array<number>;
+  artist_id: number;
+  trashed: boolean;
+  rating: number;
+  disc: number;
+  year: number;
+};
+
+export type TrackType = {
+  id: string;
+  track: number;
+  year: number;
+  title: string;
+  genre: string;
+  /** Song length (seconds) */
+  length: number;
+  album_id: number;
+  artwork_id: number;
+  artist_id: number;
+  enid: number; //0
+  uploaded_on: string; //2021-01-15
+  trashed: boolean;
+  size: number;
+  path: string;
+  uid: string;
+  rating: number;
+  plays: number;
+  /** Audio file path. */
+  file: string;
+  /** Mime type e.g. audio/mpeg3 */
+  type: string;
+  /** Replay gain (number as string) e.g. -4.7*/
+  replay_gain: string;
+  /** Uploaded time. e.g. 17:13:59 */
+  uploaded_time: string;
+};
 /*参考
 type LibraryResponseRawType = {
   settings: {

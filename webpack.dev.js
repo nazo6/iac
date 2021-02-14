@@ -14,6 +14,7 @@ const dev = {
   devtool: 'inline-source-map',
   output: {
     path: path.resolve(appDirectory, 'dist/development/renderer'),
+    publicPath: '/',
   },
   devServer: {
     contentBase: path.resolve(appDirectory, 'dist/development/renderer'),

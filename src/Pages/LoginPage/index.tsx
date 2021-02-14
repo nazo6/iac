@@ -1,12 +1,9 @@
 import { Center, Input, Button, Box, Text, Spinner, useToast } from '@chakra-ui/react';
 import * as React from 'react';
-import { useSetRecoilState } from 'recoil';
 import { getStatusWithAuth } from '../../api/auth';
-import { authState } from '../../stores/app';
 
-const LoginPage = () => {
+const LoginPage: React.FC<{ goApp: (token: string, userId: string) => void }> = (props) => {
   const toast = useToast();
-  const setAuthState = useSetRecoilState(authState);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(false);
@@ -15,7 +12,7 @@ const LoginPage = () => {
     const status = await getStatusWithAuth(email, password);
     setIsLoading(false);
     if (status.authenticated) {
-      setAuthState({ token: status.user.token, userId: status.user.user_id });
+      props.goApp(status.user.token, status.user.user_id);
     } else {
       toast({
         title: 'Login failed',

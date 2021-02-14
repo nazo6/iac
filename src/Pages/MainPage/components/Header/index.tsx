@@ -2,7 +2,15 @@ import { Flex, Box, Spacer, Input, Switch, Text, useColorMode } from '@chakra-ui
 import * as React from 'react';
 
 const Header = () => {
-  const { toggleColorMode } = useColorMode();
+  const { toggleColorMode, colorMode } = useColorMode();
+  const changeColorMode = () => {
+    if (colorMode === 'light') {
+      localStorage.setItem('app-colorMode', 'dark');
+    } else {
+      localStorage.setItem('app-colorMode', 'white');
+    }
+    toggleColorMode();
+  };
   return (
     <Flex h="100%" alignItems="center" boxShadow="md" paddingX="1rem">
       <Box>
@@ -12,10 +20,10 @@ const Header = () => {
       <Text>Dark mode</Text>
       <Box>
         <Switch
-          id="email-alerts"
           onChange={() => {
-            toggleColorMode();
+            changeColorMode();
           }}
+          defaultChecked={colorMode === 'dark'}
         />
       </Box>
     </Flex>
