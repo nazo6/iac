@@ -2,16 +2,16 @@ import { Box } from '@chakra-ui/react';
 import * as React from 'react';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { libraryState } from '~/stores/library';
+import { albumsState } from '~/stores/library';
 import Explorer from '../Explorer';
 import Album from '../GroupViews/Album';
 
 const Albums = () => {
   const history = useHistory();
   const { path } = useRouteMatch();
-  const library = useRecoilValue(libraryState);
+  const albumsData = useRecoilValue(albumsState);
   const sortData = (sortType: 'name', sortDirection: 'ascend' | 'descend') => {
-    return library!.library.albums.slice().sort((a, b) => {
+    return albumsData.slice().sort((a, b) => {
       let sortPair = ['', ''];
       switch (sortType) {
         case 'name':

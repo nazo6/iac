@@ -1,8 +1,7 @@
 import { atom } from 'recoil';
-import { LibraryResponseType } from '../api/types/LibraryResponseType';
 import { persistEffect } from './effects';
 
-export const loginState = atom<{ status: 'OK' | null } | { status: 'Error'; message: any }>({
+export const loginState = atom<{ status: 'OK' | null } | { status: 'Error'; message: string }>({
   key: 'loggedInState',
   default: { status: null },
 });

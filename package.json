@@ -23,11 +23,13 @@
     "@chakra-ui/react": "^1.1.5",
     "@emotion/react": "^11.1.4",
     "@emotion/styled": "^11.0.0",
+    "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
     "fast-copy": "^2.1.1",
     "focus-visible": "^5.2.0",
     "framer-motion": "^3.2.1",
     "history": "^5.0.0",
+    "immer": "^8.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
@@ -66,11 +68,11 @@
   },
   "lint-staged": {
     "*.@(ts|tsx)": [
-      "pnpm lint",
-      "pnpm format"
+      "yarn lint",
+      "yarn format"
     ],
     "*.@(js)": [
-      "pnpm format"
+      "yarn format"
     ]
   }
 }

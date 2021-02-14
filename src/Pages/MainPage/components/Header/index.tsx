@@ -1,5 +1,6 @@
 import { Flex, Box, Spacer, Input, Switch, Text, useColorMode } from '@chakra-ui/react';
 import * as React from 'react';
+import Player from './Player';
 
 const Header = () => {
   const { toggleColorMode, colorMode } = useColorMode();
@@ -17,7 +18,10 @@ const Header = () => {
         <Input placeholder="Search" />
       </Box>
       <Spacer />
-      <Text>Dark mode</Text>
+      <Box>
+        <Player />
+      </Box>
+      <Spacer />
       <Box>
         <Switch
           onChange={() => {

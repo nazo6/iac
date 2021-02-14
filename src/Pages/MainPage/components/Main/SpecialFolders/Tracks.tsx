@@ -1,13 +1,13 @@
 import { Box } from '@chakra-ui/react';
 import * as React from 'react';
 import { useRecoilValue } from 'recoil';
-import { libraryState } from '~/stores/library';
+import { tracksState } from '~/stores/library';
 import Explorer from '../Explorer';
 
 const Tracks = () => {
-  const library = useRecoilValue(libraryState);
+  const tracksData = useRecoilValue(tracksState);
   const sortData = (sortType: 'title' | 'uploaded_time', sortDirection: 'ascend' | 'descend') => {
-    return library!.library.tracks.slice().sort((a, b) => {
+    return tracksData.slice().sort((a, b) => {
       let sortPair = ['', ''];
       switch (sortType) {
         case 'title':

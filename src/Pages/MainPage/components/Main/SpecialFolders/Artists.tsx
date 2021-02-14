@@ -2,16 +2,16 @@ import { Box } from '@chakra-ui/react';
 import * as React from 'react';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { libraryState } from '~/stores/library';
+import { artistsState } from '~/stores/library';
 import Explorer from '../Explorer';
 import Artist from '../GroupViews/Artist';
 
 const Artists = () => {
   const history = useHistory();
   const { path } = useRouteMatch();
-  const library = useRecoilValue(libraryState);
+  const artistsData = useRecoilValue(artistsState);
   const sortData = (sortType: 'name', sortDirection: 'ascend' | 'descend') => {
-    return library!.library.artists.slice().sort((a, b) => {
+    return artistsData.slice().sort((a, b) => {
       let sortPair = ['', ''];
       switch (sortType) {
         case 'name':

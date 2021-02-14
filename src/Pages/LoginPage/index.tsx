@@ -25,7 +25,7 @@ const LoginPage: React.FC<{ goApp: (token: string, userId: string) => void }> = 
   };
   return (
     <Center w="100%">
-      <Box maxW="20rem" p={4} color="white">
+      <Box maxW="20rem" p={4}>
         <Input
           value={email}
           onChange={(event) => {
