@@ -39,19 +39,19 @@ const Main = () => {
         onFolderSelect={(folderName) => {
           switch (folderName) {
             case 'Artists':
-              history.push('artists');
+              history.push(`${path}/artists`);
               break;
             case 'Tracks':
-              history.push('tracks');
+              history.push(`${path}/tracks`);
               break;
             case 'Albums':
-              history.push('albums');
+              history.push(`${path}/albums`);
               break;
             case 'Genre':
-              history.push('genre');
+              history.push(`${path}/genre`);
               break;
             case 'Custom Folders':
-              history.push('artists');
+              history.push(`${path}/artists`);
               break;
             default:
               break;
