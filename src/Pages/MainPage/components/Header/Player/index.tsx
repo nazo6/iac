@@ -13,11 +13,13 @@ const Player = () => {
   const audio = useAudio();
   const [playerState, setPlayerState] = useAtom(withImmer(playerStateAtom));
   React.useEffect(() => {
-    audio.setSrc(playerState.queue[playerState.playIndex].file);
-    if (playerState.play) {
-      audio.play();
-    } else {
-      audio.pause();
+    if (playerState.queue[playerState.playIndex]) {
+      audio.setSrc(playerState.queue[playerState.playIndex].file);
+      if (playerState.play) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
     }
   }, [playerState.playIndex, playerState.queue]);
 
