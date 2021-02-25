@@ -10,4 +10,4 @@ export const playerStateAtom = atom<{
   queue: [],
   play: false,
 });
-playerStateAtom.debugLabel = 'queue';
+playerStateAtom.debugLabel = 'playerStatus';

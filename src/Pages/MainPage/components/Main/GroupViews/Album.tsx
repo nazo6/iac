@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Flex, Text } from '@chakra-ui/react';
-import { tracksStateSelector } from '~/stores/library';
 import Explorer from '../Explorer';
 import { TrackType } from '~/api/types/LibraryResponseType';
-import { useAtomValue } from 'jotai/utils';
 import { useAtom } from 'jotai';
 import { playerStateAtom } from '~/stores/queue';
 import {
@@ -15,7 +13,6 @@ import {
 const Album = () => {
   const [, setPlayerState] = useAtom(playerStateAtom);
 
-  const tracksData = useAtomValue(tracksStateSelector);
   const { albumId } = useParams<{ albumId: string }>();
   const albumData = useFindAlbumDataById()(albumId);
   const findTrackData = useFindTrackDataById();
@@ -38,8 +35,8 @@ const Album = () => {
           })}
           onTrackSelect={(trackData) => {
             setPlayerState({
-              queue: tracksData,
-              playIndex: tracksData.map((data) => data.id).indexOf(trackData.id),
+              queue: albumTracksData,
+              playIndex: albumTracksData.map((data) => data.id).indexOf(trackData.id),
               play: true,
             });
           }}
