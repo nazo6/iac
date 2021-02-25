@@ -16,7 +16,11 @@ const GlobalStyles = css`
   }
 `;
 const root = document.getElementById('root');
-const colorMode = localStorage.getItem('app-colorMode') as null | undefined | 'light' | 'dark';
+const colorMode = localStorage.getItem('app-colorMode') as
+  | null
+  | undefined
+  | 'light'
+  | 'dark';
 
 ReactDOM.render(
   <Provider>

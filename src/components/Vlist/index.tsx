@@ -45,17 +45,34 @@ export const Vlist = React.memo((props: VlistProps) => {
     return { heights, verticalPositions };
   }, [props]);
   const totalHeight =
-    itemDimensions.verticalPositions[props.itemCount - 1] + itemDimensions.heights[props.itemCount - 1];
+    itemDimensions.verticalPositions[props.itemCount - 1] +
+    itemDimensions.heights[props.itemCount - 1];
   const firstVisibleNode = useMemo(
-    () => findStartNode(scrolledVerticalTopPosition, itemDimensions.verticalPositions, props.itemCount),
+    () =>
+      findStartNode(
+        scrolledVerticalTopPosition,
+        itemDimensions.verticalPositions,
+        props.itemCount,
+      ),
     [scrolledVerticalTopPosition, itemDimensions.verticalPositions, props.itemCount],
   );
 
   const startNode = Math.max(0, firstVisibleNode - renderAhead);
 
   const lastVisibleNode = useMemo(
-    () => findEndNode(itemDimensions.verticalPositions, firstVisibleNode, props.itemCount, props.listHeight),
-    [itemDimensions.verticalPositions, firstVisibleNode, props.itemCount, props.listHeight],
+    () =>
+      findEndNode(
+        itemDimensions.verticalPositions,
+        firstVisibleNode,
+        props.itemCount,
+        props.listHeight,
+      ),
+    [
+      itemDimensions.verticalPositions,
+      firstVisibleNode,
+      props.itemCount,
+      props.listHeight,
+    ],
   );
   const endNode = Math.min(props.itemCount - 1, lastVisibleNode + renderAhead);
   const visibleNodeCount = endNode - startNode + 1;
@@ -101,7 +118,11 @@ export const Vlist = React.memo((props: VlistProps) => {
   );
 });
 
-function findStartNode(scrolledVerticalTopPosition: number, nodePositions: number[], itemCount: number) {
+function findStartNode(
+  scrolledVerticalTopPosition: number,
+  nodePositions: number[],
+  itemCount: number,
+) {
   let startRange = 0;
   let endRange = itemCount - 1;
   while (endRange !== startRange) {
@@ -131,7 +152,12 @@ function findStartNode(scrolledVerticalTopPosition: number, nodePositions: numbe
   return itemCount;
 }
 
-function findEndNode(nodePositions: number[], startNode: number, itemCount: number, height: number) {
+function findEndNode(
+  nodePositions: number[],
+  startNode: number,
+  itemCount: number,
+  height: number,
+) {
   let endNode;
   for (endNode = startNode; endNode < itemCount; endNode++) {
     // console.log(nodePositions[endNode], nodePositions[startNode]);
