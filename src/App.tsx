@@ -6,7 +6,7 @@ import { getStatus } from './api/auth';
 import LoginPage from './Pages/LoginPage';
 import MainPage from './Pages/MainPage';
 import { authStateAtom, loginStateAtom } from './stores/app';
-import { useAtomValue, useUpdateAtom } from 'jotai/utils';
+import { useAtomValue } from 'jotai/utils';
 import { useAtom } from 'jotai';
 
 const RedirectRoot = () => {
@@ -14,13 +14,8 @@ const RedirectRoot = () => {
   return login.status === 'OK' ? <Redirect to="/app" /> : <Redirect to="/login" />;
 };
 const RedirectLogin = () => {
-  const setAuthState = useUpdateAtom(authStateAtom);
-  const [login, setLogin] = useAtom(loginStateAtom);
-  const goApp = (token: string, userId: string) => {
-    setAuthState({ token, userId });
-    setLogin({ status: 'OK' });
-  };
-  return login.status !== 'OK' ? <LoginPage goApp={goApp} /> : <Redirect to="/app" />;
+  const [login] = useAtom(loginStateAtom);
+  return login.status !== 'OK' ? <LoginPage /> : <Redirect to="/app" />;
 };
 const RedirectApp = () => {
   const login = useAtomValue(loginStateAtom);
@@ -35,13 +30,10 @@ const App = () => {
   useEffect(() => {
     const f = async () => {
       if (authData) {
-        const res = await getStatus(authData.token, authData.userId);
+        const res = await getStatus(authData.user.token, authData.user.userid);
         if (res.authenticated) {
           setLoggedIn({ status: 'OK' });
-          setAuthData({
-            token: res.user.token,
-            userId: res.user.user_id,
-          });
+          setAuthData(res);
           setIsLoading(false);
         } else {
           setLoggedIn({ status: 'Error', message: '' });

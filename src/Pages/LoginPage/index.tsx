@@ -1,18 +1,23 @@
 import { Center, Input, Button, Box, Text, Spinner, useToast } from '@chakra-ui/react';
+import { useUpdateAtom } from 'jotai/utils';
 import * as React from 'react';
+import { authStateAtom, loginStateAtom } from '~/stores/app';
 import { getStatusWithAuth } from '../../api/auth';
 
-const LoginPage = ({ goApp }: { goApp: (token: string, userId: string) => void }) => {
+const LoginPage = () => {
   const toast = useToast();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(false);
+  const setLogin = useUpdateAtom(loginStateAtom);
+  const setAuthState = useUpdateAtom(authStateAtom);
   const login = async () => {
     setIsLoading(true);
     const status = await getStatusWithAuth(email, password);
     setIsLoading(false);
     if (status.authenticated) {
-      goApp(status.user.token, status.user.user_id);
+      setAuthState(status);
+      setLogin({ status: 'OK' });
     } else {
       toast({
         title: 'Login failed',

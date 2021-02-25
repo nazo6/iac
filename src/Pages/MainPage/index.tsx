@@ -6,10 +6,13 @@ import Main from './components/Main';
 import { authStateAtom } from '../../stores/app';
 import { libraryState } from '../../stores/library';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
+import useWebSocketUpdate from './useWebSocketUpdate';
 
 const MainPage = () => {
   const authData = useAtomValue(authStateAtom);
   const setLibraryData = useUpdateAtom(libraryState);
+
+  useWebSocketUpdate();
 
   const getLibrary = async (token: string, userId: string) => {
     const data = await getLibraryData(token, userId);
@@ -19,7 +22,7 @@ const MainPage = () => {
   };
   React.useEffect(() => {
     if (authData) {
-      getLibrary(authData.token, authData.userId);
+      getLibrary(authData.user.token, authData.user.userid);
     }
   }, []);
   return (
