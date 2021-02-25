@@ -7,18 +7,19 @@ const path = require('path');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const webpack = require('webpack');
 
-const appDirectory = path.resolve(__dirname, '../../');
+const appDirectory = path.resolve(__dirname, './');
 
 const dev = {
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'eval-source-map',
   output: {
-    path: path.resolve(appDirectory, 'dist/development/renderer'),
+    path: path.resolve(appDirectory, 'dist/development'),
     publicPath: '/',
   },
   devServer: {
-    contentBase: path.resolve(appDirectory, 'dist/development/renderer'),
+    contentBase: path.resolve(appDirectory, 'dist/development'),
     port: 9000,
+    writeToDisk: true,
     historyApiFallback: {
       rewrites: [{ from: /^\/*/, to: '/index.html' }],
     },

@@ -24,8 +24,8 @@ const Queue = () => {
       </PopoverTrigger>
       <PopoverContent>
         <List spacing={3}>
-          {playerStatus.queue.map((trackData) => {
-            return <ListItem>{trackData.title}</ListItem>;
+          {playerStatus.queue.map((trackData, index) => {
+            return <ListItem key={index}>{trackData.title}</ListItem>;
           })}
         </List>
       </PopoverContent>

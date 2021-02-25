@@ -3,15 +3,15 @@ import { useParams } from 'react-router-dom';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import Explorer from '../Explorer';
 import { TrackType } from '~/api/types/LibraryResponseType';
-import { useAtom } from 'jotai';
 import { playerStateAtom } from '~/stores/queue';
 import {
   useFindAlbumDataById,
   useFindTrackDataById,
 } from '~/Pages/MainPage/utils/usefindData';
+import { useUpdateAtom } from 'jotai/utils';
 
 const Album = () => {
-  const [, setPlayerState] = useAtom(playerStateAtom);
+  const setPlayerState = useUpdateAtom(playerStateAtom);
 
   const { albumId } = useParams<{ albumId: string }>();
   const albumData = useFindAlbumDataById()(albumId);

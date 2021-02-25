@@ -21,7 +21,6 @@ export const Vlist = React.memo((props: VlistProps) => {
   const [scrolledVerticalTopPosition, ref] = useScrollAware();
 
   React.useEffect(() => {
-    console.log(`id:${props.id} scrollPos:${scrollPos}`);
     if (scrollPos) {
       ref.current?.scrollTo(0, scrollPos);
     }
