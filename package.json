@@ -14,7 +14,7 @@
     ]
   },
   "scripts": {
-    "serve": "webpack serve --config ./webpack.dev.js --hot --color",
+    "serve": "cross-env NODE_ENV=development & webpack serve --config ./webpack.dev.js --hot --color",
     "format": "prettier --write **/*.{js,ts,tsx}",
     "lint": "eslint . --ext ts --ext tsx --fix"
   },
@@ -23,7 +23,8 @@
     "@chakra-ui/react": "^1.1.5",
     "@emotion/react": "^11.1.4",
     "@emotion/styled": "^11.0.0",
-    "@material-ui/icons": "^4.11.2",
+    "@mdi/js": "^5.9.55",
+    "@mdi/react": "^1.4.0",
     "axios": "^0.21.1",
     "fast-copy": "^2.1.1",
     "focus-visible": "^5.2.0",
@@ -46,6 +47,7 @@
     "@typescript-eslint/eslint-plugin": "^4.13.0",
     "@typescript-eslint/parser": "^4.13.0",
     "babel-loader": "^8.2.2",
+    "cross-env": "^7.0.3",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-react-hooks": "^4.2.0",

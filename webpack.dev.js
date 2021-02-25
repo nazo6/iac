@@ -23,10 +23,20 @@ const dev = {
       rewrites: [{ from: /^\/*/, to: '/index.html' }],
     },
   },
-  plugins: [new webpack.HotModuleReplacementPlugin(), new ReactRefreshWebpackPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new ReactRefreshWebpackPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+      'typeof process': JSON.stringify('object'),
+      'process.env.IS_REACT_EXPERIMENTAL': false,
+    }),
+  ],
 };
 
 const result = merge(common, dev);
-result.module.rules[0].use[0].options.plugins.push(require.resolve('react-refresh/babel'));
+result.module.rules[0].use[0].options.plugins.push(
+  require.resolve('react-refresh/babel'),
+);
 
 module.exports = result;

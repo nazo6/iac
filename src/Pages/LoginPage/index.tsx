@@ -2,7 +2,7 @@ import { Center, Input, Button, Box, Text, Spinner, useToast } from '@chakra-ui/
 import * as React from 'react';
 import { getStatusWithAuth } from '../../api/auth';
 
-const LoginPage: React.FC<{ goApp: (token: string, userId: string) => void }> = (props) => {
+const LoginPage = ({ goApp }: { goApp: (token: string, userId: string) => void }) => {
   const toast = useToast();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -12,7 +12,7 @@ const LoginPage: React.FC<{ goApp: (token: string, userId: string) => void }> = 
     const status = await getStatusWithAuth(email, password);
     setIsLoading(false);
     if (status.authenticated) {
-      props.goApp(status.user.token, status.user.user_id);
+      goApp(status.user.token, status.user.user_id);
     } else {
       toast({
         title: 'Login failed',

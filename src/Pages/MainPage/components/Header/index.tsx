@@ -1,4 +1,4 @@
-import { Flex, Box, Spacer, Input, Switch, Text, useColorMode } from '@chakra-ui/react';
+import { Flex, Box, Spacer, Input, Switch, useColorMode } from '@chakra-ui/react';
 import * as React from 'react';
 import Player from './Player';
 

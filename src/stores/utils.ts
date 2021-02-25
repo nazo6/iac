@@ -1,7 +1,12 @@
 import { atomWithReducer } from 'jotai/utils';
-import { withImmer } from 'jotai/immer';
 
-export const atomWithSave = <T>({ key, defaultValue }: { key: string; defaultValue: T }) => {
+export const atomWithSave = <T>({
+  key,
+  defaultValue,
+}: {
+  key: string;
+  defaultValue: T;
+}) => {
   const lsData = localStorage.getItem(key);
   let initialData: T;
   if (lsData) {
@@ -15,10 +20,4 @@ export const atomWithSave = <T>({ key, defaultValue }: { key: string; defaultVal
   });
   state.debugLabel = key;
   return state;
-};
-
-export const atomWithSaveAndImmer = <T>({ key, defaultValue }: { key: string; defaultValue: T }) => {
-  return withImmer(
-    atomWithSave<T>({ key, defaultValue }),
-  );
 };

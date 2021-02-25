@@ -38,11 +38,13 @@ const App = () => {
         const res = await getStatus(authData.token, authData.userId);
         if (res.authenticated) {
           setLoggedIn({ status: 'OK' });
-          setAuthData({ token: res.user.token, userId: res.user.user_id });
+          setAuthData({
+            token: res.user.token,
+            userId: res.user.user_id,
+          });
           setIsLoading(false);
         } else {
           setLoggedIn({ status: 'Error', message: '' });
-          console.log(res);
           setIsLoading(false);
         }
       } else {

@@ -1,12 +1,15 @@
 import { Box } from '@chakra-ui/react';
 import { useAtomValue } from 'jotai/utils';
 import * as React from 'react';
-import { tracksStateAtom } from '~/stores/library';
+import { tracksStateSelector } from '~/stores/library';
 import Explorer from '../Explorer';
 
 const Tracks = () => {
-  const tracksData = useAtomValue(tracksStateAtom);
-  const sortData = (sortType: 'title' | 'uploaded_time', sortDirection: 'ascend' | 'descend') => {
+  const tracksData = useAtomValue(tracksStateSelector);
+  const sortData = (
+    sortType: 'title' | 'uploaded_time',
+    sortDirection: 'ascend' | 'descend',
+  ) => {
     return tracksData.slice().sort((a, b) => {
       let sortPair = ['', ''];
       switch (sortType) {
@@ -43,7 +46,7 @@ const Tracks = () => {
             fileData: value,
           };
         })}
-        onFolderSelect={(folderName) => {
+        onTrackSelect={(track) => {
           //history.push(`${path}/${folderName}`);
         }}
       />

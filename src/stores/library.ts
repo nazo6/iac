@@ -7,8 +7,8 @@ export const libraryState = atomWithSave<LibraryResponseType | null>({
   defaultValue: null,
 });
 
-export const tracksStateAtom = atom((get) => get(libraryState)!.library.tracks);
-export const albumsStateAtom = atom((get) => get(libraryState)!.library.albums);
-export const artistsStateAtom = atom((get) => get(libraryState)!.library.artists);
-export const playlistsStateAtom = atom((get) => get(libraryState)!.library.playlists);
-export const trashStateAtom = atom((get) => get(libraryState)!.library.albums);
+export const tracksStateSelector = atom((get) => get(libraryState)!.library.tracks);
+export const albumsStateSelector = atom((get) => get(libraryState)!.library.albums);
+export const artistsStateSelector = atom((get) => get(libraryState)!.library.artists);
+export const playlistsStateSelector = atom((get) => get(libraryState)!.library.playlists);
+export const trashStateSelector = atom((get) => get(libraryState)!.library.albums);

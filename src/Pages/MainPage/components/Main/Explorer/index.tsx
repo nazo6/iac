@@ -17,13 +17,13 @@ type ExplorerPropsType = {
       }
   >;
   id: string;
-  onTrackSelect?: (trackId: string) => void;
+  onTrackSelect?: (trackId: TrackType) => void;
   onAlbumSelect?: (albumId: number) => void;
   onArtistSelect?: (artistId: number) => void;
   onGenreSelect?: (genre: string) => void;
   onFolderSelect?: (folderName: string) => void;
 };
-const Explorer: React.FC<ExplorerPropsType> = (props) => {
+const Explorer = (props: ExplorerPropsType) => {
   const { ref, width = 1, height = 1 } = useResizeObserver<HTMLDivElement>();
   return (
     <Box ref={ref} w="100%" h="100%">
@@ -54,7 +54,7 @@ const Explorer: React.FC<ExplorerPropsType> = (props) => {
                 style={style}
                 onClick={() => {
                   if (props.onTrackSelect) {
-                    props.onTrackSelect(data.fileData.id);
+                    props.onTrackSelect(data.fileData);
                   }
                 }}>
                 {data.fileData.title}
