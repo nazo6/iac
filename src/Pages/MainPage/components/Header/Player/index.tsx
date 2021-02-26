@@ -9,9 +9,11 @@ import { withImmer } from 'jotai/immer';
 import { playerStateAtom } from '~/stores/queue';
 import { useAtom } from 'jotai';
 
+const playerStateAtomWithImmer = withImmer(playerStateAtom);
+
 const Player = () => {
   const audio = useAudio();
-  const [playerState, setPlayerState] = useAtom(withImmer(playerStateAtom));
+  const [playerState, setPlayerState] = useAtom(playerStateAtomWithImmer);
   React.useEffect(() => {
     if (playerState.queue[playerState.playIndex]) {
       audio.setSrc(playerState.queue[playerState.playIndex].file);
