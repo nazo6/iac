@@ -21,6 +21,9 @@ const getStatus = async (token: string, userId: string) => {
       supported_types: false,
       url: '//api.ibroadcast.com/s/JSON/status',
     },
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    },
   });
   return response;
 };

@@ -9,10 +9,10 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
 
   return {
     status: {
-      post: (option: { body: Methods0['post']['reqBody'], config?: T }) =>
-        fetch<Methods0['post']['resBody']>(prefix, PATH0, POST, option, 'URLSearchParams').json(),
-      $post: (option: { body: Methods0['post']['reqBody'], config?: T }) =>
-        fetch<Methods0['post']['resBody']>(prefix, PATH0, POST, option, 'URLSearchParams').json().then(r => r.body),
+      post: (option: { body: Methods0['post']['reqBody'], headers: Methods0['post']['reqHeaders'], config?: T }) =>
+        fetch<Methods0['post']['resBody']>(prefix, PATH0, POST, option).json(),
+      $post: (option: { body: Methods0['post']['reqBody'], headers: Methods0['post']['reqHeaders'], config?: T }) =>
+        fetch<Methods0['post']['resBody']>(prefix, PATH0, POST, option).json().then(r => r.body),
       $path: () => `${prefix}${PATH0}`
     }
   }
