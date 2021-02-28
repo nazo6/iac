@@ -8,4 +8,7 @@ export const playerStateAtom = atom<{
 } | null>(null);
 playerStateAtom.debugLabel = 'playerStatus';
 
-export const playerNotReactiveStateAtom = atom < {};
+export const playerNotReactiveStateAtom = atom<{
+  position: number;
+  volume: number;
+} | null>(null);

@@ -1,5 +1,4 @@
-import type { AuthRequestBodyType } from '../types/AuthRequestType';
-import type { BaseResponseType } from '../types/BaseResponseType';
+import type { BaseResponseType } from '../../types/BaseResponseType';
 
 export type Methods = {
   post: {

@@ -1,11 +1,11 @@
 import { atom } from 'jotai';
-import { AuthResponseType } from '~/types/DataTypes';
+import { BaseResponseType } from '~/apis/types/BaseResponseType';
 import { atomWithSave } from './utils';
 
 export const loginStateAtom = atom<
   { status: 'OK' | null } | { status: 'Error'; message: string }
 >({ status: null });
-export const authStateAtom = atomWithSave<AuthResponseType | null>({
+export const authStateAtom = atomWithSave<BaseResponseType | null>({
   key: 'authState',
   defaultValue: null,
 });

@@ -6,6 +6,7 @@
       "es6",
       "DOM"
     ],
+    "skipLibCheck": true,
     "allowJs": true,
     "jsx": "react",
     "strict": true,

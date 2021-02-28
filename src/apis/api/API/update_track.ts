@@ -1,4 +1,4 @@
-import { BaseResponseType } from '../types/BaseResponseType';
+import { BaseResponseType } from '../../types/BaseResponseType';
 
 export type Methods = {
   post: {
