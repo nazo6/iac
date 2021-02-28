@@ -84,6 +84,7 @@ const WebSocketProvider = () => {
   }, [lastJsonMessage]);
   useEffect(() => {
     if (playerState) {
+      console.log(playerState);
       const current_song = playerState.queue[playerState.playIndex];
       sendMessage(
         JSON.stringify({
@@ -106,11 +107,11 @@ const WebSocketProvider = () => {
             result: true,
             role: 'player',
             shuffle: false,
-            start_position: 1.425603,
-            start_time: 1614471454.841,
-            timestamp: 1614470968.31602,
-            tracks: [201518609, 201518712, 201518646],
-            volume: 0.441570447353313,
+            start_position: 0,
+            start_time: 0,
+            timestamp: 0,
+            tracks: playerState.queue.map((trackData) => Number(trackData.id)),
+            volume: 0,
           },
         }),
       );

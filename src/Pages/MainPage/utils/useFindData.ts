@@ -22,7 +22,7 @@ export const useFindTrackDataById = () => {
   return (trackId: string) => {
     const trackData = tracksState.find((value) => value.id === trackId);
     if (!trackData) {
-      throw Error('Track not found.');
+      throw Error('Track not found. trackid:' + trackId);
     }
     return trackData;
   };
