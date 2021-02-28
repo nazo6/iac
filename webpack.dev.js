@@ -6,6 +6,7 @@ const common = require('./webpack.common');
 const path = require('path');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const webpack = require('webpack');
+const fs = require('fs');
 
 const appDirectory = path.resolve(__dirname, './');
 
@@ -39,5 +40,7 @@ const result = merge(common, dev);
 result.module.rules[0].use[0].options.plugins.push(
   require.resolve('react-refresh/babel'),
 );
+
+fs.rmdirSync(path.resolve(__dirname, './dist/development'), { recursive: true });
 
 module.exports = result;
