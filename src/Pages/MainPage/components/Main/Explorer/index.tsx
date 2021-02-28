@@ -1,6 +1,6 @@
 import type { TrackType } from '~/types/DataTypes';
 import * as React from 'react';
-import { Vlist } from '../../common/Vlist';
+import { Vlist } from './Vlist';
 import { Box } from '@chakra-ui/react';
 import useResizeObserver from 'use-resize-observer';
 

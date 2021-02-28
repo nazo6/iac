@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { BaseResponseType } from '~/apis/types/BaseResponseType';
+import { BaseResponseType } from '~/types/BaseResponseType';
 import { atomWithSave } from './utils';
 
 export const loginStateAtom = atom<
