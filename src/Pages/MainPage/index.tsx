@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 import * as React from 'react';
-import { getLibraryData } from '../../api/library';
+import { getLibraryData } from './library';
 import Header from './components/Header';
 import Main from './components/Main';
 import { authStateAtom } from '../../stores/app';

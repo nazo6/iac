@@ -1,8 +1,25 @@
 import { Center, Input, Button, Box, Text, Spinner, useToast } from '@chakra-ui/react';
 import { useUpdateAtom } from 'jotai/utils';
 import * as React from 'react';
+import { jsonApi } from '~/api/api';
+import { appInfo } from '~/appInfo';
 import { authStateAtom, loginStateAtom } from '~/stores/app';
-import { getStatusWithAuth } from '../../api/auth';
+
+const getStatusWithAuth = async (email: string, password: string) => {
+  const response = await jsonApi.status.$post({
+    body: {
+      email_address: email,
+      password,
+      mode: 'status',
+      client: appInfo.client,
+      device_name: appInfo.deviceName,
+      version: '3.1',
+      supported_types: false,
+      url: '//api.ibroadcast.com/s/JSON/status',
+    },
+  });
+  return response;
+};
 
 const LoginPage = () => {
   const toast = useToast();
