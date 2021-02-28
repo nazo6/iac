@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { appInfo } from '~/appInfo';
 
 import type { AuthRequestBodyType } from './types/AuthRequestType';
 import type { AuthResponseType } from './types/AuthResponseType';
@@ -16,8 +17,8 @@ export const getStatusWithAuth = async (email: string, password: string) => {
     email_address: email,
     password,
     mode: 'status',
-    client: 'website',
-    device_name: 'website',
+    client: appInfo.client,
+    device_name: appInfo.deviceName,
     version: '3.1',
     supported_types: false,
     url: '//api.ibroadcast.com/s/JSON/status',

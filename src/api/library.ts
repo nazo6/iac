@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { appInfo } from '~/appInfo';
 import type { LibraryRequestType } from './types/LibraryRequestType';
 import type { LibraryResponseType } from './types/LibraryResponseType';
 
@@ -15,8 +16,8 @@ export const getLibraryData = async (token: string, userId: string) => {
     _token: token,
     _userid: userId,
     mode: 'library',
-    client: 'ianothercast',
-    device_name: 'browser',
+    client: appInfo.client,
+    device_name: appInfo.deviceName,
     version: '3.1',
     supported_types: false,
     url: '//library.ibroadcast.com',

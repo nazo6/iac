@@ -5,9 +5,7 @@ export const playerStateAtom = atom<{
   playIndex: number;
   queue: Array<TrackType>;
   play: boolean;
-}>({
-  playIndex: 0,
-  queue: [],
-  play: false,
-});
+} | null>(null);
 playerStateAtom.debugLabel = 'playerStatus';
+
+export const playerNotReactiveStateAtom = atom < {};

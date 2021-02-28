@@ -10,7 +10,7 @@ import {
 import Icon from '@mdi/react';
 import { mdiFormatListBulleted } from '@mdi/js';
 import { useAtom } from 'jotai';
-import { playerStateAtom } from '~/stores/queue';
+import { playerStateAtom } from '~/stores/player';
 
 const Queue = () => {
   const [playerStatus, setPlayerStatus] = useAtom(playerStateAtom);
@@ -20,11 +20,12 @@ const Queue = () => {
         <IconButton
           aria-label="Open queue"
           icon={<Icon path={mdiFormatListBulleted} />}
+          disabled={!playerStatus}
         />
       </PopoverTrigger>
       <PopoverContent>
         <List spacing={3}>
-          {playerStatus.queue.map((trackData, index) => {
+          {playerStatus?.queue.map((trackData, index) => {
             return <ListItem key={index}>{trackData.title}</ListItem>;
           })}
         </List>

@@ -1,37 +1,41 @@
 import * as React from 'react';
 
-import { Box, Flex, IconButton, Spinner } from '@chakra-ui/react';
+import { Box, Center, Flex, IconButton, Spacer, Spinner, Text } from '@chakra-ui/react';
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import { useAudio } from './useAudio';
 import Icon from '@mdi/react';
 import { mdiPause, mdiPlay } from '@mdi/js';
 import { withImmer } from 'jotai/immer';
-import { playerStateAtom } from '~/stores/queue';
+import { playerStateAtom } from '~/stores/player';
 import { useAtom } from 'jotai';
+import Queue from '../Queue';
 
 const playerStateAtomWithImmer = withImmer(playerStateAtom);
 
 const Player = () => {
   const audio = useAudio();
   const [playerState, setPlayerState] = useAtom(playerStateAtomWithImmer);
+  const currentSongData = playerState?.queue[playerState?.playIndex];
   React.useEffect(() => {
-    if (playerState.queue[playerState.playIndex]) {
-      audio.setSrc(playerState.queue[playerState.playIndex].file);
-      if (playerState.play) {
-        audio.play();
-      } else {
-        audio.pause();
+    if (playerState) {
+      if (currentSongData) {
+        audio.setSrc(currentSongData.file);
+        if (playerState.play) {
+          audio.play();
+        } else {
+          audio.pause();
+        }
       }
     }
-  }, [playerState.playIndex, playerState.queue]);
+  }, [playerState?.playIndex, playerState?.queue]);
 
   React.useEffect(() => {
-    if (playerState.play) {
+    if (playerState && playerState.play) {
       audio.play();
     } else {
       audio.pause();
     }
-  }, [playerState.play]);
+  }, [playerState?.play]);
 
   return (
     <>
@@ -59,12 +63,12 @@ const Player = () => {
                 if (audio.playing) {
                   audio.pause();
                   setPlayerState((c) => {
-                    c.play = false;
+                    c!.play = false;
                   });
                 } else {
                   audio.play();
                   setPlayerState((c) => {
-                    c.play = true;
+                    c!.play = true;
                   });
                 }
               }}
@@ -77,6 +81,13 @@ const Player = () => {
               disabled={!audio.enabled}
             />
           </Box>
+          <Queue />
+          <Spacer />
+          <Center>
+            <Flex>
+              <Text>{currentSongData?.title ?? 'Not playing'}</Text>
+            </Flex>
+          </Center>
         </Flex>
       </Box>
     </>

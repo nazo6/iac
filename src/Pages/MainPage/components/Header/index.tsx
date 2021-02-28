@@ -1,7 +1,6 @@
 import { Flex, Box, Spacer, Input, Switch, useColorMode } from '@chakra-ui/react';
 import * as React from 'react';
 import Player from './Player';
-import Queue from './Queue';
 
 const Header = () => {
   const { toggleColorMode, colorMode } = useColorMode();
@@ -15,14 +14,13 @@ const Header = () => {
   };
   return (
     <Flex h="100%" alignItems="center" boxShadow="md" paddingX="1rem">
-      <Box>
+      {/*<Box>
         <Input placeholder="Search" />
       </Box>
-      <Spacer />
+      <Spacer />*/}
       <Box>
         <Flex direction="row">
           <Player />
-          <Queue />
         </Flex>
       </Box>
       <Spacer />

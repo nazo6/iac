@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/react';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import * as React from 'react';
 import { tracksStateSelector } from '~/stores/library';
-import { playerStateAtom } from '~/stores/queue';
+import { playerStateAtom } from '~/stores/player';
 import Explorer from '../Explorer';
 
 const Tracks = () => {
