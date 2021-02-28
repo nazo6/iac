@@ -18,7 +18,8 @@
     "aspida": "aspida -w",
     "serve": "webpack serve --config ./webpack.dev.js --hot --color",
     "format": "prettier --write **/*.{js,ts,tsx}",
-    "lint": "eslint . --ext ts --ext tsx --fix"
+    "lint": "eslint . --ext ts --ext tsx --fix",
+    "depgraph": "depcruise --config ./.dependency-cruiser.js -T dot src | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html && depcruise --config ./.dependency-cruiser.js -T dot src | dot -T svg > dependencygraph.svg"
   },
   "dependencies": {
     "@aspida/axios": "^1.6.0",
@@ -53,6 +54,7 @@
     "aspida": "^1.6.0",
     "babel-loader": "^8.2.2",
     "cross-env": "^7.0.3",
+    "dependency-cruiser": "^9.23.2",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-react-hooks": "^4.2.0",

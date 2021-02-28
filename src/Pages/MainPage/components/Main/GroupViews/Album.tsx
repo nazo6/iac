@@ -2,12 +2,12 @@ import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import Explorer from '../Explorer';
-import { TrackType } from '~/types/DataTypes';
+import type { TrackType } from '~/types/DataTypes';
 import { playerStateAtom } from '~/stores/player';
 import {
   useFindAlbumDataById,
   useFindTrackDataById,
-} from '~/Pages/MainPage/utils/usefindData';
+} from '~/pages/MainPage/utils/useFindData';
 import { useUpdateAtom } from 'jotai/utils';
 
 const Album = () => {

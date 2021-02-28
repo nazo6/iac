@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import useWebSocket from 'react-use-websocket';
 import { authStateAtom } from '~/stores/app';
 import { playerStateAtom } from '~/stores/player';
-import { useFindTrackDataById } from './utils/usefindData';
+import { useFindTrackDataById } from './utils/useFindData';
 
 import { appInfo } from '~/appInfo';
 

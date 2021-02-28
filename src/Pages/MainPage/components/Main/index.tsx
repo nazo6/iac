@@ -7,7 +7,7 @@ import Albums from './SpecialFolders/Albums';
 import Artists from './SpecialFolders/Artists';
 import Genre from './SpecialFolders/Genre';
 import Tracks from './SpecialFolders/Tracks';
-import Folder from '../Folder';
+import Folder from './Folder';
 
 const Main = () => {
   const history = useHistory();

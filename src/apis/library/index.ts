@@ -1,14 +1,18 @@
-import type { AuthRequestBodyType } from '../types/AuthRequestType';
-import type { BaseResponseType } from '../types/BaseResponseType';
-import { LibraryRequestType } from '../types/LibraryRequestType';
-import { LibraryResponseType } from '../types/LibraryResponseType';
-
 export type Methods = {
   post: {
     reqHeaders: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8';
     };
-    reqBody: LibraryRequestType;
+    reqBody: {
+      _userid: string;
+      _token: string;
+      mode: 'library';
+      client: string;
+      device_name: string;
+      version: string;
+      supported_types: boolean;
+      url: '//library.ibroadcast.com';
+    };
 
     resBody: any;
   };

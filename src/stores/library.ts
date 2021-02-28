@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { LibraryResponseType } from '~/apis/types/LibraryResponseType';
+import { LibraryResponseType } from '~/types/LibraryResponseType';
 import { atomWithSave } from './utils';
 
 export const libraryState = atomWithSave<LibraryResponseType | null>({

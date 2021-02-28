@@ -1,23 +1,20 @@
-import axios from 'axios';
 import { appInfo } from '~/appInfo';
-import type { LibraryRequestType } from '~/apis/types/LibraryRequestType';
-import type { LibraryResponseType } from '~/apis/types/LibraryResponseType';
+import type { LibraryResponseType } from '~/types/LibraryResponseType';
 import { libraryApi } from '~/apis/api';
 
 export const getLibraryData = async (token: string, userId: string) => {
-  const requestBody: LibraryRequestType = {
-    _token: token,
-    _userid: userId,
-    mode: 'library',
-    client: appInfo.client,
-    device_name: appInfo.deviceName,
-    version: '3.1',
-    supported_types: false,
-    url: '//library.ibroadcast.com',
-  };
   const status = await libraryApi.$post({
     headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-    body: requestBody,
+    body: {
+      _token: token,
+      _userid: userId,
+      mode: 'library',
+      client: appInfo.client,
+      device_name: appInfo.deviceName,
+      version: '3.1',
+      supported_types: false,
+      url: '//library.ibroadcast.com',
+    },
   });
 
   if (!status['result']) {
