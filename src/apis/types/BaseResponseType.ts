@@ -1,4 +1,4 @@
-export type AuthResponseType = {
+export type BaseResponseType = {
   result: boolean;
   authenticated: boolean;
   status: {

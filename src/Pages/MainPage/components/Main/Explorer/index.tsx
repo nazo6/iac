@@ -1,4 +1,4 @@
-import { TrackType } from '~/api/types/LibraryResponseType';
+import { TrackType } from '~/types/DataTypes';
 import * as React from 'react';
 import { Vlist } from '~/components/Vlist';
 import { Box } from '@chakra-ui/react';

@@ -1,15 +1,8 @@
 import axios from 'axios';
 import { appInfo } from '~/appInfo';
-import type { LibraryRequestType } from './LibraryRequestType';
-import type { LibraryResponseType } from './LibraryResponseType';
-
-const API_STATUS_ENDPOINT = 'https://library.ibroadcast.com/';
-
-const client = axios.create({
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-  },
-});
+import type { LibraryRequestType } from '~/apis/types/LibraryRequestType';
+import type { LibraryResponseType } from '~/apis/types/LibraryResponseType';
+import { libraryApi } from '~/apis/api';
 
 export const getLibraryData = async (token: string, userId: string) => {
   const requestBody: LibraryRequestType = {
@@ -22,8 +15,10 @@ export const getLibraryData = async (token: string, userId: string) => {
     supported_types: false,
     url: '//library.ibroadcast.com',
   };
-  const response = await client.post(API_STATUS_ENDPOINT, requestBody);
-  const status = response.data;
+  const status = await libraryApi.$post({
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+    body: requestBody,
+  });
 
   if (!status['result']) {
     return null;

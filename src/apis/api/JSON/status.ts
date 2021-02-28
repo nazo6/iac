@@ -1,5 +1,5 @@
-import type { AuthRequestBodyType } from '../types/AuthRequestType';
-import type { AuthResponseType } from '../types/AuthResponseType';
+import type { AuthRequestBodyType } from '../../types/AuthRequestType';
+import type { BaseResponseType } from '../../types/BaseResponseType';
 
 export type Methods = {
   post: {
@@ -8,6 +8,6 @@ export type Methods = {
     };
     reqBody: AuthRequestBodyType;
 
-    resBody: AuthResponseType;
+    resBody: BaseResponseType;
   };
 };

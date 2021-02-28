@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { TrackType } from '~/api/types/LibraryResponseType';
+import { TrackType } from '~/types/DataTypes';
 
 export const playerStateAtom = atom<{
   playIndex: number;

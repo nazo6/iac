@@ -1,12 +1,12 @@
 import { Center, Input, Button, Box, Text, Spinner, useToast } from '@chakra-ui/react';
 import { useUpdateAtom } from 'jotai/utils';
 import * as React from 'react';
-import { jsonApi } from '~/api/api';
+import { api } from '~/apis/api';
 import { appInfo } from '~/appInfo';
 import { authStateAtom, loginStateAtom } from '~/stores/app';
 
 const getStatusWithAuth = async (email: string, password: string) => {
-  const response = await jsonApi.status.$post({
+  const response = await api.JSON.status.$post({
     body: {
       email_address: email,
       password,

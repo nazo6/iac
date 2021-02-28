@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { AuthResponseType } from '~/api/types/AuthResponseType';
+import { AuthResponseType } from '~/types/DataTypes';
 import { atomWithSave } from './utils';
 
 export const loginStateAtom = atom<

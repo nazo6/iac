@@ -7,10 +7,10 @@ import MainPage from './Pages/MainPage';
 import { authStateAtom, loginStateAtom } from './stores/app';
 import { useAtomValue } from 'jotai/utils';
 import { useAtom } from 'jotai';
-import { jsonApi } from './api/api';
+import { api } from './apis/api';
 
 const getStatus = async (token: string, userId: string) => {
-  const response = await jsonApi.status.$post({
+  const response = await api.JSON.status.$post({
     body: {
       _token: token,
       _userid: userId,

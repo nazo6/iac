@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import Explorer from '../Explorer';
-import { TrackType } from '~/api/types/LibraryResponseType';
+import { TrackType } from '~/types/DataTypes';
 import { playerStateAtom } from '~/stores/player';
 import {
   useFindAlbumDataById,
