@@ -17,6 +17,7 @@
     "dev": "run-p serve aspida",
     "aspida": "aspida -w",
     "serve": "webpack serve --config ./webpack.dev.js --hot --color",
+    "build": "webpack --config ./webpack.prod.js",
     "format": "prettier --write **/*.{js,ts,tsx}",
     "lint": "eslint . --ext ts --ext tsx --fix",
     "depgraph": "depcruise --config ./.dependency-cruiser.js -T dot src | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html && depcruise --config ./.dependency-cruiser.js -T dot src | dot -T svg > dependencygraph.svg"
