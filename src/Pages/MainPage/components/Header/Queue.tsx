@@ -9,11 +9,11 @@ import {
 } from '@chakra-ui/react';
 import Icon from '@mdi/react';
 import { mdiFormatListBulleted } from '@mdi/js';
-import { useAtom } from 'jotai';
 import { playerStateAtom } from '~/stores/player';
+import { useAtomValue } from 'jotai/utils';
 
 const Queue = () => {
-  const [playerStatus, setPlayerStatus] = useAtom(playerStateAtom);
+  const playerStatus = useAtomValue(playerStateAtom);
   return (
     <Popover>
       <PopoverTrigger>

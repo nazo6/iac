@@ -85,7 +85,7 @@ const Player = () => {
           <Spacer />
           <Center>
             <Flex>
-              <Text>{currentSongData?.title ?? 'Not playing'}</Text>
+              <Text>{currentSongData ? currentSongData.title : 'Not playing'}</Text>
             </Flex>
           </Center>
         </Flex>

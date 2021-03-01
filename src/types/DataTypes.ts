@@ -1,7 +1,7 @@
 export type PlayListType = {
   id: string;
   name: string;
-  tracks: Array<number>;
+  tracks: Array<string>;
   uid: number;
   system_created: boolean;
   public_id: null | number;
@@ -15,7 +15,7 @@ export type ArtistType = {
   id: string;
   name: string;
   /** Array of trackId */
-  tracks: Array<number>;
+  tracks: Array<string>;
   trashed: boolean;
   rating: number;
 };
@@ -23,7 +23,7 @@ export type ArtistType = {
 export type AlbumType = {
   id: string;
   name: string;
-  tracks: Array<number>;
+  tracks: Array<string>;
   artist_id: number;
   trashed: boolean;
   rating: number;

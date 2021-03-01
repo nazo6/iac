@@ -1,28 +1,25 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 import * as React from 'react';
-import { getLibraryData } from './library';
+import { getLibraryData, useUpdateLibrary } from './library';
 import Header from './components/Header';
 import Main from './components/Main';
 import { authStateAtom } from '../../stores/app';
-import { libraryState } from '../../stores/library';
+import { libraryStateAtom } from '../../stores/library';
 import { useAtomValue } from 'jotai/utils';
-import { useAtom } from 'jotai';
 import WebSocketProvider from './WebSocketProvider';
 
 const MainPage = () => {
   const authData = useAtomValue(authStateAtom);
-  const [libraryData, setLibraryData] = useAtom(libraryState);
+  const libraryData = useAtomValue(libraryStateAtom);
+  const updateLibrary = useUpdateLibrary();
 
-  const getLibrary = async (token: string, userId: string) => {
-    const data = await getLibraryData(token, userId);
-    if (data) {
-      setLibraryData(data);
-    }
-  };
   React.useEffect(() => {
-    if (authData) {
-      getLibrary(authData.user.token, authData.user.userid);
-    }
+    const f = async () => {
+      if (authData) {
+        await updateLibrary(authData.user.token, authData.user.userid);
+      }
+    };
+    f();
   }, []);
   return !libraryData ? (
     <Text>Loading</Text>

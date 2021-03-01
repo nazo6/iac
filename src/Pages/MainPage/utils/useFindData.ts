@@ -8,8 +8,8 @@ import {
 
 export const useFindAlbumDataById = () => {
   const albumsState = useAtomValue(albumsStateSelector);
-  return (albumId: string) => {
-    const albumData = albumsState.find((value) => value.id === albumId);
+  return (albumId: string | number) => {
+    const albumData = albumsState.find((value) => value.id === albumId.toString());
     if (!albumData) {
       throw Error('Album not found.');
     }
@@ -19,8 +19,8 @@ export const useFindAlbumDataById = () => {
 
 export const useFindTrackDataById = () => {
   const tracksState = useAtomValue(tracksStateSelector);
-  return (trackId: string) => {
-    const trackData = tracksState.find((value) => value.id === trackId);
+  return (trackId: string | number) => {
+    const trackData = tracksState.find((value) => value.id === trackId.toString());
     if (!trackData) {
       throw Error('Track not found. trackid:' + trackId);
     }
@@ -30,8 +30,8 @@ export const useFindTrackDataById = () => {
 
 export const useFindArtistDataById = () => {
   const artistsState = useAtomValue(artistsStateSelector);
-  return (artistId: string) => {
-    const artistData = artistsState.find((value) => value.id === artistId);
+  return (artistId: string | number) => {
+    const artistData = artistsState.find((value) => value.id === artistId.toString());
     if (!artistData) {
       throw Error('Album not found.');
     }
@@ -41,8 +41,10 @@ export const useFindArtistDataById = () => {
 
 export const useFindPlayListDataById = () => {
   const playlistState = useAtomValue(playlistsStateSelector);
-  return (playlistId: string) => {
-    const playlistData = playlistState.find((value) => value.id === playlistId);
+  return (playlistId: string | number) => {
+    const playlistData = playlistState.find(
+      (value) => value.id === playlistId.toString(),
+    );
     if (!playlistData) {
       throw Error('Playlist not found.');
     }

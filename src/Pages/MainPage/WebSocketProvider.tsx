@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useAtom } from 'jotai';
-import { useAtomValue, useUpdateAtom } from 'jotai/utils';
+import { useAtomValue } from 'jotai/utils';
 import { useEffect } from 'react';
 import useWebSocket from 'react-use-websocket';
 import { authStateAtom } from '~/stores/app';
@@ -8,8 +8,9 @@ import { playerStateAtom } from '~/stores/player';
 import { useFindTrackDataById } from './utils/useFindData';
 
 import { appInfo } from '~/appInfo';
-
-type SongId = number;
+import { libraryStateAtom } from '~/stores/library';
+import * as dayjs from 'dayjs';
+import { useUpdateLibrary } from './library';
 
 type WsResponseType =
   | {
@@ -21,19 +22,19 @@ type WsResponseType =
     }
   | {
       command: 'set_state';
-      current_song: SongId; //song id
+      current_song: number; //song id
       data: { play_from: 'tracks'; play_index: number };
       message: 'ok';
       name: string;
       pause: boolean;
-      play_next: SongId[];
+      play_next: number[];
       result: true;
       role: 'player';
       shuffle: false;
       start_position: number; //113.390654
       start_time: number; //1614259032.324
       timestamp: number; //1614469929.74567
-      tracks: SongId[];
+      tracks: number[];
       volume: number;
     }
   | {
@@ -52,6 +53,9 @@ const WebSocketProvider = () => {
   const authState = useAtomValue(authStateAtom);
   const [playerState, setPlayerState] = useAtom(playerStateAtom);
   const findTrackData = useFindTrackDataById();
+  const libraryState = useAtomValue(libraryStateAtom);
+  const authData = useAtomValue(authStateAtom);
+  const updateLibrary = useUpdateLibrary();
 
   const { sendMessage, lastJsonMessage } = useWebSocket(socketUrl, {
     onOpen: () => {
@@ -74,24 +78,48 @@ const WebSocketProvider = () => {
     if (lastJsonMessage) {
       const message = lastJsonMessage as WsResponseType;
       if (message.command === 'set_state' && 'data' in message) {
-        setPlayerState({
-          playIndex: message.data.play_index,
-          queue: message.tracks.map((trackId) => findTrackData(trackId.toString())),
-          play: !message.pause,
+        let queue: any[] = [];
+        let isError = false;
+        message.tracks.forEach((trackId) => {
+          try {
+            queue.push(findTrackData(trackId.toString()));
+          } catch {
+            isError = true;
+          }
         });
+        if (isError) {
+          console.log('[WebSocketProvider] Trackid from ws not found.');
+          setPlayerState(null);
+        } else {
+          setPlayerState({
+            playIndex: message.data.play_index,
+            queue,
+            play: !message.pause,
+          });
+        }
+      } else if (message.command === 'update_library') {
+        const lastUpdatedDate = dayjs(libraryState!.status.lastmodified);
+        const requiredDate = dayjs(message.lastmodified);
+        if (requiredDate.diff(lastUpdatedDate) > 0) {
+          const f = async () => {
+            if (authData) {
+              await updateLibrary(authData.user.token, authData.user.userid);
+            }
+          };
+          f();
+        }
       }
     }
   }, [lastJsonMessage]);
   useEffect(() => {
     if (playerState) {
-      console.log(playerState);
       const current_song = playerState.queue[playerState.playIndex];
       sendMessage(
         JSON.stringify({
           user_id: authState!.user.id,
           token: authState!.user.token,
           client: appInfo.client,
-          version: '0.1',
+          version: appInfo.version,
           device_name: appInfo.deviceName,
           session_uuid: authState!.user.session.session_uuid,
           local_addr: 'undetermined',
