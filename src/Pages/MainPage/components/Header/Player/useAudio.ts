@@ -42,6 +42,7 @@ export const useAudio = () => {
     playing: !audio.paused,
     src: audio.src,
     currentTime: audio.currentTime,
+    duration: audio.duration,
     play,
     pause,
     jump,

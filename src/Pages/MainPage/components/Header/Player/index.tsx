@@ -1,6 +1,18 @@
 import * as React from 'react';
 
-import { Box, Center, Flex, IconButton, Spacer, Spinner, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Center,
+  Flex,
+  IconButton,
+  Spacer,
+  Spinner,
+  Text,
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+} from '@chakra-ui/react';
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import { useAudio } from './useAudio';
 import Icon from '@mdi/react';
@@ -9,6 +21,7 @@ import { withImmer } from 'jotai/immer';
 import { playerStateAtom } from '~/stores/player';
 import { useAtom } from 'jotai';
 import Queue from '../Queue';
+import { secondsToHms } from '../../../utils/convertTime';
 
 const playerStateAtomWithImmer = withImmer(playerStateAtom);
 
@@ -82,6 +95,24 @@ const Player = () => {
             />
           </Box>
           <Queue />
+          <Center>
+            <Text>
+              {audio.enabled && !audio.loading
+                ? secondsToHms(audio.currentTime) + '/' + secondsToHms(audio.duration)
+                : '--/--'}
+            </Text>
+            <Slider
+              w="200px"
+              marginX="1rem"
+              aria-label="Progress slider"
+              colorScheme="pink"
+              defaultValue={0}>
+              <SliderTrack>
+                <SliderFilledTrack />
+              </SliderTrack>
+              <SliderThumb />
+            </Slider>
+          </Center>
           <Spacer />
           <Center>
             <Flex>
