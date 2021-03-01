@@ -26,7 +26,7 @@ const MainPage = () => {
   ) : (
     <Flex w="100%" direction="column">
       <WebSocketProvider />
-      <Box h="3rem">
+      <Box>
         <Header />
       </Box>
       <Box flex="1">
