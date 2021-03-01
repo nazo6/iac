@@ -1,6 +1,7 @@
 {
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "search.exclude": {
-    "dependency*": true
+    "dependency*": true,
+    "yarn.lock": true
   }
 }
