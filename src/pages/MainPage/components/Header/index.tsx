@@ -1,18 +1,6 @@
 import * as React from 'react';
 
-import {
-  Box,
-  Center,
-  Flex,
-  IconButton,
-  Spacer,
-  Spinner,
-  Text,
-  Slider,
-  SliderTrack,
-  SliderFilledTrack,
-  SliderThumb,
-} from '@chakra-ui/react';
+import { Box, Center, Flex, IconButton, Spacer, Spinner, Text } from '@chakra-ui/react';
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import { useAudio } from './useAudio';
 import Icon from '@mdi/react';
@@ -22,6 +10,7 @@ import { playerStateAtom } from '~/stores/player';
 import { useAtom } from 'jotai';
 import Queue from './Queue';
 import { secondsToHms } from '../../utils/convertTime';
+import Slider from './Slider';
 
 const playerStateAtomWithImmer = withImmer(playerStateAtom);
 
@@ -98,9 +87,9 @@ const Player = () => {
             <Queue />
             <Center>
               <Text>
-                {audio.enabled && !audio.loading
+                {audio.currentTime && audio.duration
                   ? secondsToHms(audio.currentTime) + '/' + secondsToHms(audio.duration)
-                  : '--/--'}
+                  : '--:--/--:--'}
               </Text>
             </Center>
             <Spacer />
@@ -110,24 +99,12 @@ const Player = () => {
               </Flex>
             </Center>
           </Flex>
-          <Box
-            margin={0}
-            pos="absolute"
-            bottom="0"
-            w="100vw"
-            left="0"
-            transform="translate(0, 50%)">
-            <Slider
-              margin={0}
-              aria-label="Progress slider"
-              colorScheme="pink"
-              defaultValue={0}>
-              <SliderTrack>
-                <SliderFilledTrack />
-              </SliderTrack>
-              <SliderThumb />
-            </Slider>
-          </Box>
+          <Slider
+            duration={audio.duration}
+            changePosition={(value) => audio.jump(value)}
+            enabled={audio.enabled}
+            currentTime={audio.currentTime}
+          />
         </Flex>
       </Box>
     </>

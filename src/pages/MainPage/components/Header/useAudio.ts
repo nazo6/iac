@@ -30,7 +30,7 @@ export const useAudio = () => {
 
   const play = () => audio.play();
   const pause = () => audio.pause();
-  const jump = (value: number) => (audio.currentTime += value);
+  const jump = (value: number) => (audio.currentTime = value);
   const setSrc = (filePath: string) => {
     setPlayerEnabled(true);
     audio.src = 'https://streaming.ibroadcast.com' + filePath;
@@ -41,8 +41,8 @@ export const useAudio = () => {
     enabled: playerEnabled,
     playing: !audio.paused,
     src: audio.src,
-    currentTime: audio.currentTime,
-    duration: audio.duration,
+    currentTime: isNaN(audio.currentTime) ? null : audio.currentTime,
+    duration: isNaN(audio.duration) ? null : audio.duration,
     play,
     pause,
     jump,
