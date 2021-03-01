@@ -1,5 +1,7 @@
+import * as platform from 'platform';
+
 export const appInfo = {
-  deviceName: 'Website (Chrome, Win32)',
+  deviceName: 'iAnothercast (' + platform.name + ')',
   client: 'ianothercast',
   version: '0.1',
 };

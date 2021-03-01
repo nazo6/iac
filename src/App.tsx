@@ -8,6 +8,7 @@ import { authStateAtom, loginStateAtom } from './stores/app';
 import { useAtomValue } from 'jotai/utils';
 import { useAtom } from 'jotai';
 import { api } from './apis/api';
+import { appInfo } from './appInfo';
 
 const getStatus = async (token: string, userId: string) => {
   const response = await api.JSON.status.$post({
@@ -15,9 +16,9 @@ const getStatus = async (token: string, userId: string) => {
       _token: token,
       _userid: userId,
       mode: 'status',
-      client: 'website',
-      device_name: 'website',
-      version: '3.1',
+      client: appInfo.client,
+      device_name: appInfo.deviceName,
+      version: appInfo.version,
       supported_types: false,
       url: '//api.ibroadcast.com/s/JSON/status',
     },
