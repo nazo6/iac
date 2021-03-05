@@ -1,4 +1,5 @@
 import { atom } from 'jotai';
+
 import type { TrackType } from '~/types/DataTypes';
 
 export const playerStateAtom = atom<{

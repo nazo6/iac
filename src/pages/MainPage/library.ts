@@ -1,8 +1,9 @@
-import { appInfo } from '~/appInfo';
-import type { LibraryResponseType } from '~/types/LibraryResponseType';
-import { libraryApi } from '~/apis/api';
 import { useUpdateAtom } from 'jotai/utils';
+
+import { libraryApi } from '~/apis/api';
+import { appInfo } from '~/appInfo';
 import { libraryStateAtom } from '~/stores/library';
+import type { LibraryResponseType } from '~/types/LibraryResponseType';
 
 export const getLibraryData = async (token: string, userId: string) => {
   const status = await libraryApi.$post({

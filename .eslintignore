@@ -1,0 +1,5 @@
+dist/
+node_modules/
+.husky/
+depgraph/dependency-graph.html
+**/$api.ts

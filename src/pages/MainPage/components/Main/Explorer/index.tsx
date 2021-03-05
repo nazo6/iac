@@ -1,8 +1,11 @@
-import type { TrackType } from '~/types/DataTypes';
 import * as React from 'react';
-import { Vlist } from './Vlist';
+
 import { Box } from '@chakra-ui/react';
 import useResizeObserver from 'use-resize-observer';
+
+import type { TrackType } from '~/types/DataTypes';
+
+import { Vlist } from './Vlist';
 
 type ExplorerPropsType = {
   data: Array<

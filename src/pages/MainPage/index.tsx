@@ -1,12 +1,14 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
 import * as React from 'react';
-import { getLibraryData, useUpdateLibrary } from './library';
-import Header from './components/Header';
-import Main from './components/Main';
+
+import { Text, Box, Flex } from '@chakra-ui/react';
+import { useAtomValue } from 'jotai/utils';
+
 import { authStateAtom } from '../../stores/app';
 import { libraryStateAtom } from '../../stores/library';
-import { useAtomValue } from 'jotai/utils';
 import WebSocketProvider from './WebSocketProvider';
+import Header from './components/Header';
+import Main from './components/Main';
+import { useUpdateLibrary } from './library';
 
 const MainPage = () => {
   const authData = useAtomValue(authStateAtom);

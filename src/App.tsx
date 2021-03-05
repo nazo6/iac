@@ -1,14 +1,16 @@
-import { CircularProgress } from '@chakra-ui/react';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+
+import { CircularProgress } from '@material-ui/core';
+import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai/utils';
 import { Redirect, Route, Switch } from 'react-router-dom';
+
+import { api } from './apis/api';
+import { appInfo } from './appInfo';
 import LoginPage from './pages/LoginPage';
 import MainPage from './pages/MainPage';
 import { authStateAtom, loginStateAtom } from './stores/app';
-import { useAtomValue } from 'jotai/utils';
-import { useAtom } from 'jotai';
-import { api } from './apis/api';
-import { appInfo } from './appInfo';
 
 const getStatus = async (token: string, userId: string) => {
   const response = await api.JSON.status.$post({

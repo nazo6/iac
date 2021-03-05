@@ -1,16 +1,18 @@
 import * as React from 'react';
 
-import { Box, Center, Flex, IconButton, Spacer, Spinner, Text } from '@chakra-ui/react';
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
-import { useAudio } from './useAudio';
-import Icon from '@mdi/react';
+import { Box, Center, Flex, IconButton, Spacer, Spinner, Text } from '@chakra-ui/react';
 import { mdiPause, mdiPlay } from '@mdi/js';
-import { withImmer } from 'jotai/immer';
-import { playerStateAtom } from '~/stores/player';
+import Icon from '@mdi/react';
 import { useAtom } from 'jotai';
-import Queue from './Queue';
+import { withImmer } from 'jotai/immer';
+
+import { playerStateAtom } from '~/stores/player';
+
 import { secondsToHms } from '../../utils/convertTime';
+import Queue from './Queue';
 import Slider from './Slider';
+import { useAudio } from './useAudio';
 
 const playerStateAtomWithImmer = withImmer(playerStateAtom);
 
@@ -99,12 +101,6 @@ const Player = () => {
               </Flex>
             </Center>
           </Flex>
-          <Slider
-            duration={audio.duration}
-            changePosition={(value) => audio.jump(value)}
-            enabled={audio.enabled}
-            currentTime={audio.currentTime}
-          />
         </Flex>
       </Box>
     </>

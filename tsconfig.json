@@ -15,9 +15,12 @@
     "paths": {
       "~*": [
         "src*"
-      ],
+      ]
     },
     "moduleResolution": "node",
     "noEmit": true
-  }
+  },
+  "include": [
+    "src/**/*"
+  ]
 }

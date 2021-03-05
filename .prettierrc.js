@@ -6,4 +6,6 @@ module.exports = {
   endOfLine: 'lf',
   semi: true,
   printWidth: 90,
+  importOrder: ['^react$', '^(?!(~/|./|../)).*$', '^~/(.*)$', '^[./]'],
+  importOrderSeparation: true,
 };

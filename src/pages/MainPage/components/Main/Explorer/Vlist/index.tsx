@@ -1,8 +1,9 @@
-import { useAtom } from 'jotai';
 import * as React from 'react';
 import { CSSProperties, memo, useMemo } from 'react';
-import { vlistScrollPositionStateFamily } from './scrollState';
 
+import { useAtom } from 'jotai';
+
+import { vlistScrollPositionStateFamily } from './scrollState';
 import useScrollAware from './useScrollAware';
 
 type VlistProps = {

@@ -1,6 +1,16 @@
-import { Center, Input, Button, Box, Text, Spinner, useToast } from '@chakra-ui/react';
-import { useUpdateAtom } from 'jotai/utils';
 import * as React from 'react';
+
+import {
+  Alert,
+  Box,
+  Container,
+  Snackbar,
+  TextField,
+  Typography,
+} from '@material-ui/core';
+import LoadingButton from '@material-ui/lab/LoadingButton';
+import { useUpdateAtom } from 'jotai/utils';
+
 import { api } from '~/apis/api';
 import { appInfo } from '~/appInfo';
 import { authStateAtom, loginStateAtom } from '~/stores/app';
@@ -25,7 +35,7 @@ const getStatusWithAuth = async (email: string, password: string) => {
 };
 
 const LoginPage = () => {
-  const toast = useToast();
+  const [toast, setToast] = React.useState({ open: false, message: '' });
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(false);
@@ -39,40 +49,60 @@ const LoginPage = () => {
       setAuthState(status);
       setLogin({ status: 'OK' });
     } else {
-      toast({
-        title: 'Login failed',
-        description: status.message,
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-      });
+      setToast({ open: true, message: status.message });
     }
   };
   return (
-    <Center w="100%">
-      <Box maxW="20rem" p={4}>
-        <Input
-          value={email}
-          onChange={(event) => {
-            setEmail(event.target.value);
-          }}
-          placeholder="Enter e-mail"
-          marginBottom={1}
-        />
-        <Input
-          value={password}
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-          type="password"
-          placeholder="Enter password"
-          marginBottom={1}
-        />
-        <Button onClick={() => login()} isDisabled={isLoading}>
-          {isLoading ? <Spinner /> : <Text>Login</Text>}
-        </Button>
-      </Box>
-    </Center>
+    <>
+      <Container component="main" maxWidth="xs">
+        <Box
+          height="100%"
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          pt={8}>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <div>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              label="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              label="Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <LoadingButton
+              fullWidth
+              pending={isLoading}
+              variant="contained"
+              color="primary"
+              onClick={() => login()}>
+              Sign in
+            </LoadingButton>
+          </div>
+        </Box>
+      </Container>
+      <Snackbar
+        open={toast.open}
+        autoHideDuration={2000}
+        onClose={() => setToast({ open: false, message: '' })}>
+        <Alert severity="error">{toast.message}</Alert>
+      </Snackbar>
+    </>
   );
 };
 

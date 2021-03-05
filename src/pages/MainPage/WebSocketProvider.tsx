@@ -1,16 +1,18 @@
 import * as React from 'react';
+import { useEffect } from 'react';
+
+import * as dayjs from 'dayjs';
 import { useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
-import { useEffect } from 'react';
 import useWebSocket from 'react-use-websocket';
-import { authStateAtom } from '~/stores/app';
-import { playerStateAtom } from '~/stores/player';
-import { useFindTrackDataById } from './utils/useFindData';
 
 import { appInfo } from '~/appInfo';
+import { authStateAtom } from '~/stores/app';
 import { libraryStateAtom } from '~/stores/library';
-import * as dayjs from 'dayjs';
+import { playerStateAtom } from '~/stores/player';
+
 import { useUpdateLibrary } from './library';
+import { useFindTrackDataById } from './utils/useFindData';
 
 type WsResponseType =
   | {
@@ -78,7 +80,7 @@ const WebSocketProvider = () => {
     if (lastJsonMessage) {
       const message = lastJsonMessage as WsResponseType;
       if (message.command === 'set_state' && 'data' in message) {
-        let queue: any[] = [];
+        const queue: any[] = [];
         let isError = false;
         message.tracks.forEach((trackId) => {
           try {

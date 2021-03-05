@@ -1,7 +1,8 @@
 import * as React from 'react';
+
+import { Box } from '@chakra-ui/react';
 import RcSlider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import { Box } from '@chakra-ui/react';
 
 type SliderPropsType = {
   enabled: boolean;

@@ -1,8 +1,11 @@
+import * as React from 'react';
+
 import { Box } from '@chakra-ui/react';
 import { useAtomValue } from 'jotai/utils';
-import * as React from 'react';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
+
 import { albumsStateSelector } from '~/stores/library';
+
 import Explorer from '../Explorer';
 import Album from '../GroupViews/Album';
 

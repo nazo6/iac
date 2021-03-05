@@ -1,14 +1,17 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
+
 import { Box, Flex, Text } from '@chakra-ui/react';
-import Explorer from '../Explorer';
-import type { TrackType } from '~/types/DataTypes';
-import { playerStateAtom } from '~/stores/player';
+import { useUpdateAtom } from 'jotai/utils';
+import { useParams } from 'react-router-dom';
+
 import {
   useFindAlbumDataById,
   useFindTrackDataById,
 } from '~/pages/MainPage/utils/useFindData';
-import { useUpdateAtom } from 'jotai/utils';
+import { playerStateAtom } from '~/stores/player';
+import type { TrackType } from '~/types/DataTypes';
+
+import Explorer from '../Explorer';
 
 const Album = () => {
   const setPlayerState = useUpdateAtom(playerStateAtom);

@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import {
   Popover,
   PopoverTrigger,
@@ -7,10 +8,11 @@ import {
   List,
   ListItem,
 } from '@chakra-ui/react';
-import Icon from '@mdi/react';
 import { mdiFormatListBulleted } from '@mdi/js';
-import { playerStateAtom } from '~/stores/player';
+import Icon from '@mdi/react';
 import { useAtomValue } from 'jotai/utils';
+
+import { playerStateAtom } from '~/stores/player';
 
 const Queue = () => {
   const playerStatus = useAtomValue(playerStateAtom);

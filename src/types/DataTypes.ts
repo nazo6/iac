@@ -42,8 +42,8 @@ export type TrackType = {
   album_id: number;
   artwork_id: number;
   artist_id: number;
-  enid: number; //0
-  uploaded_on: string; //2021-01-15
+  enid: number;
+  uploaded_on: string;
   trashed: boolean;
   size: number;
   path: string;

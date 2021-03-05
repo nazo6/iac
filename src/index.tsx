@@ -1,36 +1,37 @@
 import * as React from 'react';
+
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Provider } from 'jotai';
 import * as ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
-import { Provider } from 'jotai';
 
-import { BrowserRouter as Router } from 'react-router-dom';
+const Root = () => {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
-import 'focus-visible/dist/focus-visible';
-import { Global, css } from '@emotion/react';
-import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
-const GlobalStyles = css`
-  .js-focus-visible :focus:not([data-focus-visible-added]) {
-    outline: none;
-    box-shadow: none;
-  }
-`;
-const root = document.getElementById('root');
-const colorMode = localStorage.getItem('app-colorMode') as
-  | null
-  | undefined
-  | 'light'
-  | 'dark';
+  const theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        palette: {
+          mode: prefersDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [prefersDarkMode],
+  );
 
-ReactDOM.render(
-  <Provider>
-    <ChakraProvider>
-      <Router>
-        <ColorModeScript initialColorMode={colorMode != null ? colorMode : 'light'} />
-        <Global styles={GlobalStyles} />
-        <App />
-      </Router>
-    </ChakraProvider>
-  </Provider>,
-  root,
-);
+  return (
+    <Provider>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <App />
+        </ThemeProvider>
+      </BrowserRouter>
+    </Provider>
+  );
+};
+
+ReactDOM.render(<Root />, document.getElementById('root'));

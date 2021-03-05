@@ -1,4 +1,5 @@
 import { useAtomValue } from 'jotai/utils';
+
 import {
   albumsStateSelector,
   artistsStateSelector,

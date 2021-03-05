@@ -2,12 +2,13 @@ import * as React from 'react';
 
 import { Box } from '@chakra-ui/react';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
+
 import Explorer from './Explorer';
+import Folder from './Folder';
 import Albums from './SpecialFolders/Albums';
 import Artists from './SpecialFolders/Artists';
 import Genre from './SpecialFolders/Genre';
 import Tracks from './SpecialFolders/Tracks';
-import Folder from './Folder';
 
 const Main = () => {
   const history = useHistory();
