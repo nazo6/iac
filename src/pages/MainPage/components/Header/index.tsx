@@ -41,7 +41,7 @@ const Player = () => {
 
   return (
     <Box position="relative">
-      <Box width="100%" display="flex" alignItems="center" paddingX="0.5rem">
+      <Box className="w-full px-2 flex items-center">
         <IconButton aria-label="Back" disabled={!audio.enabled} color="inherit">
           <ArrowBack />
         </IconButton>
@@ -83,7 +83,7 @@ const Player = () => {
               : '--:--/--:--'}
           </Typography>
         </Hidden>
-        <div style={{ flexGrow: 1 }}></div>
+        <div className="flex-grow"></div>
         <Typography>{currentSongData ? currentSongData.title : 'Not playing'}</Typography>
       </Box>
 

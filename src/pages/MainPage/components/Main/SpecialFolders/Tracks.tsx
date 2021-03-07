@@ -42,7 +42,7 @@ const Tracks = () => {
     });
   };
   return (
-    <Box height="100%">
+    <Box className="h-full">
       <Explorer
         id={`traks`}
         data={sortData('title', 'ascend').map((value) => {

@@ -23,7 +23,7 @@ const Album = () => {
     findTrackData(trackId.toString()),
   );
   return (
-    <Box display="flex" height="100%" flexDirection="column">
+    <Box className="h-full flex flex-col">
       <Box height="4rem">
         <Typography fontSize="4xl">{albumData.name}</Typography>
       </Box>

@@ -29,7 +29,7 @@ type ExplorerPropsType = {
 const Explorer = (props: ExplorerPropsType) => {
   const { ref, width = 1, height = 1 } = useResizeObserver<HTMLDivElement>();
   return (
-    <Box ref={ref} width="100%" height="100%">
+    <Box ref={ref} className="w-full h-full">
       <Vlist
         id={props.id}
         listWidth={width}

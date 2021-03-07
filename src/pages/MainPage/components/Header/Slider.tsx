@@ -14,7 +14,8 @@ const ProgressSlider = (props: SliderPropsType) => {
   const [sliderPosState, setSliderPosState] = React.useState(0);
   const [isDragging, setIsDragging] = React.useState(false);
   React.useEffect(() => {
-    if (!isDragging || !props.loading) {
+    console.log(props.loading);
+    if (!isDragging && !props.loading) {
       setSliderPosState(props.currentTime ?? 0);
     }
   }, [isDragging, props.currentTime, props.loading]);
@@ -25,8 +26,9 @@ const ProgressSlider = (props: SliderPropsType) => {
       bottom="0"
       width="100vw"
       left="0"
-      style={{ transform: 'translate(0, 50%)' }}>
+      className="transform translate-y-1/2">
       <Slider
+        classes={{ root: 'p-1' }}
         max={props.duration ?? 0}
         disabled={!props.enabled}
         onChange={(_, value) => {

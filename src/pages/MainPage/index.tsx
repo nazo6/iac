@@ -26,7 +26,7 @@ const MainPage = () => {
   return !libraryData ? (
     <Typography>Loading</Typography>
   ) : (
-    <Box width="100%" display="flex" flexDirection="column">
+    <Box className="w-full flex flex-col">
       <WebSocketProvider />
       <Box>
         <Header />

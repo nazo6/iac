@@ -55,12 +55,7 @@ const LoginPage = () => {
   return (
     <>
       <Container component="main" maxWidth="xs">
-        <Box
-          height="100%"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          pt={8}>
+        <Box className="h-full flex flex-col items-center pt-24">
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>

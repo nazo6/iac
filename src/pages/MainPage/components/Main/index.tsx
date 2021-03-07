@@ -65,7 +65,7 @@ const Main = () => {
   };
 
   return (
-    <Box height="100%">
+    <Box className="h-full">
       <Switch>
         <Route path={`${path}/artist`}>
           <Artists />
