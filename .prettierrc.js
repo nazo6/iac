@@ -8,4 +8,5 @@ module.exports = {
   printWidth: 90,
   importOrder: ['^react$', '^(?!(~/|./|../)).*$', '^~/(.*)$', '^[./]'],
   importOrderSeparation: true,
+  plugins: ['./node_modules/@trivago/prettier-plugin-sort-imports'],
 };

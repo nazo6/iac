@@ -1,11 +1,14 @@
-import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import * as React from 'react';
+
+import { useAtomValue, useUpdateAtom } from 'jotai/utils';
+import path from 'path-browserify';
 import { useHistory, useParams } from 'react-router-dom';
+
 import { useFindTrackDataById } from '~/pages/MainPage/utils/useFindData';
 import { folderStatetAtom } from '~/stores/library';
-import Explorer, { ExplorerDataType } from '../Explorer';
-import path from 'path-browserify';
 import { playerStateAtom } from '~/stores/player';
+
+import Explorer, { ExplorerDataType } from '../Explorer';
 
 const Folder = () => {
   const history = useHistory();

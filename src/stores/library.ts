@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
-import { FolderType } from '~/types/DataTypes';
 
+import { FolderType } from '~/types/DataTypes';
 import { LibraryResponseType } from '~/types/LibraryResponseType';
 
 import { atomWithSave } from './utils';
