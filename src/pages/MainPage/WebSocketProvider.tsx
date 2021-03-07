@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import useWebSocket from 'react-use-websocket';
