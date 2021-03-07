@@ -13,7 +13,7 @@ import {
 import { Folder } from '@material-ui/icons';
 import useResizeObserver from 'use-resize-observer';
 
-import getArtworkUrl from '~/Pages/MainPage/utils/getArtworkUrl';
+import getArtworkUrl from '~/pages/MainPage/utils/getArtworkUrl';
 import type { TrackType } from '~/types/DataTypes';
 
 import { Vlist } from './Vlist';
