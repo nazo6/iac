@@ -1,11 +1,11 @@
 {
-  "name": "idesktopcast",
+  "name": "iac",
   "version": "0.1.0",
   "author": "nazo",
   "license": "MIT",
   "main": "./dist/production/main.js",
   "build": {
-    "appId": "idesktopcast",
+    "appId": "iac",
     "directories": {
       "output": "release"
     },
