@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Box } from '@chakra-ui/react';
+import { Box } from '@material-ui/core';
 import { useAtomValue } from 'jotai/utils';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 
@@ -38,7 +38,7 @@ const Artists = () => {
     });
   };
   return (
-    <Box h="100%">
+    <Box height="100%">
       <Switch>
         <Route exact path={`${path}`}>
           <Explorer

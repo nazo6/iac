@@ -1,9 +1,7 @@
 import * as React from 'react';
 
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
-import { Box, Center, Flex, IconButton, Spacer, Spinner, Text } from '@chakra-ui/react';
-import { mdiPause, mdiPlay } from '@mdi/js';
-import Icon from '@mdi/react';
+import { Box, CircularProgress, IconButton, Typography, Hidden } from '@material-ui/core';
+import { ArrowBack, ArrowForward, Pause, PlayArrow } from '@material-ui/icons';
 import { useAtom } from 'jotai';
 import { withImmer } from 'jotai/immer';
 
@@ -11,7 +9,7 @@ import { playerStateAtom } from '~/stores/player';
 
 import { secondsToHms } from '../../utils/convertTime';
 import Queue from './Queue';
-import Slider from './Slider';
+import ProgressSlider from './Slider';
 import { useAudio } from './useAudio';
 
 const playerStateAtomWithImmer = withImmer(playerStateAtom);
@@ -23,7 +21,7 @@ const Player = () => {
   React.useEffect(() => {
     if (playerState) {
       if (currentSongData) {
-        audio.setSrc(currentSongData.file);
+        audio.setSrc(currentSongData.file, currentSongData.title);
         if (playerState.play) {
           audio.play();
         } else {
@@ -42,68 +40,61 @@ const Player = () => {
   }, [playerState?.play]);
 
   return (
-    <>
-      <Box w="100%" boxShadow="md">
-        <Flex flexDirection="column" pos="relative" p="5px">
-          <Flex>
-            <Box>
-              <IconButton
-                aria-label="Back"
-                icon={<ArrowBackIcon />}
-                disabled={!audio.enabled}
-              />
-            </Box>
-            <Box>
-              <IconButton
-                aria-label="Back"
-                icon={
-                  audio.loading ? (
-                    <Spinner />
-                  ) : (
-                    <Icon path={audio.playing ? mdiPause : mdiPlay} />
-                  )
+    <Box position="relative">
+      <Box width="100%" display="flex" alignItems="center" paddingX="0.5rem">
+        <IconButton aria-label="Back" disabled={!audio.enabled} color="inherit">
+          <ArrowBack />
+        </IconButton>
+        <Box>
+          {audio.loading ? (
+            <CircularProgress />
+          ) : (
+            <IconButton
+              aria-label="Back"
+              disabled={!audio.enabled}
+              color="inherit"
+              onClick={() => {
+                if (audio.playing) {
+                  audio.pause();
+                  setPlayerState((c) => {
+                    c!.play = false;
+                  });
+                } else {
+                  audio.play();
+                  setPlayerState((c) => {
+                    c!.play = true;
+                  });
                 }
-                disabled={!audio.enabled}
-                onClick={() => {
-                  if (audio.playing) {
-                    audio.pause();
-                    setPlayerState((c) => {
-                      c!.play = false;
-                    });
-                  } else {
-                    audio.play();
-                    setPlayerState((c) => {
-                      c!.play = true;
-                    });
-                  }
-                }}
-              />
-            </Box>
-            <Box>
-              <IconButton
-                aria-label="Back"
-                icon={<ArrowForwardIcon />}
-                disabled={!audio.enabled}
-              />
-            </Box>
-            <Queue />
-            <Center>
-              <Text>
-                {audio.currentTime && audio.duration
-                  ? secondsToHms(audio.currentTime) + '/' + secondsToHms(audio.duration)
-                  : '--:--/--:--'}
-              </Text>
-            </Center>
-            <Spacer />
-            <Center>
-              <Flex>
-                <Text>{currentSongData ? currentSongData.title : 'Not playing'}</Text>
-              </Flex>
-            </Center>
-          </Flex>
-        </Flex>
+              }}>
+              {audio.playing ? <Pause /> : <PlayArrow />}
+            </IconButton>
+          )}
+        </Box>
+        <IconButton aria-label="Forward" disabled={!audio.enabled} color="inherit">
+          <ArrowForward />
+        </IconButton>
+        <Hidden only="xs">
+          <Queue />
+        </Hidden>
+        <Hidden only="xs">
+          <Typography>
+            {audio.currentTime && audio.duration
+              ? secondsToHms(audio.currentTime) + '/' + secondsToHms(audio.duration)
+              : '--:--/--:--'}
+          </Typography>
+        </Hidden>
+        <div style={{ flexGrow: 1 }}></div>
+        <Typography>{currentSongData ? currentSongData.title : 'Not playing'}</Typography>
       </Box>
-    </>
+
+      <ProgressSlider
+        loading={audio.loading}
+        enabled={audio.enabled}
+        currentTime={audio.currentTime}
+        duration={audio.duration}
+        changePosition={(sec) => audio.jump(sec)}
+      />
+    </Box>
   );
 };
 

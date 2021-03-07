@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Typography } from '@material-ui/core';
 import { useUpdateAtom } from 'jotai/utils';
 import { useParams } from 'react-router-dom';
 
@@ -23,11 +23,11 @@ const Album = () => {
     findTrackData(trackId.toString()),
   );
   return (
-    <Flex h="100%" direction="column">
-      <Box h="4rem">
-        <Text fontSize="4xl">{albumData.name}</Text>
+    <Box display="flex" height="100%" flexDirection="column">
+      <Box height="4rem">
+        <Typography fontSize="4xl">{albumData.name}</Typography>
       </Box>
-      <Box flex="1" minH={0}>
+      <Box flex="1" minHeight="0">
         <Explorer
           id={`album-${albumId}`}
           data={albumTracksData.map((value) => {
@@ -45,7 +45,7 @@ const Album = () => {
           }}
         />
       </Box>
-    </Flex>
+    </Box>
   );
 };
 export default Album;

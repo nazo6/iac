@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Text, Box, Flex } from '@chakra-ui/react';
+import { Box, Typography } from '@material-ui/core';
 import { useAtomValue } from 'jotai/utils';
 
 import { authStateAtom } from '../../stores/app';
@@ -24,9 +24,9 @@ const MainPage = () => {
     f();
   }, []);
   return !libraryData ? (
-    <Text>Loading</Text>
+    <Typography>Loading</Typography>
   ) : (
-    <Flex w="100%" direction="column">
+    <Box width="100%" display="flex" flexDirection="column">
       <WebSocketProvider />
       <Box>
         <Header />
@@ -34,7 +34,7 @@ const MainPage = () => {
       <Box flex="1">
         <Main />
       </Box>
-    </Flex>
+    </Box>
   );
 };
 

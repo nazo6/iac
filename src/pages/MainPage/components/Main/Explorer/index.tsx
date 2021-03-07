@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Box } from '@chakra-ui/react';
+import { Box } from '@material-ui/core';
 import useResizeObserver from 'use-resize-observer';
 
 import type { TrackType } from '~/types/DataTypes';
@@ -29,7 +29,7 @@ type ExplorerPropsType = {
 const Explorer = (props: ExplorerPropsType) => {
   const { ref, width = 1, height = 1 } = useResizeObserver<HTMLDivElement>();
   return (
-    <Box ref={ref} w="100%" h="100%">
+    <Box ref={ref} width="100%" height="100%">
       <Vlist
         id={props.id}
         listWidth={width}

@@ -17,6 +17,8 @@ export const useAudio = () => {
     audio.addEventListener('timeupdate', forceUpdate);
     audio.addEventListener('loadstart', setLoadingTrue);
     audio.addEventListener('loadeddata', setLoadingFalse);
+    audio.addEventListener('seeking', setLoadingTrue);
+    audio.addEventListener('seeked', setLoadingFalse);
 
     return () => {
       audio.removeEventListener('play', forceUpdate);
@@ -25,15 +27,31 @@ export const useAudio = () => {
       audio.removeEventListener('timeupdate', forceUpdate);
       audio.removeEventListener('loadstart', setLoadingTrue);
       audio.removeEventListener('loadeddata', setLoadingFalse);
+      audio.removeEventListener('seeking', setLoadingTrue);
+      audio.removeEventListener('seeked', setLoadingFalse);
     };
   }, []);
 
   const play = () => audio.play();
   const pause = () => audio.pause();
   const jump = (value: number) => (audio.currentTime = value);
-  const setSrc = (filePath: string) => {
+  const setSrc = (
+    filePath: string,
+    title?: string,
+    artist?: string,
+    album?: string,
+    artworkPath?: string,
+  ) => {
     setPlayerEnabled(true);
     audio.src = 'https://streaming.ibroadcast.com' + filePath;
+    if (navigator.mediaSession) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title,
+        artist,
+        album,
+        artwork: artworkPath ? [{ src: artworkPath }] : undefined,
+      });
+    }
   };
 
   return {

@@ -1,39 +1,40 @@
 import * as React from 'react';
 
-import { Box } from '@chakra-ui/react';
-import RcSlider from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import { Box, Slider } from '@material-ui/core';
 
 type SliderPropsType = {
   enabled: boolean;
+  loading: boolean;
   currentTime: number | null;
   duration: number | null;
   changePosition: (seconds: number) => void;
 };
 
-const Slider = (props: SliderPropsType) => {
+const ProgressSlider = (props: SliderPropsType) => {
   const [sliderPosState, setSliderPosState] = React.useState(0);
   const [isDragging, setIsDragging] = React.useState(false);
   React.useEffect(() => {
-    if (!isDragging) {
+    if (!isDragging || !props.loading) {
       setSliderPosState(props.currentTime ?? 0);
     }
-  });
+  }, [isDragging, props.currentTime, props.loading]);
   return (
     <Box
       margin={0}
-      pos="absolute"
+      position="absolute"
       bottom="0"
-      w="100vw"
+      width="100vw"
       left="0"
-      transform="translate(0, 50%)">
-      <RcSlider
+      style={{ transform: 'translate(0, 50%)' }}>
+      <Slider
         max={props.duration ?? 0}
         disabled={!props.enabled}
-        onBeforeChange={() => setIsDragging(true)}
-        onChange={(value) => setSliderPosState(value)}
-        onAfterChange={(value) => {
-          props.changePosition(value);
+        onChange={(_, value) => {
+          setIsDragging(true);
+          setSliderPosState(value as number);
+        }}
+        onChangeCommitted={(_, value) => {
+          props.changePosition(value as number);
           setIsDragging(false);
         }}
         value={sliderPosState}
@@ -42,4 +43,4 @@ const Slider = (props: SliderPropsType) => {
   );
 };
 
-export default Slider;
+export default ProgressSlider;

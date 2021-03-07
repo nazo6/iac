@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Box } from '@chakra-ui/react';
+import { Box } from '@material-ui/core';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 
 import { tracksStateSelector } from '~/stores/library';
@@ -42,7 +42,7 @@ const Tracks = () => {
     });
   };
   return (
-    <Box h="100%">
+    <Box height="100%">
       <Explorer
         id={`traks`}
         data={sortData('title', 'ascend').map((value) => {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Box } from '@chakra-ui/react';
+import { Box, Container } from '@material-ui/core';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 
 import Explorer from './Explorer';
@@ -65,7 +65,7 @@ const Main = () => {
   };
 
   return (
-    <Box h="100%">
+    <Box height="100%">
       <Switch>
         <Route path={`${path}/artist`}>
           <Artists />
