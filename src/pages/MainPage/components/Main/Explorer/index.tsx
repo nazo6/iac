@@ -1,6 +1,14 @@
 import * as React from 'react';
 
-import { Box, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
+import {
+  Box,
+  Grid,
+  Hidden,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from '@material-ui/core';
 import { Folder } from '@material-ui/icons';
 import useResizeObserver from 'use-resize-observer';
 
@@ -63,16 +71,36 @@ const Explorer = (props: ExplorerPropsType) => {
           } else {
             return (
               <ListItem key={index} style={style} className="border">
-                <Box>
-                  <Typography
+                <Grid container>
+                  <Grid
+                    xs={12}
+                    sm={8}
+                    md={6}
+                    item
                     onClick={() => {
                       if (props.onTrackSelect) {
                         props.onTrackSelect(data.fileData);
                       }
                     }}>
-                    {data.fileData.title}
-                  </Typography>
-                </Box>
+                    <Typography className="whitespace-nowrap overflow-ellipsis overflow-hidden">
+                      {data.fileData.title}
+                    </Typography>
+                  </Grid>
+                  <Hidden only="xs">
+                    <Grid
+                      sm={4}
+                      md={3}
+                      onClick={() => {
+                        if (props.onAlbumSelect) {
+                          props.onAlbumSelect(data.fileData.album_id);
+                        }
+                      }}>
+                      <Typography className="whitespace-nowrap overflow-ellipsis overflow-hidden">
+                        {data.fileData.artist}
+                      </Typography>
+                    </Grid>
+                  </Hidden>
+                </Grid>
               </ListItem>
             );
           }

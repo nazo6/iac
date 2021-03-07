@@ -69,17 +69,20 @@ const getLibraryData = async (token: string, userId: string) => {
     return null;
   }
   const data = formatData(status);
-  return produce(data, (draft) => {
+  const data1 = produce(data, (draft) => {
     draft.library.albums = draft.library.albums.map((e) => {
+      console.log();
       return produce(e, (draft2) => {
         draft2.artist = data.library.artists.find(
           (value) => value.id === draft2.artist_id.toString(),
         )?.name;
       });
     });
+  });
+  return produce(data1, (draft) => {
     draft.library.tracks = draft.library.tracks.map((e) => {
       return produce(e, (draft2) => {
-        const album = data.library.albums.find(
+        const album = data1.library.albums.find(
           (value) => value.id === draft2.album_id.toString(),
         );
         draft2.album = album?.name;
