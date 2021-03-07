@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CSSProperties, memo, useMemo } from 'react';
+import { CSSProperties, useMemo } from 'react';
 
 import { useAtom } from 'jotai';
 
@@ -75,21 +75,24 @@ export const Vlist = React.memo((props: VlistProps) => {
     ],
   );
   const endNode = Math.min(props.itemCount - 1, lastVisibleNode + renderAhead);
-  const visibleNodeCount = endNode - startNode + 1;
-  //console.log(scrolledVerticalTopPosition, startNode, endNode);
-  const visibleChildren = useMemo(
+  const children = useMemo(
     () =>
-      new Array(visibleNodeCount).fill(null).map((_, index) =>
-        props.itemRenderer(index + startNode, {
-          height: itemDimensions.heights[index + startNode],
+      new Array(props.itemCount).fill(null).map((_, index) =>
+        props.itemRenderer(index, {
+          height: itemDimensions.heights[index],
           width: props.listWidth,
-          top: `${itemDimensions.verticalPositions[index + startNode]}px`,
+          top: `${itemDimensions.verticalPositions[index]}px`,
           position: 'absolute',
         }),
       ),
-    [startNode, visibleNodeCount, props.itemRenderer],
+    [
+      itemDimensions.heights,
+      itemDimensions.verticalPositions,
+      props.itemCount,
+      props.itemRenderer,
+      props.listWidth,
+    ],
   );
-  //console.log(visibleChildren);
 
   return (
     <div
@@ -111,7 +114,7 @@ export const Vlist = React.memo((props: VlistProps) => {
             position: 'relative',
             willChange: 'transform',
           }}>
-          {visibleChildren}
+          {children.slice(startNode, endNode + 1)}
         </div>
       </div>
     </div>
@@ -169,4 +172,4 @@ function findEndNode(
   return endNode;
 }
 
-export default memo(Vlist);
+export default Vlist;

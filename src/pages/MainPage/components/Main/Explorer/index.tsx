@@ -34,7 +34,7 @@ const Explorer = (props: ExplorerPropsType) => {
     <Box ref={ref} className="w-full h-full">
       <Vlist
         id={props.id}
-        renderAhead={0}
+        renderAhead={3}
         listWidth={width}
         listHeight={height}
         itemRenderer={(index, style) => {
@@ -42,7 +42,6 @@ const Explorer = (props: ExplorerPropsType) => {
           if (data.type === 'folder') {
             return (
               <ListItem
-                button
                 title={'Folder ' + data.displayName ?? data.name}
                 key={index}
                 style={style}
