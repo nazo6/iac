@@ -79,8 +79,7 @@ const Explorer = (props: ExplorerPropsType) => {
                 <Grid container>
                   <Grid
                     xs={12}
-                    sm={8}
-                    md={6}
+                    sm={6}
                     item
                     onClick={() => {
                       if (props.onTrackSelect) {
@@ -100,10 +99,23 @@ const Explorer = (props: ExplorerPropsType) => {
                       </Typography>
                     </div>
                   </Grid>
+                  <Hidden smDown>
+                    <Grid
+                      sm={3}
+                      item
+                      onClick={() => {
+                        if (props.onAlbumSelect) {
+                          props.onAlbumSelect(data.fileData.album_id);
+                        }
+                      }}>
+                      <Typography className="whitespace-nowrap overflow-ellipsis overflow-hidden">
+                        {data.fileData.album}
+                      </Typography>
+                    </Grid>
+                  </Hidden>
                   <Hidden only="xs">
                     <Grid
-                      sm={4}
-                      md={3}
+                      sm={3}
                       item
                       onClick={() => {
                         if (props.onAlbumSelect) {
