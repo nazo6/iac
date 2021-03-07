@@ -54,7 +54,7 @@ const Main = () => {
               history.push(`${path}/genre`);
               break;
             case 'Custom Folders':
-              history.push(`${path}/folder`);
+              history.push(`${path}/folder/`);
               break;
             default:
               break;
@@ -79,7 +79,7 @@ const Main = () => {
         <Route path={`${path}/track`}>
           <Tracks />
         </Route>
-        <Route path={`${path}/folder`}>
+        <Route path={`${path}/folder/*`}>
           <Folder />
         </Route>
         <Route path={`${path}/`}>

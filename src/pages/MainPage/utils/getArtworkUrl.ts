@@ -6,7 +6,7 @@ const getArtworkUrl = (
   let sizePrefix = '';
   switch (size) {
     case 'icon':
-      sizePrefix = '-150';
+      sizePrefix = '-80';
       break;
     case 'small':
       sizePrefix = '-300';

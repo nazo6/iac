@@ -19,18 +19,20 @@ import type { TrackType } from '~/types/DataTypes';
 import { Vlist } from './Vlist';
 import { CacheImage } from '~/pages/MainPage/utils/CacheImage';
 
+export type ExplorerDataType = Array<
+  | {
+      type: 'track';
+      fileData: TrackType;
+    }
+  | {
+      type: 'folder';
+      name: string;
+      displayName?: string;
+    }
+>;
+
 type ExplorerPropsType = {
-  data: Array<
-    | {
-        type: 'track';
-        fileData: TrackType;
-      }
-    | {
-        type: 'folder';
-        name: string;
-        displayName?: string;
-      }
-  >;
+  data: ExplorerDataType;
   id: string;
   onTrackSelect?: (trackId: TrackType) => void;
   onAlbumSelect?: (albumId: number) => void;

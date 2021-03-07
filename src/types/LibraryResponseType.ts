@@ -1,4 +1,10 @@
-import type { PlayListType, ArtistType, AlbumType, TrackType } from '~/types/DataTypes';
+import type {
+  PlayListType,
+  ArtistType,
+  AlbumType,
+  TrackType,
+  TagType,
+} from '~/types/DataTypes';
 
 export type LibraryResponseType = {
   settings: {
@@ -18,7 +24,7 @@ export type LibraryResponseType = {
   };
   library: {
     expires: number;
-    tags: Record<string, unknown>;
+    tags: Array<TagType>;
     tracks: Array<TrackType>;
     artists: Array<ArtistType>;
     albums: Array<AlbumType>;

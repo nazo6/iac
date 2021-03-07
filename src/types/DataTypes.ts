@@ -62,3 +62,16 @@ export type TrackType = {
   album?: string;
   artist?: string;
 };
+
+export type TagType = {
+  archived: boolean;
+  id: string;
+  name: string;
+  tracks: number[];
+};
+
+export type FolderType = {
+  name: string;
+  files?: number[];
+  folders?: FolderType;
+}[];

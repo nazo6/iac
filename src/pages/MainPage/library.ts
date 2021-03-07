@@ -3,7 +3,8 @@ import { useUpdateAtom } from 'jotai/utils';
 
 import { libraryApi } from '~/apis/api';
 import { appInfo } from '~/appInfo';
-import { libraryStateAtom } from '~/stores/library';
+import { folderStatetAtom, libraryStateAtom } from '~/stores/library';
+import { FolderType, TagType } from '~/types/DataTypes';
 import type { LibraryResponseType } from '~/types/LibraryResponseType';
 
 const formatData = (data: any) => {
@@ -47,6 +48,9 @@ const formatData = (data: any) => {
   data['library']['albums'] = convert(data['library']['albums']);
   data['library']['trash'] = convert(data['library']['trash']);
   data['library']['playlists'] = convert(data['library']['playlists']);
+  data['library']['tags'] = Object.keys(data['library']['tags']).map((value) => {
+    return { ...data['library']['tags'][value], id: value };
+  });
   return data as LibraryResponseType;
 };
 
@@ -71,7 +75,6 @@ const getLibraryData = async (token: string, userId: string) => {
   const data = formatData(status);
   const data1 = produce(data, (draft) => {
     draft.library.albums = draft.library.albums.map((e) => {
-      console.log();
       return produce(e, (draft2) => {
         draft2.artist = data.library.artists.find(
           (value) => value.id === draft2.artist_id.toString(),
@@ -92,12 +95,51 @@ const getLibraryData = async (token: string, userId: string) => {
   });
 };
 
+const tagToFolder = (tagData: TagType[]) => {
+  const pathsData = tagData
+    .filter((tag) => tag.name.startsWith('_f/') && !tag.archived)
+    .map((tag) => {
+      return {
+        id: tag.id,
+        path: tag.name === '_f/' ? [] : tag.name.substr(3).split('/'),
+        tracks: tag.tracks,
+      };
+    });
+  const folderData: FolderType = [
+    {
+      name: 'root',
+    },
+  ];
+  pathsData.forEach((value) => {
+    if (value.path.length === 0) {
+      folderData[0].files = value.tracks;
+      return;
+    }
+    value.path.reduce((previous, crr, index) => {
+      if (!previous.folders) {
+        previous.folders = [];
+      }
+      const newIndex =
+        previous.folders.findIndex((v) => v.name === crr) >= 0
+          ? previous.folders.findIndex((v) => v.name === crr)
+          : previous.folders.push({
+              name: crr,
+              files: index === value.path.length - 1 ? value.tracks : undefined,
+            }) - 1;
+      return previous.folders[newIndex];
+    }, folderData[0]);
+  });
+  return folderData;
+};
+
 export const useUpdateLibrary = () => {
   const setLibraryData = useUpdateAtom(libraryStateAtom);
+  const setFolderData = useUpdateAtom(folderStatetAtom);
   return async (token: string, userId: string) => {
     const data = await getLibraryData(token, userId);
     if (data) {
       setLibraryData(data);
+      setFolderData(tagToFolder(data.library.tags));
     } else {
       throw Error('Error occured when fetching library.');
     }
