@@ -29,6 +29,7 @@ export type AlbumType = {
   rating: number;
   disc: number;
   year: number;
+  artist?: string;
 };
 
 export type TrackType = {
@@ -58,4 +59,6 @@ export type TrackType = {
   replay_gain: string;
   /** Uploaded time. e.g. 17:13:59 */
   uploaded_time: string;
+  album?: string;
+  artist?: string;
 };
