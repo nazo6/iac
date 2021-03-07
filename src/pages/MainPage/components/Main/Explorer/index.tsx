@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import {
+  Avatar,
   Box,
   Grid,
   Hidden,
@@ -12,6 +13,7 @@ import {
 import { Folder } from '@material-ui/icons';
 import useResizeObserver from 'use-resize-observer';
 
+import getArtworkUrl from '~/Pages/MainPage/utils/getArtworkUrl';
 import type { TrackType } from '~/types/DataTypes';
 
 import { Vlist } from './Vlist';
@@ -82,14 +84,22 @@ const Explorer = (props: ExplorerPropsType) => {
                         props.onTrackSelect(data.fileData);
                       }
                     }}>
-                    <Typography className="whitespace-nowrap overflow-ellipsis overflow-hidden">
-                      {data.fileData.title}
-                    </Typography>
+                    <div className="flex">
+                      <Avatar
+                        variant="square"
+                        alt="Cover"
+                        src={getArtworkUrl(data.fileData.artwork_id, 'icon')}
+                      />
+                      <Typography className="whitespace-nowrap overflow-ellipsis overflow-hidden flex-1 ml-1">
+                        {data.fileData.title}
+                      </Typography>
+                    </div>
                   </Grid>
                   <Hidden only="xs">
                     <Grid
                       sm={4}
                       md={3}
+                      item
                       onClick={() => {
                         if (props.onAlbumSelect) {
                           props.onAlbumSelect(data.fileData.album_id);
