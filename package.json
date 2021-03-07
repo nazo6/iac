@@ -20,7 +20,7 @@
     "build": "vite build",
     "format": "prettier --write .",
     "lint": "eslint . --ext ts --ext tsx --fix",
-    "depgrpah": "run-p depgraph-html depgraph-svg",
+    "depgraph": "run-p depgraph-html depgraph-svg",
     "depgraph-html": "depcruise --config ./.dependency-cruiser.js -T dot src | dot -T svg | depcruise-wrap-stream-in-html > ./depgraph/dependency-graph.html",
     "depgraph-svg": "depcruise --config ./.dependency-cruiser.js -T dot src | dot -T svg > ./depgraph/dependencygraph.svg"
   },
