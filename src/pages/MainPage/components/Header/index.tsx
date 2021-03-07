@@ -45,9 +45,9 @@ const Player = () => {
         <IconButton aria-label="Back" disabled={!audio.enabled} color="inherit">
           <ArrowBack />
         </IconButton>
-        <Box>
+        <Box className="w-48px h-48px flex justify-center items-center">
           {audio.loading ? (
-            <CircularProgress />
+            <CircularProgress size={35} />
           ) : (
             <IconButton
               aria-label="Back"
@@ -84,7 +84,11 @@ const Player = () => {
           </Typography>
         </Hidden>
         <div className="flex-grow"></div>
-        <Typography>{currentSongData ? currentSongData.title : 'Not playing'}</Typography>
+        <div className="text-center">
+          <Typography className="text-left inline-block">
+            {currentSongData ? currentSongData.title : 'Not playing'}
+          </Typography>
+        </div>
       </Box>
 
       <ProgressSlider

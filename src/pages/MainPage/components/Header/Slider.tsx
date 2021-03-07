@@ -11,14 +11,12 @@ type SliderPropsType = {
 };
 
 const ProgressSlider = (props: SliderPropsType) => {
-  const [sliderPosState, setSliderPosState] = React.useState(0);
-  const [isDragging, setIsDragging] = React.useState(false);
+  const [sliderPosState, setSliderPosState] = React.useState<number | null>(0);
   React.useEffect(() => {
-    console.log(props.loading);
-    if (!isDragging && !props.loading) {
-      setSliderPosState(props.currentTime ?? 0);
+    if (!props.loading) {
+      setSliderPosState(null);
     }
-  }, [isDragging, props.currentTime, props.loading]);
+  }, [props.loading]);
   return (
     <Box
       margin={0}
@@ -32,14 +30,12 @@ const ProgressSlider = (props: SliderPropsType) => {
         max={props.duration ?? 0}
         disabled={!props.enabled}
         onChange={(_, value) => {
-          setIsDragging(true);
           setSliderPosState(value as number);
         }}
         onChangeCommitted={(_, value) => {
           props.changePosition(value as number);
-          setIsDragging(false);
         }}
-        value={sliderPosState}
+        value={sliderPosState ?? props.currentTime ?? 0}
       />
     </Box>
   );
