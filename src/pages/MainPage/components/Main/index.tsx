@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Box, Container } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 
 import Explorer from './Explorer';

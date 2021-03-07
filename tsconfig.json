@@ -1,26 +1,35 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "ES6",
+    "target": "ESNext",
     "lib": [
-      "es6",
-      "DOM"
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
     ],
-    "skipLibCheck": true,
-    "allowJs": true,
-    "jsx": "react",
+    "types": [
+      "vite/client"
+    ],
+    "allowJs": false,
+    "skipLibCheck": false,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
     "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react",
     "baseUrl": "./",
     "paths": {
       "~*": [
         "src*"
       ]
     },
-    "moduleResolution": "node",
-    "noEmit": true
   },
   "include": [
-    "src/**/*"
+    "./src"
   ]
 }
