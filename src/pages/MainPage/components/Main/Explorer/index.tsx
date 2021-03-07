@@ -17,6 +17,7 @@ import getArtworkUrl from '~/pages/MainPage/utils/getArtworkUrl';
 import type { TrackType } from '~/types/DataTypes';
 
 import { Vlist } from './Vlist';
+import { CacheImage } from '~/pages/MainPage/utils/CacheImage';
 
 type ExplorerPropsType = {
   data: Array<
@@ -85,8 +86,10 @@ const Explorer = (props: ExplorerPropsType) => {
                       }
                     }}>
                     <div className="flex">
+                      <CacheImage src={getArtworkUrl(data.fileData.artwork_id, 'icon')} />
                       <Avatar
                         variant="square"
+                        className="p-1"
                         alt="Cover"
                         src={getArtworkUrl(data.fileData.artwork_id, 'icon')}
                       />
@@ -116,7 +119,7 @@ const Explorer = (props: ExplorerPropsType) => {
           }
         }}
         itemCount={props.data.length}
-        calcItemHeight={() => 40}
+        calcItemHeight={() => 50}
       />
     </Box>
   );
