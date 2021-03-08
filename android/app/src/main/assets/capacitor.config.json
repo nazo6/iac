@@ -1,0 +1,13 @@
+{
+  "appId": "tk.nazo6.iac.native",
+  "appName": "iac",
+  "bundledWebRuntime": false,
+  "webDir": "dist",
+  "npmClient": "yarn",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

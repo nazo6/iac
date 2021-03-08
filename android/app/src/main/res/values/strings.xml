@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">iac</string>
+    <string name="title_activity_main">iac</string>
+    <string name="package_name">tk.nazo6.iac.mobile</string>
+    <string name="custom_url_scheme">tk.nazo6.iac.mobile</string>
+</resources>
