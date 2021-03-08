@@ -55,6 +55,7 @@ const Explorer = (props: ExplorerPropsType) => {
           if (data.type === 'folder') {
             return (
               <ListItem
+                button
                 title={'Folder ' + data.displayName ?? data.name}
                 key={index}
                 style={style}
@@ -75,7 +76,12 @@ const Explorer = (props: ExplorerPropsType) => {
             );
           } else {
             return (
-              <ListItem key={index} style={style} className="border">
+              <ListItem button key={index} style={style} className="border" 
+                onClick={() => {
+                      if (props.onTrackSelect) {
+                        props.onTrackSelect(data.fileData);
+                      }
+                    }}>
                 <Grid container>
                   <Grid
                     xs={12}
