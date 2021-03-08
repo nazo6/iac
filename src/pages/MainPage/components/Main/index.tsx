@@ -5,6 +5,7 @@ import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 
 import Explorer from './Explorer';
 import Folder from './Folder';
+import Search from './Search';
 import Albums from './SpecialFolders/Albums';
 import Artists from './SpecialFolders/Artists';
 import Genre from './SpecialFolders/Genre';
@@ -81,6 +82,9 @@ const Main = () => {
         </Route>
         <Route path={`${path}/folder/*`}>
           <Folder />
+        </Route>
+        <Route path={`${path}/search/:keyword`}>
+          <Search />
         </Route>
         <Route path={`${path}/`}>
           <Top />
