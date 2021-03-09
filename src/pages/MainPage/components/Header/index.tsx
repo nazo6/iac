@@ -66,7 +66,7 @@ const Player = () => {
           aria-label="Home"
           onClick={() => {
             history.push('/app');
-            toggleSearchBarState();
+            setShowSearchbarState(false);
           }}>
           <Home />
         </IconButton>
