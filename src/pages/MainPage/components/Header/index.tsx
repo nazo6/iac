@@ -12,6 +12,7 @@ import {
   ArrowBack,
   ArrowForward,
   Close,
+  Home,
   Pause,
   PlayArrow,
   Search,
@@ -61,6 +62,14 @@ const Player = () => {
   return (
     <Box position="relative">
       <Box className="w-full px-2 flex items-center">
+        <IconButton
+          aria-label="Home"
+          onClick={() => {
+            history.push('/app');
+            toggleSearchBarState();
+          }}>
+          <Home />
+        </IconButton>
         <IconButton aria-label="Search" onClick={toggleSearchBarState} color="inherit">
           {showSearchBarState ? <Close /> : <Search />}
         </IconButton>

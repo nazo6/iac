@@ -8,6 +8,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Menu,
   Typography,
 } from '@material-ui/core';
 import { Folder } from '@material-ui/icons';
@@ -26,7 +27,7 @@ export type ExplorerDataType = Array<
     }
   | {
       type: 'folder';
-      name: string;
+      id: string;
       displayName?: string;
     }
 >;
@@ -34,15 +35,31 @@ export type ExplorerDataType = Array<
 type ExplorerPropsType = {
   data: ExplorerDataType;
   id: string;
-  onTrackSelect?: (trackId: TrackType) => void;
+  folderContextMenu?: React.ReactNode;
+  fileContextMenu?: React.ReactNode;
+  onTrackSelect?: (track: TrackType) => void;
   onAlbumSelect?: (albumId: number) => void;
   onArtistSelect?: (artistId: number) => void;
   onGenreSelect?: (genre: string) => void;
-  onFolderSelect?: (folderName: string) => void;
+  onFolderSelect?: (folderId: string) => void;
 };
 
 const Explorer = (props: ExplorerPropsType) => {
   const { ref, width = 1, height = 1 } = useResizeObserver<HTMLDivElement>();
+  const [fileContextMenuState, setFileContextMenuState] = React.useState<{
+    mouseX: null | number;
+    mouseY: null | number;
+  }>({
+    mouseX: null,
+    mouseY: null,
+  });
+  const [folderContextMenuState, setFolderContextMenuState] = React.useState<{
+    mouseX: null | number;
+    mouseY: null | number;
+  }>({
+    mouseX: null,
+    mouseY: null,
+  });
 
   const Item = ({ index, style }: { index: number; style: React.CSSProperties }) => {
     const data = props.data[index];
@@ -50,16 +67,25 @@ const Explorer = (props: ExplorerPropsType) => {
       return (
         <ListItem
           button
-          title={'Folder ' + data.displayName ?? data.name}
+          title={'Folder ' + data.displayName ?? data.id}
           key={index}
           style={style}
           className="border"
-          onClick={() => (props.onFolderSelect ? props.onFolderSelect(data.name) : null)}>
+          onContextMenu={(event) => {
+            if (fileContextMenuState) {
+              event.preventDefault();
+              setFolderContextMenuState({
+                mouseX: event.clientX - 2,
+                mouseY: event.clientY - 4,
+              });
+            }
+          }}
+          onClick={() => (props.onFolderSelect ? props.onFolderSelect(data.id) : null)}>
           <ListItemIcon>
             <Folder />
           </ListItemIcon>
           <ListItemText
-            primary={data.displayName ?? data.name}
+            primary={data.displayName ?? data.id}
             classes={{
               primary: 'whitespace-nowrap overflow-ellipsis overflow-hidden',
             }}
@@ -73,6 +99,15 @@ const Explorer = (props: ExplorerPropsType) => {
           key={index}
           style={style}
           className="border"
+          onContextMenu={(event) => {
+            if (folderContextMenuState) {
+              event.preventDefault();
+              setFileContextMenuState({
+                mouseX: event.clientX - 2,
+                mouseY: event.clientY - 4,
+              });
+            }
+          }}
           onClick={() => {
             if (props.onTrackSelect) {
               props.onTrackSelect(data.fileData);
@@ -136,23 +171,66 @@ const Explorer = (props: ExplorerPropsType) => {
   };
 
   return (
-    <Box ref={ref} className="w-full h-full">
-      {props.data.length > 0 ? (
-        <Vlist
-          id={props.id}
-          renderAhead={5}
-          listWidth={width}
-          listHeight={height}
-          itemRenderer={(index, style) => (
-            <Item index={index} style={style} key={index} />
-          )}
-          itemCount={props.data.length}
-          calcItemHeight={() => 50}
-        />
+    <>
+      <Box ref={ref} className="w-full h-full">
+        {props.data.length > 0 ? (
+          <Vlist
+            id={props.id}
+            renderAhead={5}
+            listWidth={width}
+            listHeight={height}
+            itemRenderer={(index, style) => (
+              <Item index={index} style={style} key={index} />
+            )}
+            itemCount={props.data.length}
+            calcItemHeight={() => 50}
+          />
+        ) : (
+          <>No data</>
+        )}
+      </Box>
+      {props.fileContextMenu ? (
+        <Menu
+          keepMounted
+          open={fileContextMenuState.mouseY !== null}
+          onClose={() => setFileContextMenuState({ mouseX: null, mouseY: null })}
+          onClick={() => setFolderContextMenuState({ mouseX: null, mouseY: null })}
+          anchorReference="anchorPosition"
+          anchorPosition={
+            fileContextMenuState.mouseY !== null && fileContextMenuState.mouseX !== null
+              ? {
+                  top: fileContextMenuState.mouseY,
+                  left: fileContextMenuState.mouseX,
+                }
+              : undefined
+          }>
+          {props.fileContextMenu}
+        </Menu>
       ) : (
-        <>No data</>
+        <></>
       )}
-    </Box>
+      {props.folderContextMenu ? (
+        <Menu
+          keepMounted
+          open={folderContextMenuState.mouseY !== null}
+          onClose={() => setFolderContextMenuState({ mouseX: null, mouseY: null })}
+          onClick={() => setFolderContextMenuState({ mouseX: null, mouseY: null })}
+          anchorReference="anchorPosition"
+          anchorPosition={
+            folderContextMenuState.mouseY !== null &&
+            folderContextMenuState.mouseX !== null
+              ? {
+                  top: folderContextMenuState.mouseY,
+                  left: folderContextMenuState.mouseX,
+                }
+              : undefined
+          }>
+          {props.folderContextMenu}
+        </Menu>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 

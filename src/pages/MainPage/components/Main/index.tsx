@@ -21,23 +21,23 @@ const Main = () => {
         data={[
           {
             type: 'folder',
-            name: 'Artists',
+            id: 'Artists',
           },
           {
             type: 'folder',
-            name: 'Tracks',
+            id: 'Tracks',
           },
           {
             type: 'folder',
-            name: 'Albums',
+            id: 'Albums',
           },
           {
             type: 'folder',
-            name: 'Genre',
+            id: 'Genre',
           },
           {
             type: 'folder',
-            name: 'Custom Folders',
+            id: 'Custom Folders',
           },
         ]}
         onFolderSelect={(folderName) => {

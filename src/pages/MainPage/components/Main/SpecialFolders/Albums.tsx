@@ -46,7 +46,7 @@ const Albums = () => {
             data={sortData('name', 'ascend').map((value) => {
               return {
                 type: 'folder',
-                name: value.id,
+                id: value.id,
                 displayName: value.name,
               };
             })}

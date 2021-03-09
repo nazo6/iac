@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { MenuItem } from '@material-ui/core';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import path from 'path-browserify';
 import { useHistory, useParams } from 'react-router-dom';
@@ -27,7 +28,7 @@ const Folder = () => {
     ? currentData.folders.map((value) => {
         return {
           type: 'folder',
-          name: value.name,
+          id: value.name,
         };
       })
     : [];
@@ -58,6 +59,7 @@ const Folder = () => {
           play: true,
         });
       }}
+      fileContextMenu={[<MenuItem>Copy</MenuItem>]}
     />
   );
 };

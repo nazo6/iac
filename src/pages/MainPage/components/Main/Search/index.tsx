@@ -43,7 +43,7 @@ const Search = () => {
       albumsState.map((value) => {
         return {
           type: 'folder',
-          name: value.id,
+          id: value.id,
           displayName: value.name,
         };
       }),
@@ -54,7 +54,7 @@ const Search = () => {
       artistsState.map((value) => {
         return {
           type: 'folder',
-          name: value.id,
+          id: value.id,
           displayName: value.name,
         };
       }),
