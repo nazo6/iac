@@ -6,7 +6,7 @@ export type Methods = {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8';
     };
     reqBody: {
-      _userid: number;
+      _userid: string;
       _token: string;
       mode: 'update_album';
       album_id: number;

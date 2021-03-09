@@ -5,11 +5,9 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   TextField,
 } from '@material-ui/core';
-import { TextFields } from '@material-ui/icons';
 import LoadingButton from '@material-ui/lab/LoadingButton';
 import { useAtomValue } from 'jotai/utils';
 
@@ -17,25 +15,27 @@ import { api } from '~/apis/api';
 import { appInfo } from '~/appInfo';
 import { authStateAtom } from '~/stores/app';
 import { artistsStateSelector } from '~/stores/library';
-import { AlbumType } from '~/types/DataTypes';
+import { TrackType } from '~/types/DataTypes';
 
-type AlbumEditDialogProps = {
-  albumData: AlbumType;
+type TrackEditDialogProps = {
+  trackData: TrackType;
   open: boolean;
-  onChanged: (changedAlbumData: AlbumType) => void;
+  onChanged: (changedTrackData: TrackType) => void;
   onClose: () => void;
 };
-const AlbumEditDialog = (props: AlbumEditDialogProps) => {
+const TrackEditDialog = (props: TrackEditDialogProps) => {
   const authState = useAtomValue(authStateAtom);
   const [pending, setPending] = React.useState(false);
   const artistState = useAtomValue(artistsStateSelector);
-  const [newAlbumDataState, setNewAlbumDataState] = React.useState(props.albumData);
+  const [newTrackDataState, setNewTrackDataState] = React.useState<
+    TrackType & { track_no: number }
+  >({ ...props.trackData, track_no: props.trackData.track });
   const [newArtistNameState, setNewArtistNameState] = React.useState<null | string>(
-    props.albumData.artist ?? null,
+    props.trackData.artist ?? null,
   );
   return (
     <Dialog open={props.open} onClose={props.onClose}>
-      <DialogTitle>Edit "{props.albumData.name}"</DialogTitle>
+      <DialogTitle>Edit "{props.trackData.title}"</DialogTitle>
       <DialogContent>
         <TextField
           autoFocus
@@ -43,9 +43,9 @@ const AlbumEditDialog = (props: AlbumEditDialogProps) => {
           label="Title"
           fullWidth
           variant="standard"
-          value={newAlbumDataState.name}
+          value={newTrackDataState.title}
           onChange={(e) => {
-            setNewAlbumDataState({ ...newAlbumDataState, name: e.target.value });
+            setNewTrackDataState({ ...newTrackDataState, title: e.target.value });
           }}
         />
         <TextField
@@ -54,9 +54,24 @@ const AlbumEditDialog = (props: AlbumEditDialogProps) => {
           fullWidth
           variant="standard"
           type="number"
-          value={newAlbumDataState.year}
+          value={newTrackDataState.year}
           onChange={(e) => {
-            setNewAlbumDataState({ ...newAlbumDataState, year: Number(e.target.value) });
+            setNewTrackDataState({ ...newTrackDataState, year: Number(e.target.value) });
+          }}
+        />
+        <TextField
+          margin="dense"
+          label="Track number"
+          fullWidth
+          variant="standard"
+          type="number"
+          value={newTrackDataState.track}
+          onChange={(e) => {
+            setNewTrackDataState({
+              ...newTrackDataState,
+              track_no: Number(e.target.value),
+              track: Number(e.target.value),
+            });
           }}
         />
         <TextField
@@ -95,19 +110,24 @@ const AlbumEditDialog = (props: AlbumEditDialogProps) => {
                     },
                   })
                 ).artist_id
-              : props.albumData.artist_id.toString();
-            await api.API.update_album.$post({
+              : props.trackData.artist_id.toString();
+            await api.API.update_track.$post({
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
               },
               body: {
                 _userid: authState!.user.user_id,
                 _token: authState!.user.token,
-                mode: 'update_album',
-                album_id: Number(props.albumData.id),
-                artist_id: Number(newArtistId),
-                name: newAlbumDataState.name,
-                year: newAlbumDataState.year.toString(),
+                mode: 'update_track',
+                tracks: [
+                  {
+                    ...newTrackDataState,
+                    title: newTrackDataState.title,
+                    year: newTrackDataState.year.toString(),
+                    file_id: Number(props.trackData.id),
+                    artist_id: Number(newArtistId),
+                  },
+                ],
                 client: appInfo.client,
                 device_name: appInfo.deviceName,
                 version: appInfo.version,
@@ -124,4 +144,4 @@ const AlbumEditDialog = (props: AlbumEditDialogProps) => {
   );
 };
 
-export default AlbumEditDialog;
+export default TrackEditDialog;
