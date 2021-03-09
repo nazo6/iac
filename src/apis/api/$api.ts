@@ -2,17 +2,19 @@
 import { AspidaClient } from 'aspida'
 import { Methods as Methods0 } from './API/create_album'
 import { Methods as Methods1 } from './API/get_artwork'
-import { Methods as Methods2 } from './API/update_album'
-import { Methods as Methods3 } from './API/update_track'
-import { Methods as Methods4 } from './JSON/status'
+import { Methods as Methods2 } from './API/set_artwork'
+import { Methods as Methods3 } from './API/update_album'
+import { Methods as Methods4 } from './API/update_track'
+import { Methods as Methods5 } from './JSON/status'
 
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const prefix = (baseURL === undefined ? 'https://api.ibroadcast.com/s/' : baseURL).replace(/\/$/, '')
   const PATH0 = '/API/create_album'
   const PATH1 = '/API/get_artwork'
-  const PATH2 = '/API/update_album'
-  const PATH3 = '/API/update_track'
-  const PATH4 = '/JSON/status'
+  const PATH2 = '/API/set_artwork'
+  const PATH3 = '/API/update_album'
+  const PATH4 = '/API/update_track'
+  const PATH5 = '/JSON/status'
   const POST = 'POST'
 
   return {
@@ -31,28 +33,35 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
           fetch<Methods1['post']['resBody']>(prefix, PATH1, POST, option).json().then(r => r.body),
         $path: () => `${prefix}${PATH1}`
       },
-      update_album: {
+      set_artwork: {
         post: (option: { body: Methods2['post']['reqBody'], headers: Methods2['post']['reqHeaders'], config?: T }) =>
           fetch<Methods2['post']['resBody']>(prefix, PATH2, POST, option).json(),
         $post: (option: { body: Methods2['post']['reqBody'], headers: Methods2['post']['reqHeaders'], config?: T }) =>
           fetch<Methods2['post']['resBody']>(prefix, PATH2, POST, option).json().then(r => r.body),
         $path: () => `${prefix}${PATH2}`
       },
-      update_track: {
+      update_album: {
         post: (option: { body: Methods3['post']['reqBody'], headers: Methods3['post']['reqHeaders'], config?: T }) =>
           fetch<Methods3['post']['resBody']>(prefix, PATH3, POST, option).json(),
         $post: (option: { body: Methods3['post']['reqBody'], headers: Methods3['post']['reqHeaders'], config?: T }) =>
           fetch<Methods3['post']['resBody']>(prefix, PATH3, POST, option).json().then(r => r.body),
         $path: () => `${prefix}${PATH3}`
-      }
-    },
-    JSON: {
-      status: {
+      },
+      update_track: {
         post: (option: { body: Methods4['post']['reqBody'], headers: Methods4['post']['reqHeaders'], config?: T }) =>
           fetch<Methods4['post']['resBody']>(prefix, PATH4, POST, option).json(),
         $post: (option: { body: Methods4['post']['reqBody'], headers: Methods4['post']['reqHeaders'], config?: T }) =>
           fetch<Methods4['post']['resBody']>(prefix, PATH4, POST, option).json().then(r => r.body),
         $path: () => `${prefix}${PATH4}`
+      }
+    },
+    JSON: {
+      status: {
+        post: (option: { body: Methods5['post']['reqBody'], headers: Methods5['post']['reqHeaders'], config?: T }) =>
+          fetch<Methods5['post']['resBody']>(prefix, PATH5, POST, option).json(),
+        $post: (option: { body: Methods5['post']['reqBody'], headers: Methods5['post']['reqHeaders'], config?: T }) =>
+          fetch<Methods5['post']['resBody']>(prefix, PATH5, POST, option).json().then(r => r.body),
+        $path: () => `${prefix}${PATH5}`
       }
     }
   }
