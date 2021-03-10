@@ -68,7 +68,7 @@ const Explorer = (props: ExplorerPropsType) => {
         <ListItem
           button
           title={'Folder ' + data.displayName ?? data.id}
-          key={index}
+          key={'folder-' + index}
           style={style}
           className="border"
           onContextMenu={(event) => {
@@ -96,7 +96,7 @@ const Explorer = (props: ExplorerPropsType) => {
       return (
         <ListItem
           button
-          key={index}
+          key={'track-' + index}
           style={style}
           className="border"
           onContextMenu={(event) => {

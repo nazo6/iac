@@ -75,7 +75,7 @@ const ChangeImageDialog = (props: ChangeImageDialogProps) => {
       classes={{ paper: 'h-full w-full' }}>
       <DialogTitle>Change artwork</DialogTitle>
       <DialogContent>
-        <div className="flex flex-col">
+        <div className="flex flex-col h-full">
           <div>
             <Tabs
               value={tabState}
@@ -90,12 +90,12 @@ const ChangeImageDialog = (props: ChangeImageDialogProps) => {
               <Tab label="Select" />
             </Tabs>
           </div>
-          <Box className="h-full w-full flex-1 overflow-auto">
+          <Box className="h-full w-full flex-1 p-2 overflow-auto">
             {tabState === 0 ? (
-              <div className="p-2 max-w-xs" {...getRootProps()}>
+              <div className="p-2 w-full h-full" {...getRootProps()}>
                 <input {...getInputProps()} />
-                <CacheImage src={getArtworkUrl(props.artworkId, 'original')} />
-                <img src={getArtworkUrl(props.artworkId, 'original')} />
+                <CacheImage src={getArtworkUrl(props.artworkId, 'big')} />
+                <img src={getArtworkUrl(props.artworkId, 'big')} />
               </div>
             ) : tabState === 1 ? (
               <div></div>
@@ -103,15 +103,15 @@ const ChangeImageDialog = (props: ChangeImageDialogProps) => {
               <CircularProgress />
             ) : (
               <Box className="flex flex-row flex-wrap items-center justify-evenly gap-3">
-                {onlineArtworkState.map((value) => {
+                {onlineArtworkState.map((value, index) => {
                   return (
-                    <>
+                    <div key={index}>
                       <CacheImage src={getArtworkUrl(value.artwork_id, 'small')} />
                       <img
                         src={getArtworkUrl(value.artwork_id, 'small')}
-                        className="w-120px h-120px"
+                        className="w-120px h-120px bg-gray-300"
                       />
-                    </>
+                    </div>
                   );
                 })}
               </Box>
