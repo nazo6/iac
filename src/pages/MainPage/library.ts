@@ -33,11 +33,6 @@ const formatData = (data: any) => {
         itemObject[map[index]] = value;
       });
       itemObject['id'] = key;
-      if ('tracks' in itemObject) {
-        itemObject['tracks'] = (itemObject['tracks'] as any).map((e: any) => {
-          return e.toString();
-        });
-      }
       result.push(itemObject);
     });
     return result;

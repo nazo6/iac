@@ -23,7 +23,7 @@ export type ArtistType = {
 export type AlbumType = {
   id: string;
   name: string;
-  tracks: Array<string>;
+  tracks: Array<number>;
   artist_id: number;
   trashed: boolean;
   rating: number;
@@ -75,3 +75,5 @@ export type FolderType = {
   files?: number[];
   folders?: FolderType;
 }[];
+
+export type ArtworkListType = { artwork_id: string }[];

@@ -1,3 +1,5 @@
+import { ArtworkListType } from '~/types/DataTypes';
+
 import type { BaseResponseType } from '../../../types/BaseResponseType';
 
 export type Methods = {
@@ -17,7 +19,7 @@ export type Methods = {
     };
 
     resBody: BaseResponseType & {
-      art: { artwork_id: string }[];
+      art: ArtworkListType;
     };
   };
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  Autocomplete,
   Button,
   Dialog,
   DialogActions,
@@ -9,7 +10,6 @@ import {
   DialogTitle,
   TextField,
 } from '@material-ui/core';
-import { TextFields } from '@material-ui/icons';
 import LoadingButton from '@material-ui/lab/LoadingButton';
 import { useAtomValue } from 'jotai/utils';
 
@@ -18,6 +18,9 @@ import { appInfo } from '~/appInfo';
 import { authStateAtom } from '~/stores/app';
 import { artistsStateSelector } from '~/stores/library';
 import { AlbumType } from '~/types/DataTypes';
+
+import { useFindTrackDataById } from '../../utils/useFindData';
+import ChangeImageDialog from './ChangeImageDialog';
 
 type AlbumEditDialogProps = {
   albumData: AlbumType;
@@ -28,7 +31,9 @@ type AlbumEditDialogProps = {
 const AlbumEditDialog = (props: AlbumEditDialogProps) => {
   const authState = useAtomValue(authStateAtom);
   const [pending, setPending] = React.useState(false);
+  const [changeImageDialogOpen, setChangeImageDialogOpen] = React.useState(false);
   const artistState = useAtomValue(artistsStateSelector);
+  const artworkId = useFindTrackDataById()(props.albumData.tracks[0]).artwork_id;
   const [newAlbumDataState, setNewAlbumDataState] = React.useState(props.albumData);
   const [newArtistNameState, setNewArtistNameState] = React.useState<null | string>(
     props.albumData.artist ?? null,
@@ -37,38 +42,60 @@ const AlbumEditDialog = (props: AlbumEditDialogProps) => {
     <Dialog open={props.open} onClose={props.onClose}>
       <DialogTitle>Edit "{props.albumData.name}"</DialogTitle>
       <DialogContent>
-        <TextField
-          autoFocus
-          margin="dense"
-          label="Title"
-          fullWidth
-          variant="standard"
-          value={newAlbumDataState.name}
-          onChange={(e) => {
-            setNewAlbumDataState({ ...newAlbumDataState, name: e.target.value });
-          }}
+        <ChangeImageDialog
+          open={changeImageDialogOpen}
+          tracks={props.albumData.tracks}
+          artworkId={artworkId}
+          onClose={() => setChangeImageDialogOpen(false)}
         />
-        <TextField
-          margin="dense"
-          label="Year"
-          fullWidth
-          variant="standard"
-          type="number"
-          value={newAlbumDataState.year}
-          onChange={(e) => {
-            setNewAlbumDataState({ ...newAlbumDataState, year: Number(e.target.value) });
-          }}
-        />
-        <TextField
-          margin="dense"
-          label="Artist"
-          fullWidth
-          variant="standard"
-          value={newArtistNameState}
-          onChange={(e) => {
-            setNewArtistNameState(e.target.value);
-          }}
-        />
+        <div className="flex md:flex-row xs:flex-col items-center">
+          <div>
+            <Button onClick={() => setChangeImageDialogOpen(true)}>Change artwork</Button>
+            <TextField
+              autoFocus
+              margin="dense"
+              label="Title"
+              fullWidth
+              variant="standard"
+              value={newAlbumDataState.name}
+              onChange={(e) => {
+                setNewAlbumDataState({ ...newAlbumDataState, name: e.target.value });
+              }}
+            />
+            <TextField
+              margin="dense"
+              label="Year"
+              fullWidth
+              variant="standard"
+              type="number"
+              value={newAlbumDataState.year}
+              onChange={(e) => {
+                setNewAlbumDataState({
+                  ...newAlbumDataState,
+                  year: Number(e.target.value),
+                });
+              }}
+            />
+            <Autocomplete
+              className="w-full"
+              options={artistState.map((value) => value.name)}
+              style={{ width: 300 }}
+              inputValue={newArtistNameState ?? ''}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  margin="dense"
+                  label="Artist"
+                  fullWidth
+                  variant="standard"
+                  onChange={(e) => {
+                    setNewArtistNameState(e.target.value);
+                  }}
+                />
+              )}
+            />
+          </div>
+        </div>
       </DialogContent>
       <DialogActions>
         <Button onClick={props.onClose}>Cancel</Button>
