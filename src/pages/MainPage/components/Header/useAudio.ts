@@ -1,6 +1,8 @@
 import * as React from 'react';
 
-const audio = new Audio();
+class AudioData {
+  static audio = new Audio()
+}
 
 export const useAudio = () => {
   const [playerEnabled, setPlayerEnabled] = React.useState(false);
@@ -11,30 +13,30 @@ export const useAudio = () => {
   const forceUpdate = () => _forceUpdate((prevState) => !prevState);
 
   React.useEffect(() => {
-    audio.addEventListener('play', forceUpdate);
-    audio.addEventListener('pause', forceUpdate);
-    audio.addEventListener('ended', forceUpdate);
-    audio.addEventListener('timeupdate', forceUpdate);
-    audio.addEventListener('loadstart', setLoadingTrue);
-    audio.addEventListener('loadeddata', setLoadingFalse);
-    audio.addEventListener('seeking', setLoadingTrue);
-    audio.addEventListener('seeked', setLoadingFalse);
+    AudioData.audio.addEventListener('play', forceUpdate);
+    AudioData.audio.addEventListener('pause', forceUpdate);
+    AudioData.audio.addEventListener('ended', forceUpdate);
+    AudioData.audio.addEventListener('timeupdate', forceUpdate);
+    AudioData.audio.addEventListener('loadstart', setLoadingTrue);
+    AudioData.audio.addEventListener('loadeddata', setLoadingFalse);
+    AudioData.audio.addEventListener('seeking', setLoadingTrue);
+    AudioData.audio.addEventListener('seeked', setLoadingFalse);
 
     return () => {
-      audio.removeEventListener('play', forceUpdate);
-      audio.removeEventListener('pause', forceUpdate);
-      audio.removeEventListener('ended', forceUpdate);
-      audio.removeEventListener('timeupdate', forceUpdate);
-      audio.removeEventListener('loadstart', setLoadingTrue);
-      audio.removeEventListener('loadeddata', setLoadingFalse);
-      audio.removeEventListener('seeking', setLoadingTrue);
-      audio.removeEventListener('seeked', setLoadingFalse);
+      AudioData.audio.removeEventListener('play', forceUpdate);
+      AudioData.audio.removeEventListener('pause', forceUpdate);
+      AudioData.audio.removeEventListener('ended', forceUpdate);
+      AudioData.audio.removeEventListener('timeupdate', forceUpdate);
+      AudioData.audio.removeEventListener('loadstart', setLoadingTrue);
+      AudioData.audio.removeEventListener('loadeddata', setLoadingFalse);
+      AudioData.audio.removeEventListener('seeking', setLoadingTrue);
+      AudioData.audio.removeEventListener('seeked', setLoadingFalse);
     };
   }, []);
 
-  const play = () => audio.play();
-  const pause = () => audio.pause();
-  const jump = (value: number) => (audio.currentTime = value);
+  const play = () => AudioData.audio.play();
+  const pause = () => AudioData.audio.pause();
+  const jump = (value: number) => (AudioData.audio.currentTime = value);
   const setSrc = (
     filePath: string,
     title?: string,
@@ -43,7 +45,7 @@ export const useAudio = () => {
     artworkPath?: string,
   ) => {
     setPlayerEnabled(true);
-    audio.src = 'https://streaming.ibroadcast.com' + filePath;
+    AudioData.audio.src = 'https://streaming.ibroadcast.com' + filePath;
     if (navigator.mediaSession) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title,
@@ -57,10 +59,10 @@ export const useAudio = () => {
   return {
     loading,
     enabled: playerEnabled,
-    playing: !audio.paused,
-    src: audio.src,
-    currentTime: isNaN(audio.currentTime) ? null : audio.currentTime,
-    duration: isNaN(audio.duration) ? null : audio.duration,
+    playing: !AudioData.audio.paused,
+    src: AudioData.audio.src,
+    currentTime: isNaN(AudioData.audio.currentTime) ? null : AudioData.audio.currentTime,
+    duration: isNaN(AudioData.audio.duration) ? null : AudioData.audio.duration,
     play,
     pause,
     jump,
