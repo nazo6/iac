@@ -66,7 +66,7 @@ const Main = () => {
   };
 
   return (
-    <Box className="h-full">
+    <Box className="flex-1 flex">
       <Switch>
         <Route path={`${path}/artist`}>
           <Artists />

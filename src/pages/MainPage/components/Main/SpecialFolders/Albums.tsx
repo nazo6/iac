@@ -38,7 +38,7 @@ const Albums = () => {
     });
   };
   return (
-    <Box className="h-full">
+    <Box className="w-full">
       <Switch>
         <Route exact path={`${path}`}>
           <Explorer

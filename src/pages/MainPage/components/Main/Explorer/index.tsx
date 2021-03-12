@@ -178,7 +178,7 @@ const Explorer = (props: ExplorerPropsType) => {
 
   return (
     <>
-      <Box ref={ref} className="w-full h-full">
+      <Box ref={ref} className="h-full w-full">
         {props.data.length > 0 ? (
           <Vlist
             id={props.id}

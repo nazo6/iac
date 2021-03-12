@@ -99,13 +99,13 @@ export const Vlist = React.memo((props: VlistProps) => {
       style={{
         height: props.listHeight,
         width: props.listWidth,
-        overflow: 'overlay',
+        overflowY: 'auto',
+        overflowX: 'hidden',
       }}
       ref={ref}>
       <div
         style={{
-          overflow: 'hidden',
-          willChange: 'transform',
+          willChange: 'auto',
           height: totalHeight,
           position: 'relative',
         }}>

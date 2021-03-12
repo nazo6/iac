@@ -26,12 +26,12 @@ const MainPage = () => {
   return !libraryData ? (
     <Typography>Loading</Typography>
   ) : (
-    <Box className="w-full flex flex-col">
+    <Box className="w-full flex flex-col items-stretch">
       <WebSocketProvider />
       <Box>
         <Header />
       </Box>
-      <Box flex="1">
+      <Box className="flex-1 flex">
         <Main />
       </Box>
     </Box>
