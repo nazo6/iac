@@ -14,7 +14,7 @@ module.exports = {
           replace: false,
           graph: {
             splines: 'ortho',
-            rankdir: 'LR',
+            rankdir: 'TB',
           },
           edge: {
             arrowhead: 'vee',
