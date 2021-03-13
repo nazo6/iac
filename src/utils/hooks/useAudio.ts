@@ -12,6 +12,7 @@ export const useAudio = () => {
   const [, _forceUpdate] = React.useState(false);
   const forceUpdate = () => _forceUpdate((prevState) => !prevState);
 
+
   React.useEffect(() => {
     AudioData.audio.addEventListener('play', forceUpdate);
     AudioData.audio.addEventListener('pause', forceUpdate);
@@ -36,7 +37,7 @@ export const useAudio = () => {
 
   const play = () => AudioData.audio.play();
   const pause = () => AudioData.audio.pause();
-  const jump = (value: number) => (AudioData.audio.currentTime = value);
+  const jump = (value: number) => {AudioData.audio.currentTime = value};
   const setSrc = (
     filePath: string,
     title?: string,
@@ -45,14 +46,16 @@ export const useAudio = () => {
     artworkPath?: string,
   ) => {
     setPlayerEnabled(true);
-    AudioData.audio.src = 'https://streaming.ibroadcast.com' + filePath;
-    if (navigator.mediaSession) {
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title,
-        artist,
-        album,
-        artwork: artworkPath ? [{ src: artworkPath }] : undefined,
-      });
+    if(AudioData.audio.src !== 'https://streaming.ibroadcast.com' + filePath) {
+      AudioData.audio.src = 'https://streaming.ibroadcast.com' + filePath;
+      if (navigator.mediaSession) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title,
+          artist,
+          album,
+          artwork: artworkPath ? [{ src: artworkPath }] : undefined,
+        });
+      }
     }
   };
 

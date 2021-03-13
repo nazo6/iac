@@ -10,7 +10,7 @@ import Artists from './artist/Artists';
 import Folder from './folder';
 import Genre from './genre/Genre';
 import Search from './search';
-import Tracks from './track/Tracks';
+import Tracks from './track';
 
 const MainRoute = () => {
   const history = useHistory();
