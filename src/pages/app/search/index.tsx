@@ -71,7 +71,7 @@ const Search = () => {
   );
 
   return (
-    <Box className="flex flex-col h-full">
+    <Box className="flex flex-col">
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs
           value={tabState}

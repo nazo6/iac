@@ -67,7 +67,7 @@ const MainRoute = () => {
   };
 
   return (
-    <Box className="flex-1 flex">
+    <>
       <Switch>
         <Route path={`${path}/artist`}>
           <Artists />
@@ -91,7 +91,7 @@ const MainRoute = () => {
           <Top />
         </Route>
       </Switch>
-    </Box>
+    </>
   );
 };
 
