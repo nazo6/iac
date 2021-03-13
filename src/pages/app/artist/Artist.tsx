@@ -4,15 +4,11 @@ import { Box, Typography } from '@material-ui/core';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import { useHistory, useParams } from 'react-router-dom';
 
-import {
-  useFindArtistDataById,
-  useFindTrackDataById,
-} from '~/pages/MainPage/utils/useFindData';
+import Explorer, { ExplorerDataType } from '~/components/Explorer';
 import { albumsStateSelector } from '~/stores/library';
 import { playerStateAtom } from '~/stores/player';
 import { TrackType } from '~/types/DataTypes';
-
-import Explorer, { ExplorerDataType } from '../Explorer';
+import { useFindArtistDataById, useFindTrackDataById } from '~/utils/hooks/useFindData';
 
 const Artist = () => {
   const setPlayerState = useUpdateAtom(playerStateAtom);

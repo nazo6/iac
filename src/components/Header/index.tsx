@@ -22,11 +22,11 @@ import { withImmer } from 'jotai/immer';
 import { useHistory } from 'react-router-dom';
 
 import { playerStateAtom } from '~/stores/player';
+import { secondsToHms } from '~/utils/convertTime';
+import { useAudio } from '~/utils/hooks/useAudio';
 
-import { secondsToHms } from '../../utils/convertTime';
 import Queue from './Queue';
 import ProgressSlider from './Slider';
-import { useAudio } from './useAudio';
 
 const playerStateAtomWithImmer = withImmer(playerStateAtom);
 

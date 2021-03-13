@@ -14,9 +14,9 @@ import {
 import { Folder } from '@material-ui/icons';
 import useResizeObserver from 'use-resize-observer';
 
-import { CacheImage } from '~/pages/MainPage/utils/CacheImage';
-import getArtworkUrl from '~/pages/MainPage/utils/getArtworkUrl';
 import type { TrackType } from '~/types/DataTypes';
+import { CacheImage } from '~/utils/CacheImage';
+import getArtworkUrl from '~/utils/getArtworkUrl';
 
 import { Vlist } from './Vlist';
 
@@ -132,14 +132,12 @@ const Explorer = (props: ExplorerPropsType) => {
                   alt="Cover"
                   src={getArtworkUrl(data.fileData.artwork_id, 'icon')}
                 />
-                <Typography className="whitespace-nowrap overflow-ellipsis overflow-hidden flex-1 ml-1">
-                  {data.fileData.title}
+                <Box className="whitespace-nowrap overflow-ellipsis overflow-hidden ml-1">
+                  <Typography>{data.fileData.title}</Typography>
                   <Hidden mdUp>
-                    <Typography className="whitespace-nowrap overflow-ellipsis overflow-hidden">
-                      {data.fileData.album}
-                    </Typography>
+                    <Typography>{data.fileData.album}</Typography>
                   </Hidden>
-                </Typography>
+                </Box>
               </div>
             </Grid>
             <Hidden mdDown>

@@ -3,10 +3,9 @@ import * as React from 'react';
 import { Box } from '@material-ui/core';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 
+import Explorer from '~/components/Explorer';
 import { tracksStateSelector } from '~/stores/library';
 import { playerStateAtom } from '~/stores/player';
-
-import Explorer from '../Explorer';
 
 const Tracks = () => {
   const tracksData = useAtomValue(tracksStateSelector);

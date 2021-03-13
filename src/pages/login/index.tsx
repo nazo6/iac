@@ -12,8 +12,8 @@ import LoadingButton from '@material-ui/lab/LoadingButton';
 import { useUpdateAtom } from 'jotai/utils';
 
 import { api } from '~/apis/api';
-import { appInfo } from '~/appInfo';
 import { authStateAtom, loginStateAtom } from '~/stores/app';
+import { appInfo } from '~/utils/appInfo';
 
 const getStatusWithAuth = async (email: string, password: string) => {
   const response = await api.JSON.status.$post({

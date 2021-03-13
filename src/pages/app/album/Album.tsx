@@ -5,16 +5,12 @@ import { withImmer } from 'jotai/immer';
 import { useUpdateAtom } from 'jotai/utils';
 import { useParams } from 'react-router-dom';
 
-import {
-  useFindAlbumDataById,
-  useFindTrackDataById,
-} from '~/pages/MainPage/utils/useFindData';
+import Explorer from '~/components/Explorer';
+import AlbumEditDialog from '~/components/editDialogs/AlbumEditDialog';
 import { libraryStateAtom } from '~/stores/library';
 import { playerStateAtom } from '~/stores/player';
 import type { TrackType } from '~/types/DataTypes';
-
-import AlbumEditDialog from '../../EditDialogs/AlbumEditDialog';
-import Explorer from '../Explorer';
+import { useFindAlbumDataById, useFindTrackDataById } from '~/utils/hooks/useFindData';
 
 const libraryAtomWithImmer = withImmer(libraryStateAtom);
 

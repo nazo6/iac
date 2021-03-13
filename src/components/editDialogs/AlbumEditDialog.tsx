@@ -14,12 +14,12 @@ import LoadingButton from '@material-ui/lab/LoadingButton';
 import { useAtomValue } from 'jotai/utils';
 
 import { api } from '~/apis/api';
-import { appInfo } from '~/appInfo';
 import { authStateAtom } from '~/stores/app';
 import { artistsStateSelector } from '~/stores/library';
 import { AlbumType } from '~/types/DataTypes';
+import { appInfo } from '~/utils/appInfo';
+import { useFindTrackDataById } from '~/utils/hooks/useFindData';
 
-import { useFindTrackDataById } from '../../utils/useFindData';
 import ChangeImageDialog from './ChangeImageDialog';
 
 type AlbumEditDialogProps = {

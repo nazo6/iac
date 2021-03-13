@@ -3,15 +3,16 @@ import * as React from 'react';
 import { Box } from '@material-ui/core';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 
-import Explorer from './Explorer';
-import Folder from './Folder';
-import Search from './Search';
-import Albums from './SpecialFolders/Albums';
-import Artists from './SpecialFolders/Artists';
-import Genre from './SpecialFolders/Genre';
-import Tracks from './SpecialFolders/Tracks';
+import Explorer from '~/components/Explorer';
 
-const Main = () => {
+import Albums from './album/Albums';
+import Artists from './artist/Artists';
+import Folder from './folder';
+import Genre from './genre/Genre';
+import Search from './search';
+import Tracks from './track/Tracks';
+
+const MainRoute = () => {
   const history = useHistory();
   const { path } = useRouteMatch();
   const Top = () => {
@@ -94,4 +95,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default MainRoute;

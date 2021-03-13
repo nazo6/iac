@@ -2,10 +2,10 @@ import produce from 'immer';
 import { useUpdateAtom } from 'jotai/utils';
 
 import { libraryApi } from '~/apis/api';
-import { appInfo } from '~/appInfo';
 import { folderStatetAtom, libraryStateAtom } from '~/stores/library';
 import { FolderType, TagType } from '~/types/DataTypes';
 import type { LibraryResponseType } from '~/types/LibraryResponseType';
+import { appInfo } from '~/utils/appInfo';
 
 const formatData = (data: any) => {
   const convert = (

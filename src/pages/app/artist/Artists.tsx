@@ -4,10 +4,10 @@ import { Box } from '@material-ui/core';
 import { useAtomValue } from 'jotai/utils';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 
+import Explorer from '~/components/Explorer';
 import { artistsStateSelector } from '~/stores/library';
 
-import Explorer from '../Explorer';
-import Artist from '../GroupViews/Artist';
+import Artist from './Artist';
 
 const Artists = () => {
   const history = useHistory();

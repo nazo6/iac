@@ -5,11 +5,10 @@ import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import path from 'path-browserify';
 import { useHistory, useParams } from 'react-router-dom';
 
-import { useFindTrackDataById } from '~/pages/MainPage/utils/useFindData';
+import Explorer, { ExplorerDataType } from '~/components/Explorer';
 import { folderStatetAtom } from '~/stores/library';
 import { playerStateAtom } from '~/stores/player';
-
-import Explorer, { ExplorerDataType } from '../Explorer';
+import { useFindTrackDataById } from '~/utils/hooks/useFindData';
 
 const Folder = () => {
   const history = useHistory();

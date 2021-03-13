@@ -3,12 +3,13 @@ import * as React from 'react';
 import { Box, Typography } from '@material-ui/core';
 import { useAtomValue } from 'jotai/utils';
 
-import { authStateAtom } from '../../stores/app';
-import { libraryStateAtom } from '../../stores/library';
+import Header from '~/components/Header';
+import { authStateAtom } from '~/stores/app';
+import { libraryStateAtom } from '~/stores/library';
+import { useUpdateLibrary } from '~/utils/hooks/useUpdateLibrary';
+
 import WebSocketProvider from './WebSocketProvider';
-import Header from './components/Header';
-import Main from './components/Main';
-import { useUpdateLibrary } from './library';
+import MainRoute from './route';
 
 const MainPage = () => {
   const authData = useAtomValue(authStateAtom);
@@ -32,7 +33,7 @@ const MainPage = () => {
         <Header />
       </Box>
       <Box className="flex-1 flex">
-        <Main />
+        <MainRoute />
       </Box>
     </Box>
   );

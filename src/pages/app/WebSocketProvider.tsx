@@ -6,13 +6,12 @@ import { useAtom } from 'jotai';
 import { useAtomValue } from 'jotai/utils';
 import useWebSocket from 'react-use-websocket';
 
-import { appInfo } from '~/appInfo';
 import { authStateAtom } from '~/stores/app';
 import { libraryStateAtom } from '~/stores/library';
 import { playerStateAtom } from '~/stores/player';
-
-import { useUpdateLibrary } from './library';
-import { useFindTrackDataById } from './utils/useFindData';
+import { appInfo } from '~/utils/appInfo';
+import { useFindTrackDataById } from '~/utils/hooks/useFindData';
+import { useUpdateLibrary } from '~/utils/hooks/useUpdateLibrary';
 
 type WsResponseType =
   | {

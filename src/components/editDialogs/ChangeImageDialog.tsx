@@ -15,9 +15,9 @@ import { useAtomValue } from 'jotai/utils';
 import { useDropzone } from 'react-dropzone';
 
 import { api } from '~/apis/api';
-import { appInfo } from '~/appInfo';
 import { authStateAtom } from '~/stores/app';
 import { ArtworkListType } from '~/types/DataTypes';
+import { appInfo } from '~/utils/appInfo';
 
 import { CacheImage } from '../../utils/CacheImage';
 import getArtworkUrl from '../../utils/getArtworkUrl';

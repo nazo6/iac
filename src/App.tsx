@@ -7,10 +7,10 @@ import { useAtomValue } from 'jotai/utils';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { api } from './apis/api';
-import { appInfo } from './appInfo';
-import LoginPage from './pages/LoginPage';
-import MainPage from './pages/MainPage';
+import MainPage from './pages/app/index';
+import LoginPage from './pages/login';
 import { authStateAtom, loginStateAtom } from './stores/app';
+import { appInfo } from './utils/appInfo';
 
 const getStatus = async (token: string, userId: string) => {
   const response = await api.JSON.status.$post({

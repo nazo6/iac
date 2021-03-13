@@ -4,15 +4,14 @@ import { Box, Tabs, Tab } from '@material-ui/core';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import { useHistory, useParams } from 'react-router-dom';
 
-import { useQuery } from '~/pages/MainPage/utils/useQuery';
+import Explorer, { ExplorerDataType } from '~/components/Explorer';
 import {
   albumsStateSelector,
   artistsStateSelector,
   tracksStateSelector,
 } from '~/stores/library';
 import { playerStateAtom } from '~/stores/player';
-
-import Explorer, { ExplorerDataType } from '../Explorer';
+import { useQuery } from '~/utils/hooks/useQuery';
 
 const Search = () => {
   const { keyword } = useParams<{ keyword: string }>();
