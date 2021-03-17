@@ -5,7 +5,8 @@
       "configuration": {
         "request": "launch",
         "url": "http://localhost:3000/",
-        "webRoot": "${workspaceRoot}/src"
+        "webRoot": "${workspaceRoot}/src",
+        "runtimeExecutable": "/mnt/c/Program Files (x86)/Google/Chrome/Application//chrome.exe"
       }
     }
   }
